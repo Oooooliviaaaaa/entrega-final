@@ -1,0 +1,143 @@
+@import url('https://fonts.googleapis.com/css2?family=Space+Mono:ital,wght@0,400;0,700;1,400;1,700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@0,300..800;1,300..800&display=swap');
+
+/* --- Estilos Generales --- */
+body {
+    font-family: sans-serif;
+    margin: 70px;
+    margin-top:0;
+    padding: 2em;
+    background-color: #f4f4f4;
+}
+
+
+h1, h2 {
+    font-family: 'Space Mono';
+    color: #333;
+}
+
+h3{
+    font-family: 'Open Sans';
+    font-size: 1em;
+}
+
+/* --- Contenedor Principal --- */
+#container {
+    display: grid;
+    /* Define 2 columnas: la primera ocupa 1 fracción, la segunda 2 fracciones */
+    grid-template-columns: 1fr 2fr;
+    gap: 5em; /* Espacio entre las columnas */
+    align-items: start; /* Alinea los items al inicio */
+}
+
+/* --- Columna Izquierda: Intro --- */
+.intro {
+    /* Por defecto, se ubica en la primera columna del grid */
+    display: flex;
+    flex-direction: column; /* Organiza los elementos internos en una columna */
+    justify-content: center; /* Centra el contenido verticalmente */
+}
+
+.intro p {
+    /* El párrafo ya usa el ancho de su contenedor por defecto */
+    font-family: 'Open Sans';
+    text-align: justify;
+    line-height: 1.6;
+}
+
+.intro a {
+    /* El ancla del botón se centrará gracias al 'align-self' */
+    align-self: center; /* Centra este elemento específico en el eje transversal */
+    margin-top: 1em;
+}
+
+.intro button {
+    font-family: 'Space Mono';
+    font-size: 1em;
+    padding: 15px 45px;
+    margin-top: 30px;
+    border: none;
+    background-color: #a588f4;
+    color: #000;
+ 
+    cursor: pointer;
+    border-radius: 50px;
+    
+}
+
+.intro button:hover {
+    background: #000; ;
+    color: white;
+
+}
+
+
+/* Columna Derecha: Proyectos */
+.proyectos {
+    display: flex;
+    flex-direction: column;
+    /* Por defecto, se ubica en la segunda columna del grid */
+}
+
+/* --- Galería de Proyectos --- */
+.galeria {
+    display: grid;
+    /* Define 3 columnas de igual tamaño */
+    grid-template-columns: repeat(4, 1fr);
+    gap: 1.5em; /* Espacio entre las tarjetas */
+}
+
+/* --- Tarjetas Individuales --- */
+.tarjeta {
+    background-color: rgb(255, 255, 255);
+    border-radius: 8px;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+    overflow: hidden; /* Asegura que la imagen no se salga de los bordes redondeados */
+}
+
+.tarjeta a {
+    /* El ancla ocupa todo el espacio de su columna en la galería */
+    display: block; /* Permite que el ancla ocupe todo el espacio */
+    width: 100%;
+    text-decoration: none;
+    color: inherit;
+    transition: transform 0.2s ease-in-out;
+}
+
+.tarjeta a:hover {
+    filter: brightness(70%); /* Aplica un filtro de brillo al 70% (más oscuro) */
+    transform: scale(1.05); /* Efecto de zoom al pasar el mouse */
+}
+
+.tarjeta img {
+    /* La imagen se ajusta al ancho del ancla */
+    width: 100%;
+    display: block; /* Elimina espacios en blanco debajo de la imagen */
+}
+
+.tarjeta h3 {
+    text-align: center;
+    padding: 0.5em 0;
+    margin: 0;
+}
+
+
+/* --- Media Query para pantallas pequeñas --- */
+@media (max-width: 900px) {
+    
+    /* Ajusta los márgenes del body para aprovechar el espacio */
+    body {
+        margin: 20px;
+        padding: 1em;
+    }
+
+    /* Cambia el contenedor principal a una sola columna */
+    #container {
+        grid-template-columns: 1fr;
+    }
+
+    /* Cambia la galería de proyectos a una sola columna */
+    .galeria {
+        grid-template-columns: 1fr;
+    }
+}
