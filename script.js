@@ -1,128 +1,106 @@
 
 
-/* =========================================
-   FOTOGRAFÍAS Y TEXTOS EDITABLES
 
-   Cambia las rutas de las imágenes
-   y los textos de cada encargo.
+/* ==========================================
+   PORTAFOLIO DIGITAL
 
-   Ejemplo de fotografía:
-   imagen: 'imagenes/foto1.jpg'
+   FUNCIONES:
+   - Navegación entre las 3 diapositivas
+   - Lectura de contenidos desde HTML
+   - Creación de los 6 sectores de la rueda
+   - Selección y ampliación de sectores
+   - Movimiento de la perilla
+   - Visualización de fotos y videos
+   - Transición de apertura de libro
+   - Actualización de textos y enlaces
 
-   Si imagen está vacía (''),
-   el rectángulo permanece verde.
-   ========================================= */
-
-const encargos = [
-
-  // ===== SECTOR 1 =====
-  {
-    imagen: '',
-    titulo: 'Encargo 1',
-
-    textoIzquierdo:
-      'El ejercicio debia contener un\n' +
-      'sistema de particulas, ....',
-
-    textoDerecho:
-      'El ejercicio debia contener un\n' +
-      'sistema de particulas, ....',
-
-    linkJP5: '',
-    linkWiki: ''
-  },
-
-  // ===== SECTOR 2 =====
-  {
-    imagen: '',
-    titulo: 'Encargo 2',
-
-    textoIzquierdo:
-      'El ejercicio debia contener un\n' +
-      'sistema de particulas, ....',
-
-    textoDerecho:
-      'El ejercicio debia contener un\n' +
-      'sistema de particulas, ....',
-
-    linkJP5: '',
-    linkWiki: ''
-  },
-
-  // ===== SECTOR 3 =====
-  {
-    imagen: '',
-    titulo: 'Encargo 3',
-
-    textoIzquierdo:
-      'El ejercicio debia contener un\n' +
-      'sistema de particulas, ....',
-
-    textoDerecho:
-      'El ejercicio debia contener un\n' +
-      'sistema de particulas, ....',
-
-    linkJP5: '',
-    linkWiki: ''
-  },
-
-  // ===== SECTOR 4 =====
-  {
-    imagen: '',
-    titulo: 'Encargo 4',
-
-    textoIzquierdo:
-      'El ejercicio debia contener un\n' +
-      'sistema de particulas, ....',
-
-    textoDerecho:
-      'El ejercicio debia contener un\n' +
-      'sistema de particulas, ....',
-
-    linkJP5: '',
-    linkWiki: ''
-  },
-
-  // ===== SECTOR 5 =====
-  {
-    imagen: '',
-    titulo: 'Encargo 5',
-
-    textoIzquierdo:
-      'El ejercicio debia contener un\n' +
-      'sistema de particulas, ....',
-
-    textoDerecho:
-      'El ejercicio debia contener un\n' +
-      'sistema de particulas, ....',
-
-    linkJP5: '',
-    linkWiki: ''
-  },
-
-  // ===== SECTOR 6 =====
-  {
-    imagen: '',
-    titulo: 'Encargo 6',
-
-    textoIzquierdo:
-      'El ejercicio debia contener un\n' +
-      'sistema de particulas, ....',
-
-    textoDerecho:
-      'El ejercicio debia contener un\n' +
-      'sistema de particulas, ....',
-
-    linkJP5: '',
-    linkWiki: ''
-  }
-
-];
+   IMPORTANTE:
+   Las fotografías, los videos, los textos
+   y los enlaces se editan en index.html.
+   ========================================== */
 
 
-/* =========================================
-   ADAPTACIÓN DE PANTALLA
-   ========================================= */
+/* ==========================================
+   1. LEER LOS ENCARGOS DESDE HTML
+   ========================================== */
+
+function leerEncargo(numero) {
+
+  const plantilla = document.getElementById(
+    `encargo-${numero}`
+  );
+
+  const contenido = plantilla.content;
+
+  const foto = contenido.querySelector(
+    '.foto-encargo'
+  );
+
+  const video = contenido.querySelector(
+    '.video-encargo'
+  );
+
+  const titulo = contenido.querySelector(
+    '.titulo-dato'
+  );
+
+  const textoIzquierdo = contenido.querySelector(
+    '.texto-izquierdo-dato'
+  );
+
+  const textoDerecho = contenido.querySelector(
+    '.texto-derecho-dato'
+  );
+
+  const linkJP5 = contenido.querySelector(
+    '.link-jp5-dato'
+  );
+
+  const linkWiki = contenido.querySelector(
+    '.link-wiki-dato'
+  );
+
+  return {
+
+    /* FOTOGRAFÍA DEL HTML */
+    imagen: foto.getAttribute('src')?.trim() || '',
+
+    /* VIDEO DEL HTML */
+    video: video.getAttribute('src')?.trim() || '',
+
+    /* TÍTULO DEL HTML */
+    titulo: titulo.textContent.trim(),
+
+    /* TEXTOS DEL HTML */
+    textoIzquierdo: textoIzquierdo
+      .textContent.trim(),
+
+    textoDerecho: textoDerecho
+      .textContent.trim(),
+
+    /* ENLACES DEL HTML */
+    linkJP5: linkJP5.getAttribute('href') || '',
+
+    linkWiki: linkWiki.getAttribute('href') || ''
+
+  };
+}
+
+
+/* CREAR UNA LISTA CON LOS SEIS ENCARGOS */
+
+const encargos = [];
+
+for (let i = 1; i <= 6; i++) {
+
+  encargos.push(leerEncargo(i));
+
+}
+
+
+/* ==========================================
+   2. ADAPTAR DIAPOSITIVAS A LA PANTALLA
+   ========================================== */
 
 function adaptarPantalla() {
 
@@ -131,27 +109,31 @@ function adaptarPantalla() {
     window.innerHeight / 768
   );
 
-  const escenario =
-    document.getElementById('escenario');
+  const escenario = document.getElementById(
+    'escenario'
+  );
 
-  escenario.style.transform =
-    `scale(${escala})`;
+  escenario.style.transform = `scale(${escala})`;
 
   escenario.style.left =
     `${(window.innerWidth - 1366 * escala) / 2}px`;
 
   escenario.style.top =
     `${(window.innerHeight - 768 * escala) / 2}px`;
+
 }
 
-window.addEventListener('resize', adaptarPantalla);
+window.addEventListener(
+  'resize',
+  adaptarPantalla
+);
 
 adaptarPantalla();
 
 
-/* =========================================
-   CAMBIO DE DIAPOSITIVAS
-   ========================================= */
+/* ==========================================
+   3. CAMBIAR DE DIAPOSITIVA
+   ========================================== */
 
 function mostrar(id) {
 
@@ -164,12 +146,15 @@ function mostrar(id) {
       );
 
     });
+
 }
 
 
-/* =========================================
-   BOTÓN IMAGEN ESCRITA
-   ========================================= */
+/* ==========================================
+   4. NAVEGACIÓN PRINCIPAL
+   ========================================== */
+
+/* ABRIR DIAPOSITIVA 2 */
 
 document.getElementById('abrir-imagen')
   .addEventListener('click', evento => {
@@ -181,9 +166,7 @@ document.getElementById('abrir-imagen')
   });
 
 
-/* =========================================
-   FLECHAS DE REGRESO
-   ========================================= */
+/* REGRESAR AL INICIO */
 
 document.querySelectorAll('.volver')
   .forEach(boton => {
@@ -192,6 +175,9 @@ document.querySelectorAll('.volver')
 
       if (transicionEnCurso) return;
 
+      /* DETENER VIDEOS ANTES DE SALIR */
+      detenerVideos();
+
       mostrar('inicio');
 
     });
@@ -199,28 +185,32 @@ document.querySelectorAll('.volver')
   });
 
 
-/* =========================================
-   CONFIGURACIÓN DE RUEDA
-   ========================================= */
+/* ==========================================
+   5. VARIABLES DE LA RUEDA
+   ========================================== */
 
 const NS = 'http://www.w3.org/2000/svg';
 
-const grupo =
-  document.getElementById('sectores-rueda');
+const grupo = document.getElementById(
+  'sectores-rueda'
+);
 
-const clips =
-  document.getElementById('clips-rueda');
+const clips = document.getElementById(
+  'clips-rueda'
+);
 
 const sectores = [];
 
+/* SECTOR ACTUAL */
 let actual = 0;
 
+/* CONTROL DE LA ANIMACIÓN */
 let transicionEnCurso = false;
 
 
-/* =========================================
-   COORDENADAS CIRCULARES
-   ========================================= */
+/* ==========================================
+   6. CALCULAR COORDENADAS CIRCULARES
+   ========================================== */
 
 function coordenada(radio, grados) {
 
@@ -230,14 +220,17 @@ function coordenada(radio, grados) {
     260 + radio * Math.cos(angulo),
     260 + radio * Math.sin(angulo)
   ];
+
 }
 
 
-/* =========================================
-   CREAR SEIS SECTORES INTERACTIVOS
-   ========================================= */
+/* ==========================================
+   7. CREAR LOS SEIS SECTORES DE LA RUEDA
+   ========================================== */
 
 for (let i = 0; i < 6; i++) {
+
+  /* CADA SECTOR OCUPA 60 GRADOS */
 
   const inicio = -90 + i * 60;
 
@@ -247,14 +240,20 @@ for (let i = 0; i < 6; i++) {
 
   const q = coordenada(250, fin);
 
+
+  /* CREAR FORMA DEL SECTOR */
+
   const forma =
     `M260 260
      L${p[0]} ${p[1]}
      A250 250 0 0 1 ${q[0]} ${q[1]}
      Z`;
 
-  const sector =
-    document.createElementNS(NS, 'g');
+
+  const sector = document.createElementNS(
+    NS,
+    'g'
+  );
 
   sector.setAttribute('class', 'sector');
 
@@ -268,10 +267,12 @@ for (let i = 0; i < 6; i++) {
   );
 
 
-  /* CREAR FORMA DEL SECTOR */
+  /* FONDO ROJO DEL SECTOR */
 
-  const contorno =
-    document.createElementNS(NS, 'path');
+  const contorno = document.createElementNS(
+    NS,
+    'path'
+  );
 
   contorno.setAttribute('d', forma);
 
@@ -280,15 +281,21 @@ for (let i = 0; i < 6; i++) {
   sector.appendChild(contorno);
 
 
-  /* CREAR RECORTE PARA FOTOGRAFÍA */
+  /* ======================================
+     RECORTE CIRCULAR PARA LA FOTOGRAFÍA
+     ====================================== */
 
-  const clip =
-    document.createElementNS(NS, 'clipPath');
+  const clip = document.createElementNS(
+    NS,
+    'clipPath'
+  );
 
   clip.setAttribute('id', `recorte-${i}`);
 
-  const cp =
-    document.createElementNS(NS, 'path');
+  const cp = document.createElementNS(
+    NS,
+    'path'
+  );
 
   cp.setAttribute('d', forma);
 
@@ -297,12 +304,21 @@ for (let i = 0; i < 6; i++) {
   clips.appendChild(clip);
 
 
-  /* INSERTAR FOTOGRAFÍA */
+  /* ======================================
+     FOTOGRAFÍA DEL SECTOR
+
+     Se obtiene desde index.html.
+
+     Para los videos, puedes utilizar
+     su fotografía como miniatura.
+     ====================================== */
 
   if (encargos[i].imagen) {
 
-    const foto =
-      document.createElementNS(NS, 'image');
+    const foto = document.createElementNS(
+      NS,
+      'image'
+    );
 
     foto.setAttribute(
       'href',
@@ -310,9 +326,11 @@ for (let i = 0; i < 6; i++) {
     );
 
     foto.setAttribute('x', '10');
+
     foto.setAttribute('y', '10');
 
     foto.setAttribute('width', '500');
+
     foto.setAttribute('height', '500');
 
     foto.setAttribute(
@@ -331,26 +349,33 @@ for (let i = 0; i < 6; i++) {
     );
 
     sector.appendChild(foto);
+
   }
 
 
-  /* EVENTOS DE INTERACCIÓN */
+  /* ======================================
+     INTERACCIÓN DE LOS SECTORES
+     ====================================== */
 
+  /* AL PASAR EL CURSOR */
   sector.addEventListener(
     'mouseenter',
     () => seleccionar(i)
   );
 
+  /* AL SELECCIONAR CON TECLADO */
   sector.addEventListener(
     'focus',
     () => seleccionar(i)
   );
 
+  /* AL HACER CLIC */
   sector.addEventListener(
     'click',
     () => abrirDetalle(i)
   );
 
+  /* ACCESIBILIDAD CON TECLADO */
   sector.addEventListener(
     'keydown',
     evento => {
@@ -363,36 +388,91 @@ for (let i = 0; i < 6; i++) {
         evento.preventDefault();
 
         abrirDetalle(i);
+
       }
 
     }
   );
 
+
+  /* INCORPORAR EL SECTOR A LA RUEDA */
+
   grupo.appendChild(sector);
 
   sectores.push(sector);
+
 }
 
 
-/* =========================================
-   MOSTRAR FOTOGRAFÍA
-   ========================================= */
+/* ==========================================
+   8. MOSTRAR FOTOGRAFÍA EN UN PANEL
 
-function aplicarFoto(elemento, ruta) {
+   Utiliza un elemento <img> y la ruta
+   que se escribió en HTML.
+   ========================================== */
 
-  elemento.style.backgroundImage = ruta
-    ? `url("${ruta.replace(/"/g, '%22')}")`
-    : 'none';
+function mostrarImagen(panel, ruta) {
+
+  /* ELIMINAR CONTENIDO ANTERIOR */
+  panel.replaceChildren();
+
+  if (!ruta) return;
+
+  /* CREAR IMAGEN */
+  const imagen = document.createElement('img');
+
+  imagen.src = ruta;
+
+  imagen.alt = 'Imagen del encargo seleccionado';
+
+  panel.appendChild(imagen);
+
 }
 
 
-/* =========================================
-   SELECCIONAR SECTOR DE RUEDA
-   ========================================= */
+/* ==========================================
+   9. MOSTRAR VIDEO EN UN PANEL
+
+   El video es opcional.
+
+   Si se está en la diapositiva 3,
+   tendrá controles de reproducción.
+   ========================================== */
+
+function mostrarVideo(panel, ruta, controles = false) {
+
+  panel.replaceChildren();
+
+  if (!ruta) return;
+
+  const video = document.createElement('video');
+
+  video.src = ruta;
+
+  video.controls = controles;
+
+  video.playsInline = true;
+
+  video.preload = 'metadata';
+
+  /* NO REPRODUCIR AUTOMÁTICAMENTE */
+  video.autoplay = false;
+
+  panel.appendChild(video);
+
+}
+
+
+/* ==========================================
+   10. SELECCIONAR UN SECTOR
+   ========================================== */
 
 function seleccionar(indice) {
 
   actual = indice;
+
+
+  /* AUMENTAR SECTOR SELECCIONADO */
 
   sectores.forEach((sector, i) => {
 
@@ -400,7 +480,9 @@ function seleccionar(indice) {
       'seleccionado',
       i === indice
     );
+
   });
+
 
   /* GIRAR PERILLA */
 
@@ -410,48 +492,91 @@ function seleccionar(indice) {
     .style.transform =
     `rotate(${angulo + 90}deg)`;
 
-  /* CAMBIAR FOTOGRAFÍA DERECHA */
 
-  aplicarFoto(
-    document.getElementById('imagen-grande'),
-    encargos[indice].imagen
+  /* ======================================
+     MOSTRAR CONTENIDO DERECHO
+
+     PRIORIDAD:
+     1. Fotografía, si existe.
+     2. Video, si no hay fotografía.
+     3. Fondo verde, si ambos están vacíos.
+
+     Esto permite conservar una miniatura
+     de fotografía para cada video.
+     ====================================== */
+
+  const panel = document.getElementById(
+    'imagen-grande'
   );
+
+  const item = encargos[indice];
+
+  if (item.imagen) {
+
+    mostrarImagen(panel, item.imagen);
+
+  } else if (item.video) {
+
+    mostrarVideo(panel, item.video, false);
+
+  } else {
+
+    panel.replaceChildren();
+
+  }
+
 }
 
 
-/* =========================================
-   ACTUALIZAR ENLACES
-   ========================================= */
+/* ==========================================
+   11. ACTUALIZAR ENLACES DEL ENCARGO
+   ========================================== */
 
 function asignarEnlace(id, url) {
 
-  const enlace =
-    document.getElementById(id);
+  const enlace = document.getElementById(id);
 
   enlace.href = url || '#';
 
   enlace.onclick = url
     ? null
     : evento => evento.preventDefault();
+
 }
 
 
-/* =========================================
-   TRANSICIÓN DE APERTURA DE LIBRO
+/* ==========================================
+   12. DETENER VIDEOS AL CAMBIAR DE PÁGINA
+   ========================================== */
 
-   DURACIÓN: 5 SEGUNDOS
+function detenerVideos() {
 
-   MODIFICACIONES:
+  document.querySelectorAll(
+    '#escenario video'
+  ).forEach(video => {
 
-   1. Apertura más lenta.
-   2. Movimiento suave.
-   3. Fotografía y marco giran juntos.
-   4. Aparece suavemente la diapositiva 3.
-   5. No permite animaciones superpuestas.
-   ========================================= */
+    video.pause();
+
+  });
+
+}
+
+
+/* ==========================================
+   13. ABRIR DETALLE CON ANIMACIÓN DE LIBRO
+
+   DURACIÓN: 2 SEGUNDOS (DESDE CSS)
+
+   Se copia el marco negro completo,
+   junto con su fotografía o video.
+
+   Luego la hoja gira 180 grados
+   con una transición suave.
+   ========================================== */
 
 function abrirDetalle(indice) {
 
+  /* EVITAR ANIMACIONES REPETIDAS */
   if (transicionEnCurso) return;
 
   seleccionar(indice);
@@ -459,22 +584,44 @@ function abrirDetalle(indice) {
   const item = encargos[indice];
 
 
-  /* ACTUALIZAR FOTOGRAFÍA DE DIAPOSITIVA 3 */
+  /* ======================================
+     ACTUALIZAR CONTENIDO DE DIAPOSITIVA 3
+     ====================================== */
 
-  aplicarFoto(
-    document.getElementById('imagen-detalle'),
-    item.imagen
+  const panelDetalle = document.getElementById(
+    'imagen-detalle'
   );
 
+  /* SI HAY VIDEO, MOSTRARLO CON CONTROLES */
+  if (item.video) {
 
-  /* ACTUALIZAR TÍTULO */
+    mostrarVideo(
+      panelDetalle,
+      item.video,
+      true
+    );
 
+  /* SI NO HAY VIDEO, MOSTRAR LA FOTO */
+  } else if (item.imagen) {
+
+    mostrarImagen(
+      panelDetalle,
+      item.imagen
+    );
+
+  } else {
+
+    panelDetalle.replaceChildren();
+
+  }
+
+
+  /* TÍTULO */
   document.getElementById('titulo-encargo')
     .textContent = item.titulo;
 
 
-  /* ACTUALIZAR TEXTOS */
-
+  /* TEXTOS */
   document.getElementById('texto-izquierda')
     .textContent = item.textoIzquierdo;
 
@@ -482,46 +629,52 @@ function abrirDetalle(indice) {
     .textContent = item.textoDerecho;
 
 
-  /* ACTUALIZAR ENLACES */
+  /* ENLACES */
+  asignarEnlace(
+    'link-jp5',
+    item.linkJP5
+  );
 
-  asignarEnlace('link-jp5', item.linkJP5);
+  asignarEnlace(
+    'link-wiki',
+    item.linkWiki
+  );
 
-  asignarEnlace('link-wiki', item.linkWiki);
 
-
-  /* ACTIVAR BLOQUEO DE TRANSICIÓN */
+  /* ======================================
+     CREAR ANIMACIÓN DE APERTURA
+     ====================================== */
 
   transicionEnCurso = true;
 
+  detenerVideos();
 
-  /* OBTENER ESCENARIO PRINCIPAL */
+  const escenario = document.getElementById(
+    'escenario'
+  );
 
-  const escenario =
-    document.getElementById('escenario');
-
-
-  /* CREAR CONTENEDOR 3D DEL LIBRO */
-
-  const escenaLibro =
-    document.createElement('div');
+  /* ESCENA DEL LIBRO */
+  const escenaLibro = document.createElement(
+    'div'
+  );
 
   escenaLibro.className = 'libro-escena';
 
 
-  /* CREAR LA HOJA GIRATORIA */
-
-  const hoja =
-    document.createElement('div');
+  /* HOJA GIRATORIA */
+  const hoja = document.createElement('div');
 
   hoja.className = 'libro-hoja';
 
 
-  /* =====================================
+  /* ======================================
      CARA FRONTAL
 
-     Copia marco negro, panel verde
-     y fotografía como una sola pieza.
-     ===================================== */
+     Copiar el marco derecho COMPLETO:
+     - Borde negro
+     - Fondo verde
+     - Fotografía o video
+     ====================================== */
 
   const frontal = document.querySelector(
     '#imagen-escrita .marco-derecho'
@@ -529,75 +682,80 @@ function abrirDetalle(indice) {
 
   frontal.classList.add('libro-cara');
 
-  frontal.removeAttribute('id');
-
+  /* QUITAR IDS REPETIDOS */
   frontal.querySelectorAll('[id]')
     .forEach(elemento => {
+
       elemento.removeAttribute('id');
+
     });
 
   frontal.style.left = '0';
+
   frontal.style.top = '0';
 
   frontal.style.width = '100%';
+
   frontal.style.height = '100%';
 
 
-  /* =====================================
+  /* ======================================
      CARA TRASERA
 
-     Utiliza exactamente la misma fotografía
-     y el mismo marco negro.
-     ===================================== */
+     Mantiene la misma imagen, video
+     y marco negro.
+     ====================================== */
 
   const trasera = frontal.cloneNode(true);
 
-  trasera.classList.add('libro-cara-trasera');
+  trasera.classList.add(
+    'libro-cara-trasera'
+  );
 
 
-  /* UNIR LAS DOS CARAS */
-
+  /* UNIR CARAS DE LA HOJA */
   hoja.appendChild(frontal);
 
   hoja.appendChild(trasera);
 
 
-  /* INCORPORAR AL ESCENARIO */
-
+  /* INCORPORAR EL LIBRO AL ESCENARIO */
   escenaLibro.appendChild(hoja);
 
   escenario.appendChild(escenaLibro);
 
 
-  /* =====================================
+  /* ======================================
      MOSTRAR DIAPOSITIVA 3 DEBAJO
 
-     Se agrega la clase detalle-entrando,
-     que controla su aparición suave.
-     ===================================== */
+     La aparición gradual se controla
+     desde estilos.css.
+     ====================================== */
 
-  const detalle =
-    document.getElementById('detalle');
+  const detalle = document.getElementById(
+    'detalle'
+  );
 
-  detalle.classList.remove('detalle-entrando');
+  detalle.classList.remove(
+    'detalle-entrando'
+  );
 
-  // Reinicia la animación de aparición
+  /* REINICIAR ANIMACIÓN DE APARICIÓN */
   void detalle.offsetWidth;
 
-  detalle.classList.add('detalle-entrando');
+  detalle.classList.add(
+    'detalle-entrando'
+  );
 
   mostrar('detalle');
 
 
-  /* =====================================
-     FINALIZAR AL TERMINAR LA ANIMACIÓN
+  /* ======================================
+     FINALIZACIÓN AUTOMÁTICA
 
-     Ocurre tras los 5 segundos definidos
-     en el CSS.
-
-     Eliminar el libro temporal permite
-     ver por completo la diapositiva 3.
-     ===================================== */
+     JavaScript espera a que termine
+     la animación CSS de 2 segundos.
+     ====================================== */
 
   hoja.addEventListener(
     'animationend',
@@ -607,35 +765,40 @@ function abrirDetalle(indice) {
         return;
       }
 
-      /* ELIMINAR HOJA TEMPORAL */
+      /* RETIRAR HOJA TEMPORAL */
       escenaLibro.remove();
 
-      /* DEJAR EL DETALLE VISIBLE */
+      /* MANTENER VISIBLE LA DIAPOSITIVA 3 */
       detalle.classList.remove(
         'detalle-entrando'
       );
 
-      /* PERMITIR NUEVAS INTERACCIONES */
+      /* HABILITAR NUEVAS INTERACCIONES */
       transicionEnCurso = false;
 
     },
     { once: true }
   );
+
 }
 
 
-/* =========================================
-   ESTADO INICIAL
-   ========================================= */
+/* ==========================================
+   14. CONFIGURACIÓN INICIAL
+   ========================================== */
 
+/* SELECCIONAR PRIMER ENCARGO */
 seleccionar(0);
 
-sectores[0].classList.remove('seleccionado');
+/* NO AMPLIAR HASTA INTERACTUAR */
+sectores[0].classList.remove(
+  'seleccionado'
+);
 
 
-/* =========================================
-   ACCESO MEDIANTE ENLACES INTERNOS
-   ========================================= */
+/* ==========================================
+   15. ACCESO DIRECTO A LAS DIAPOSITIVAS
+   ========================================== */
 
 const hash = location.hash.substring(1);
 
@@ -648,4 +811,5 @@ if (hash === 'imagen-escrita') {
   mostrar('imagen-escrita');
 
   abrirDetalle(0);
+
 }
