@@ -1,0 +1,20 @@
+PORTAFOLIO DIGITAL — HTML, CSS y JavaScript
+
+1. Abre index.html en tu navegador (no necesitas instalar nada).
+2. Para añadir fotos, coloca los archivos en la carpeta imagenes.
+3. Abre script.js y sustituye cada imagen: '' por la ruta, por ejemplo:
+   imagen: 'imagenes/encargo-1.jpg'
+   La misma foto aparece en la rueda, el panel derecho de la diapositiva 2
+   y el panel izquierdo de la diapositiva 3.
+4. Edita los textos y enlaces de cada encargo en script.js.
+5. Para cambiar el título, encabezados y texto de la diapositiva 1,
+   edita index.html. Hay comentarios junto a cada texto.
+6. Los colores, tamaños y posiciones originales están en estilos.css.
+
+FUNCIONAMIENTO
+- "Imagen escrita" abre la diapositiva 2.
+- Pasar el puntero o hacer foco sobre un sector lo destaca, gira la perilla
+  y actualiza la imagen de la derecha.
+- Hacer clic en un sector abre el detalle de ese encargo en la diapositiva 3.
+- La flecha de las diapositivas 2 y 3 vuelve a la diapositiva 1.
+- No se añadieron imágenes ni textos diferentes a los del wireframe.

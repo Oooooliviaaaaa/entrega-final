@@ -1,0 +1,587 @@
+
+
+/* =========================================
+   CONFIGURACIÓN GENERAL
+   ========================================= */
+
+:root {
+  --rojo: #7a1111;
+  --verde: #7ed953;
+  --gris: #cbd3db;
+  --negro: #000;
+
+  /* DURACIÓN DE LA ANIMACIÓN DE LIBRO */
+  --duracion-libro: 2s;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html,
+body {
+  margin: 0;
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+  background: var(--rojo);
+}
+
+body {
+  font-family: Georgia, "Times New Roman", serif;
+}
+
+/* =========================================
+   ESCENARIO GENERAL
+   ========================================= */
+
+#escenario {
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: 1366px;
+  height: 768px;
+  transform-origin: top left;
+  overflow: hidden;
+  background: var(--rojo);
+}
+
+.diapositiva {
+  position: absolute;
+  inset: 0;
+  display: none;
+  background: var(--rojo);
+}
+
+.diapositiva.activa {
+  display: block;
+}
+
+/* =========================================
+   DIAPOSITIVA 1
+   ========================================= */
+
+.titulo-principal {
+  position: absolute;
+  top: 46px;
+  left: 0;
+  width: 100%;
+  font-size: 50px;
+  line-height: 1.1;
+  text-align: center;
+  color: black;
+  margin: 0;
+  font-weight: 700;
+}
+
+/* BARRA DE NAVEGACIÓN */
+
+.barra {
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: 194px;
+  height: 50px;
+  display: grid;
+  grid-template-columns:
+    232px 286px 301px 265px 1fr;
+  border-top: 4px solid white;
+  border-bottom: 4px solid white;
+}
+
+.celda {
+  height: 46px;
+  border-right: 4px solid white;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-decoration: none;
+  color: white;
+  font-weight: bold;
+  font-size: 23px;
+  white-space: nowrap;
+}
+
+.celda:last-child {
+  border-right: 0;
+}
+
+/* TÍTULO DE SECCIÓN */
+
+.titulo-seccion {
+  position: absolute;
+  left: 101px;
+  top: 314px;
+  margin: 0;
+  font-size: 49px;
+  color: black;
+}
+
+/* DESCRIPCIÓN */
+
+.descripcion-inicio {
+  position: absolute;
+  left: 140px;
+  top: 533px;
+  margin: 0;
+  font-size: 37px;
+  color: black;
+}
+
+/* =========================================
+   FLECHAS DE REGRESO
+   ========================================= */
+
+.volver {
+  position: absolute;
+  top: 10px;
+  left: 26px;
+  width: 77px;
+  height: 79px;
+  padding: 0;
+  background: none;
+  border: 0;
+  cursor: pointer;
+  z-index: 10;
+}
+
+.volver svg {
+  width: 100%;
+  height: 100%;
+  fill: black;
+}
+
+/* =========================================
+   DIAPOSITIVA 2: RUEDA
+   ========================================= */
+
+.rueda {
+  position: absolute;
+  left: 101px;
+  top: 122px;
+  width: 520px;
+  height: 520px;
+}
+
+.rueda-svg {
+  display: block;
+  width: 520px;
+  height: 520px;
+  overflow: visible;
+}
+
+/* SECTORES INTERACTIVOS */
+
+.sector {
+  cursor: pointer;
+
+  transform-box: fill-box;
+  transform-origin: center;
+
+  transition:
+    transform 0.25s ease,
+    filter 0.25s ease;
+}
+
+/* SECTOR SELECCIONADO */
+
+.sector.seleccionado {
+  transform: scale(1.065);
+  filter: brightness(1.1);
+}
+
+.sector:focus {
+  outline: none;
+  filter: brightness(1.15);
+}
+
+.sector path {
+  stroke: black;
+  stroke-width: 3;
+  stroke-linejoin: round;
+}
+
+/* =========================================
+   PERILLA GIRATORIA
+   ========================================= */
+
+.perilla {
+  position: absolute;
+  left: 198px;
+  top: 198px;
+  width: 124px;
+  height: 124px;
+  border-radius: 50%;
+  background: #3d4041;
+  pointer-events: none;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  z-index: 4;
+}
+
+.perilla-interior {
+  width: 109px;
+  height: 109px;
+  background: #5d606a;
+  border-radius: 50%;
+}
+
+/* AGUJA */
+
+.aguja {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 124px;
+  height: 124px;
+
+  transform: rotate(-45deg);
+
+  transition:
+    transform 0.4s ease-in-out;
+}
+
+.aguja::before {
+  content: "";
+
+  position: absolute;
+  top: 8px;
+  left: 54px;
+  width: 22px;
+  height: 84px;
+
+  border: 8px solid #3b3c3e;
+  border-radius: 12px;
+
+  background: #79a5ff;
+
+  transform: rotate(-3deg);
+  transform-origin: bottom center;
+}
+
+/* =========================================
+   RECTÁNGULO DERECHO DE DIAPOSITIVA 2
+   ========================================= */
+
+.marco-derecho {
+  position: absolute;
+  left: 710px;
+  top: 113px;
+  width: 593px;
+  height: 542px;
+
+  border: 4px solid black;
+  border-left-width: 48px;
+
+  padding: 10px 0;
+}
+
+/* FOTOGRAFÍA DEL RECTÁNGULO VERDE */
+
+.panel-verde {
+  width: 100%;
+  height: 100%;
+
+  background: var(--verde);
+
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+}
+
+/* =========================================
+   DIAPOSITIVA 3
+   ========================================= */
+
+/* RECTÁNGULO IZQUIERDO */
+
+.marco-izquierdo {
+  position: absolute;
+  left: 117px;
+  top: 113px;
+  width: 545px;
+  height: 542px;
+
+  border: 4px solid black;
+
+  padding: 10px 0;
+}
+
+/* RECTÁNGULO DERECHO */
+
+.marco-texto {
+  position: absolute;
+  left: 660px;
+  top: 113px;
+  width: 643px;
+  height: 542px;
+
+  border: 4px solid black;
+  border-left-width: 48px;
+}
+
+/* CÍRCULO GRIS */
+
+.circulo-gris {
+  position: absolute;
+  left: 17px;
+  top: 16px;
+
+  width: 502px;
+  height: 502px;
+
+  border-radius: 50%;
+
+  background: var(--gris);
+
+  overflow: hidden;
+}
+
+/* TÍTULO DEL ENCARGO */
+
+#titulo-encargo {
+  position: absolute;
+  top: 62px;
+  left: 0;
+  width: 100%;
+
+  text-align: center;
+
+  margin: 0;
+
+  color: black;
+  font-size: 40px;
+}
+
+/* TEXTOS */
+
+.texto-izquierda,
+.texto-derecha {
+  position: absolute;
+  margin: 0;
+
+  color: black;
+
+  font-size: 12px;
+  line-height: 16px;
+
+  top: 158px;
+  width: 185px;
+
+  white-space: pre-line;
+}
+
+.texto-izquierda {
+  left: 24px;
+}
+
+.texto-derecha {
+  left: 330px;
+}
+
+/* CÍRCULO CENTRAL */
+
+.anillo-gris {
+  position: absolute;
+  top: 184px;
+  left: 184px;
+
+  width: 134px;
+  height: 134px;
+
+  border-radius: 50%;
+  background: #6d7981;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.orificio {
+  width: 75px;
+  height: 75px;
+
+  border-radius: 50%;
+  background: #3e4346;
+}
+
+/* ENLACES */
+
+.enlaces {
+  position: absolute;
+  top: 388px;
+  left: 0;
+  width: 100%;
+
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+
+  font-size: 12px;
+  line-height: 18px;
+}
+
+.enlaces a {
+  color: black;
+  text-decoration: none;
+}
+
+.enlaces a:hover {
+  text-decoration: underline;
+}
+
+/* =========================================
+   ANIMACIÓN DE APERTURA DE LIBRO
+   =========================================
+
+   DURACIÓN TOTAL: 5 SEGUNDOS
+
+   La imagen verde y el marco negro
+   se mantienen unidos.
+
+   El giro se realiza alrededor del
+   borde izquierdo del rectángulo.
+
+   La curva cubic-bezier permite
+   un movimiento suave y continuo.
+   ========================================= */
+
+/* ESCENA CON PERSPECTIVA 3D */
+
+.libro-escena {
+  position: absolute;
+
+  left: 710px;
+  top: 113px;
+
+  width: 593px;
+  height: 542px;
+
+  perspective: 1400px;
+  perspective-origin: center center;
+
+  z-index: 20;
+
+  pointer-events: none;
+}
+
+/* HOJA QUE SE ABRE */
+
+.libro-hoja {
+  position: relative;
+
+  width: 100%;
+  height: 100%;
+
+  transform-style: preserve-3d;
+
+  /* EL GIRO PARTE DESDE EL BORDE IZQUIERDO */
+  transform-origin: left center;
+
+  will-change: transform;
+
+  /* ANIMACIÓN DE CINCO SEGUNDOS */
+  animation:
+    abrir-libro
+    var(--duracion-libro)
+    cubic-bezier(0.45, 0, 0.55, 1)
+    forwards;
+}
+
+/* CARAS FRONTAL Y TRASERA */
+
+.libro-cara {
+  position: absolute;
+  inset: 0;
+
+  backface-visibility: hidden;
+  -webkit-backface-visibility: hidden;
+}
+
+/* CARA POSTERIOR CON LA MISMA FOTOGRAFÍA */
+
+.libro-cara-trasera {
+  transform: rotateY(180deg);
+}
+
+/* MOVIMIENTO DE APERTURA */
+
+@keyframes abrir-libro {
+
+  /* LIBRO CERRADO */
+  0% {
+    transform: rotateY(0deg);
+  }
+
+  /* INICIO SUAVE */
+  15% {
+    transform: rotateY(-12deg);
+  }
+
+  /* APERTURA PROGRESIVA */
+  35% {
+    transform: rotateY(-55deg);
+  }
+
+  /* MITAD DEL MOVIMIENTO */
+  50% {
+    transform: rotateY(-90deg);
+  }
+
+  /* CONTINÚA LA APERTURA */
+  65% {
+    transform: rotateY(-125deg);
+  }
+
+  /* DESACELERACIÓN FINAL */
+  85% {
+    transform: rotateY(-168deg);
+  }
+
+  /* LIBRO COMPLETAMENTE ABIERTO */
+  100% {
+    transform: rotateY(-180deg);
+  }
+
+}
+
+/* =========================================
+   APARICIÓN SUAVE DE LA DIAPOSITIVA 3
+
+   Se produce durante la apertura del libro.
+   ========================================= */
+
+#detalle.detalle-entrando .marco-izquierdo,
+#detalle.detalle-entrando .marco-texto {
+
+  animation:
+    aparecer-contenido
+    var(--duracion-libro)
+    ease-in-out
+    both;
+}
+
+/* APARICIÓN PROGRESIVA */
+
+@keyframes aparecer-contenido {
+
+  0% {
+    opacity: 0;
+  }
+
+  30% {
+    opacity: 0;
+  }
+
+  70% {
+    opacity: 0.65;
+  }
+
+  100% {
+    opacity: 1;
+  }
+
+}

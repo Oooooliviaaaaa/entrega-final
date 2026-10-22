@@ -1,115 +1,239 @@
+
+
 <!DOCTYPE html>
-<html lang="en">
-
+<html lang="es">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>IE 2026</title>
-    <link rel="stylesheet" href="style.css">
+  <meta charset="UTF-8">
+  <meta name="viewport"
+        content="width=device-width, initial-scale=1.0">
+
+  <title>Portafolio Digital</title>
+
+  <!-- ARCHIVO DE ESTILOS -->
+  <link rel="stylesheet" href="estilos.css">
 </head>
-
-
-<!-- Inicio Body -->
 
 <body>
 
-    <!-- Sección principal -->
-    <header>
-        <h1>Portafolio IE 2026</h1>
-    </header>
+<div id="escenario">
 
-    <!-- Contenedor General -->
-    <div id="container">
+  <!-- =====================================
+       DIAPOSITIVA 1: PÁGINA PRINCIPAL
 
-        <!-- Contenedor lado izquierdo - Parrafo y botón -->
-        <div class="intro">
-            <p>
-                Imagen escrita es una asignatura que se centra en la intersección entre diseño,
-                la programación y arte generativo. Utilizando p5.js como herramienta principal, el curso explora los
-                fundamentos de la programación creativa y su aplicación en el diseño visual interactivo.
-            </p>
-            <p>
-                A través del creative coding se hace énfasis en el pensamiento computacional como herramienta de diseño,
-                fomentando un enfoque innovador en la resolución de problemas visuales y la creación artística. La
-                integración de herramientas de IA busca ampliar las posibilidades creativas y técnicas, sirviendo como
-                complemento al proceso de diseño y programación
-            </p>
+       AQUÍ PUEDES CAMBIAR:
+       - Título del portafolio
+       - Textos de navegación
+       - Descripción del curso
+       ===================================== -->
+
+  <section class="diapositiva activa" id="inicio">
+
+    <!-- TÍTULO PRINCIPAL -->
+    <h1 class="titulo-principal">
+      Portafolio Digital
+    </h1>
+
+    <!-- BARRA DE NAVEGACIÓN -->
+    <nav class="barra">
+
+      <span class="celda"></span>
+
+      <!-- BOTÓN WIKI CASIOPEA -->
+      <a class="celda" href="#wiki">
+        Wiki Casiopea
+      </a>
+
+      <!-- BOTÓN QUE ABRE LA DIAPOSITIVA 2 -->
+      <a class="celda"
+         href="#imagen-escrita"
+         id="abrir-imagen">
+        Imagen escrita
+      </a>
+
+      <!-- BOTÓN SOBRE MÍ -->
+      <a class="celda" href="#sobre-mi">
+        Sobre Mi
+      </a>
+
+      <span class="celda"></span>
+
+    </nav>
+
+    <!-- TÍTULO EDITABLE -->
+    <h2 class="titulo-seccion">
+      Imagen Escrita
+    </h2>
+
+    <!-- DESCRIPCIÓN EDITABLE -->
+    <p class="descripcion-inicio">
+      El curso mezlca
+    </p>
+
+  </section>
 
 
-            <a href="https://wiki.ead.pucv.cl/Sitio_Web_IE_-_Javiera_Ruiz" target="_blank">
-                <button>
-                    wiki del proyecto
-                </button>
-            </a>
+  <!-- =====================================
+       DIAPOSITIVA 2: RUEDA INTERACTIVA
+       ===================================== -->
 
-        </div>
+  <section class="diapositiva" id="imagen-escrita">
 
-        <!-- Contenedor lado derecho -->
-        <div class="proyectos">
-            <h2>Mis proyectos p5js</h2>
+    <!-- FLECHA PARA VOLVER AL INICIO -->
+    <button class="volver"
+            type="button"
+            aria-label="Volver al inicio">
 
-            <!-- Contenedor galería de proyectos -->
-            <div class="galeria">
-                <!-- tarjeta proyecto 1 -->
-                <div class="tarjeta">
-                    <a href="https://editor.p5js.org/jruiz-IE/full/_D3gtXvo_" target="_blank">
-                        <img src="assets/Encargo 1-IE ORC.png">
-                        </img>
-                        <h3>Tarea 1</h3>
-                    </a>
-                </div>
+      <svg viewBox="0 0 80 80">
+        <path d="M39 0 L0 39 L39 78
+                 L39 57 L77 57 L77 20
+                 L39 20 Z"/>
+      </svg>
 
-                <!-- tarjeta proyecto 2 -->
-                <div class="tarjeta">
-                    <a href="">
-                        <img src="assets/Encargo 2-IE ORC.png">
-                        </img>
-                        <h3>Tarea 2</h3>
-                    </a>
-                </div>
+    </button>
 
-                <!-- tarjeta proyecto 3 -->
-                <div class="tarjeta">
-                    <a href="">
-                        <img src="assets/Encargo 3-IE ORC.png">
-                        </img>
-                        <h3>Tarea 3</h3>
-                    </a>
-                </div>
+    <!-- RUEDA DE SEIS SECTORES -->
+    <div class="rueda">
 
-                <!-- tarjeta proyecto 4 -->
-                <div class="tarjeta">
-                    <a href="">
-                        <img src="assets/Encargo 4-IE ORC.png">
-                        </img>
-                        <h3>Tarea 4</h3>
-                    </a>
-                </div>
+      <svg class="rueda-svg" viewBox="0 0 520 520">
 
-                <!-- tarjeta proyecto 5 -->
-                <div class="tarjeta">
-                    <a href="">
-                        <img src="assets/Encargo 5-IE ORC.png">
-                        </img>
-                        <h3>Tarea 5</h3>
-                    </a>
-                </div>
+        <!-- RECORTES PARA FOTOGRAFÍAS -->
+        <defs id="clips-rueda"></defs>
 
-                <!-- tarjeta proyecto 6 -->
-                <div class="tarjeta">
-                    <a href="">
-                        <img src="assets/Encargo 6-IE ORC.png">
-                        </img>
-                        <h3>Tarea 6</h3>
-                    </a>
-                </div>
+        <!-- SECTORES GENERADOS POR JAVASCRIPT -->
+        <g id="sectores-rueda"></g>
 
-            </div>
+        <!-- CIRCUNFERENCIA EXTERIOR -->
+        <circle
+          cx="260"
+          cy="260"
+          r="247"
+          fill="none"
+          stroke="black"
+          stroke-width="19"
+          pointer-events="none"/>
 
-        </div>
+      </svg>
+
+      <!-- PERILLA GIRATORIA -->
+      <div class="perilla">
+
+        <div class="perilla-interior"></div>
+
+        <div class="aguja" id="aguja"></div>
+
+      </div>
 
     </div>
 
-</body>
+    <!-- =====================================
+         RECTÁNGULO DERECHO
 
+         El marco negro y la imagen verde
+         se abrirán juntos como un libro.
+
+         La imagen depende del sector elegido.
+         ===================================== -->
+
+    <div class="marco-derecho">
+
+      <div id="imagen-grande"
+           class="panel-verde">
+      </div>
+
+    </div>
+
+  </section>
+
+
+  <!-- =====================================
+       DIAPOSITIVA 3: DETALLE DEL ENCARGO
+
+       Mantiene la fotografía seleccionada
+       y muestra sus textos correspondientes.
+       ===================================== -->
+
+  <section class="diapositiva" id="detalle">
+
+    <!-- FLECHA PARA VOLVER AL INICIO -->
+    <button class="volver"
+            type="button"
+            aria-label="Volver al inicio">
+
+      <svg viewBox="0 0 80 80">
+        <path d="M39 0 L0 39 L39 78
+                 L39 57 L77 57 L77 20
+                 L39 20 Z"/>
+      </svg>
+
+    </button>
+
+    <!-- MISMA FOTOGRAFÍA SELECCIONADA -->
+    <div class="marco-izquierdo">
+
+      <div id="imagen-detalle"
+           class="panel-verde">
+      </div>
+
+    </div>
+
+    <!-- RECTÁNGULO DERECHO CON TEXTOS -->
+    <div class="marco-texto">
+
+      <div class="circulo-gris">
+
+        <!-- TÍTULO EDITABLE DEL ENCARGO -->
+        <h2 id="titulo-encargo">
+          Encargo 1
+        </h2>
+
+        <!-- TEXTO IZQUIERDO -->
+        <p class="texto-izquierda"
+           id="texto-izquierda">
+          El ejercicio debia contener un
+          sistema de particulas, ....
+        </p>
+
+        <!-- TEXTO DERECHO -->
+        <p class="texto-derecha"
+           id="texto-derecha">
+          El ejercicio debia contener un
+          sistema de particulas, ....
+        </p>
+
+        <!-- CÍRCULO CENTRAL -->
+        <div class="anillo-gris">
+          <div class="orificio"></div>
+        </div>
+
+        <!-- ENLACES EDITABLES -->
+        <div class="enlaces">
+
+          <a id="link-jp5"
+             href="#"
+             target="_blank"
+             rel="noopener noreferrer">
+            LINK JP5
+          </a>
+
+          <a id="link-wiki"
+             href="#"
+             target="_blank"
+             rel="noopener noreferrer">
+            LINK WIKI
+          </a>
+
+        </div>
+
+      </div>
+
+    </div>
+
+  </section>
+
+</div>
+
+<!-- CONEXIÓN CON JAVASCRIPT -->
+<script src="script.js"></script>
+
+</body>
 </html>
