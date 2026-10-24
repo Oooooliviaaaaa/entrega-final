@@ -1,36 +1,34 @@
 
+
 <!DOCTYPE html>
 <html lang="es">
 
 <head>
   <meta charset="UTF-8">
+
   <meta name="viewport"
         content="width=device-width, initial-scale=1.0">
 
   <title>Portafolio Digital</title>
+
   <link rel="stylesheet" href="estilos.css">
 </head>
 
 <body>
 
 <!-- ==========================================
-     CONTENIDOS EDITABLES DE LOS SEIS ENCARGOS
+     CONTENIDOS EDITABLES DE LOS ENCARGOS
 
-     Aquí puedes modificar:
-     - Imágenes de miniaturas
+     Puedes modificar:
+     - Miniaturas
      - Videos
      - Proyectos p5.js
      - Títulos
      - Textos
      - Enlaces JP5 y Wiki
 
-     PRIORIDAD AL ABRIR:
-     1. Proyecto p5.js
-     2. Video
-     3. Fotografía
-
-     Si no utilizas video o proyecto p5.js,
-     deja su atributo src="" vacío.
+     Si un encargo no tiene video o p5.js,
+     deja su src="" vacío.
      ========================================== -->
 
 
@@ -40,38 +38,31 @@
 
 <template id="encargo-1">
 
-  <!-- MINIATURA -->
   <img class="foto-encargo"
        src="imagenes/Miniatura encargo 1 IE.png"
        alt="Fotografía del encargo 1">
 
-  <!-- VIDEO OPCIONAL -->
   <video class="video-encargo"
          src=""
          controls
          playsinline></video>
 
-  <!-- P5.JS -->
   <iframe class="p5-encargo"
           src=""
           title="Proyecto p5.js del encargo 1"
           allow="camera; microphone; fullscreen"
           allowfullscreen></iframe>
 
-  <!-- TÍTULO -->
   <h3 class="titulo-dato">Encargo 1</h3>
 
-  <!-- DESCRIPCIÓN IZQUIERDA -->
   <p class="texto-izquierdo-dato">
     El primer acercamiento a p5.js fue crear la protada de algun disco de nuestra eleccion, en la primera clase solamente aprendimos lo basico de formas, lineas y el sistema de coordenadas en el que funcióna.
   </p>
 
-  <!-- DESCRIPCIÓN DERECHA -->
   <p class="texto-derecho-dato">
     Como elección yo opte por el disco "El gran Santiago" de Teleradio Donoso, banda que aunque actualmente no sigue activa, el vocalista Alex Andwanter continua su recorrido como solistas en una carrera muy prolifica y personalemente de mi gusto, y tocando ocasionalmente canciones de la banda, como "Amar en el Campo" "Bailar y Llorar" "Eramos Todos Felices". La banda se situa en los principios de los 2000, un sonido indie, conformado por bateria, dos guitarras y un bajo en sus presentaciónes en vivo.
   </p>
 
-  <!-- ENLACES -->
   <a class="link-jp5-dato" href="">LINK JP5</a>
   <a class="link-wiki-dato" href="">LINK WIKI</a>
 
@@ -93,7 +84,6 @@
          controls
          playsinline></video>
 
-  <!-- ENLACE P5.JS CONSERVADO -->
   <iframe class="p5-encargo"
           src="https://editor.p5js.org/Oooolivia/full/JbzLVOZFd"
           title="Proyecto p5.js del encargo 2"
@@ -131,7 +121,6 @@
          controls
          playsinline></video>
 
-  <!-- ENLACE P5.JS CONSERVADO -->
   <iframe class="p5-encargo"
           src="https://editor.p5js.org/Oooolivia/full/Qn4XNRZUi"
           title="Proyecto p5.js del encargo 3"
@@ -169,7 +158,6 @@
          controls
          playsinline></video>
 
-  <!-- ENLACE P5.JS CONSERVADO -->
   <iframe class="p5-encargo"
           src="https://editor.p5js.org/Oooolivia/full/7vfrkykC2"
           title="Proyecto p5.js del encargo 4"
@@ -207,7 +195,6 @@
          controls
          playsinline></video>
 
-  <!-- ENLACE P5.JS CONSERVADO -->
   <iframe class="p5-encargo"
           src="https://editor.p5js.org/Oooolivia/full/iesaQkATe"
           title="Proyecto p5.js del encargo 5"
@@ -245,7 +232,6 @@
          controls
          playsinline></video>
 
-  <!-- ENLACE P5.JS CONSERVADO -->
   <iframe class="p5-encargo"
           src="https://editor.p5js.org/Oooolivia/full/MQi_dVf2_"
           title="Proyecto p5.js del encargo 6"
@@ -275,24 +261,30 @@
 
 
 <!-- ==========================================
-     ESTRUCTURA VISUAL DEL PORTAFOLIO
+     ESCENARIO DEL PORTAFOLIO
      ========================================== -->
 
 <div id="escenario">
 
 
   <!-- ======================================
-       DIAPOSITIVA 1: PANTALLA INICIAL
+       PANTALLA 1: INICIO
        ====================================== -->
 
   <section class="diapositiva activa" id="inicio">
 
-    <!-- ÚNICA FRANJA ROJA -->
+    <!-- CABECERA ROJA DE 165 PX -->
     <header class="cabecera-inicio">
 
+      <!-- NOMBRE DEL PORTAFOLIO, IZQUIERDA -->
       <h1 class="titulo-principal">
         Portafolio Digital
       </h1>
+
+      <!-- NOMBRE DE LA AUTORA, DERECHA -->
+      <span class="nombre-autora">
+        Olivia Rodriguez Cornejo
+      </span>
 
     </header>
 
@@ -300,14 +292,19 @@
     <!-- CONTENIDO CON FONDO AHUESADO -->
     <div class="contenido-inicio">
 
+      <!-- TÍTULO PRINCIPAL DEL PROYECTO -->
       <h2 class="titulo-seccion">
         Imagen Escrita
       </h2>
 
-      <!-- DESCRIPCIÓN EN DOS COLUMNAS -->
+
+      <!-- ==================================
+           DOS COLUMNAS DE DESCRIPCIÓN
+           ================================== -->
+
       <div class="descripcion-inicio">
 
-        <!-- PRIMERA COLUMNA -->
+        <!-- COLUMNA IZQUIERDA -->
         <p>
           La asignatura consiste en adentrarnos al mundo
           de la codificación como diseñadores, trabajando
@@ -317,7 +314,7 @@
           el código nos puede brindar.
         </p>
 
-        <!-- SEGUNDA COLUMNA -->
+        <!-- COLUMNA DERECHA -->
         <p>
           Se insiste en el proceso creativo y en cómo
           lograr que la codificación sea una herramienta
@@ -334,18 +331,23 @@
     </div>
 
 
-    <!-- BOTONES INFERIORES -->
+    <!-- ==================================
+         BOTONES INFERIORES
+         ================================== -->
+
     <nav class="botones-inicio"
          aria-label="Navegación principal">
 
-      <!-- ABRE LA RUEDA -->
+      <!-- BOTÓN ENCARGOS -->
+      <!-- Mantener el ID para JavaScript -->
       <a class="boton-inicio boton-imagen"
          id="abrir-imagen"
          href="#imagen-escrita">
-        Imagen<br>escrita
+        Encargos
       </a>
 
-      <!-- CAMBIAR # POR TU ENLACE WIKI -->
+      <!-- BOTÓN WIKI -->
+      <!-- Reemplaza # por tu enlace real -->
       <a class="boton-inicio boton-wiki"
          id="abrir-wiki"
          href="#">
@@ -358,13 +360,12 @@
 
 
   <!-- ======================================
-       DIAPOSITIVA 2: RUEDA INTERACTIVA
-       FONDO AHUESADO
+       PANTALLA 2: RUEDA INTERACTIVA
        ====================================== -->
 
   <section class="diapositiva" id="imagen-escrita">
 
-    <!-- FLECHA: REGRESA AL INICIO -->
+    <!-- FLECHA PARA REGRESAR AL INICIO -->
     <button class="volver"
             id="volver-inicio"
             type="button"
@@ -385,13 +386,14 @@
     </button>
 
 
-    <!-- RUEDA DE SEIS MINIATURAS -->
+    <!-- RUEDA CON SEIS ENCARGOS -->
     <div class="rueda">
 
       <svg class="rueda-svg"
            viewBox="0 0 520 520">
 
         <defs id="clips-rueda"></defs>
+
         <g id="sectores-rueda"></g>
 
         <circle cx="260"
@@ -405,12 +407,13 @@
       </svg>
 
 
-      <!-- PERILLA GIRATORIA -->
+      <!-- PERILLA INTERACTIVA -->
       <div class="perilla"
            id="perilla"
            title="Arrastra para seleccionar un encargo">
 
         <div class="perilla-interior"></div>
+
         <div class="aguja" id="aguja"></div>
 
       </div>
@@ -418,7 +421,7 @@
     </div>
 
 
-    <!-- FOTOGRAFÍA DEL ENCARGO SELECCIONADO -->
+    <!-- IMAGEN GRANDE DEL ENCARGO -->
     <div class="marco-derecho">
 
       <div class="panel-verde"
@@ -430,13 +433,12 @@
 
 
   <!-- ======================================
-       DIAPOSITIVA 3: ENCARGO ABIERTO
-       FONDO AHUESADO
+       PANTALLA 3: ENCARGO ABIERTO
        ====================================== -->
 
   <section class="diapositiva" id="detalle">
 
-    <!-- FLECHA: REGRESA A LA RUEDA -->
+    <!-- FLECHA PARA REGRESAR A LA RUEDA -->
     <button class="volver"
             id="volver-rueda"
             type="button"
@@ -457,7 +459,7 @@
     </button>
 
 
-    <!-- FOTO, VIDEO O PROYECTO P5.JS -->
+    <!-- PROYECTO P5.JS, VIDEO O FOTO -->
     <div class="marco-izquierdo">
 
       <div class="panel-verde"
@@ -466,28 +468,33 @@
     </div>
 
 
-    <!-- MARCO DE DESCRIPCIONES -->
+    <!-- PANEL CIRCULAR DE TEXTOS -->
     <div class="marco-texto">
 
       <div class="circulo-gris">
 
+        <!-- TÍTULO DEL ENCARGO -->
         <h2 id="titulo-encargo">
           Encargo 1
         </h2>
 
-        <!-- DOS COLUMNAS CIRCULARES -->
+        <!-- COLUMNA IZQUIERDA -->
         <div class="texto-izquierda"
              id="texto-izquierda"></div>
 
+        <!-- COLUMNA DERECHA -->
         <div class="texto-derecha"
              id="texto-derecha"></div>
 
-        <!-- CÍRCULO PEQUEÑO -->
+        <!-- CÍRCULO CENTRAL -->
         <div class="anillo-gris">
+
           <div class="orificio"></div>
+
         </div>
 
-        <!-- ENLACES -->
+
+        <!-- ENLACES DEL ENCARGO -->
         <div class="enlaces">
 
           <a id="link-jp5"
@@ -515,7 +522,6 @@
 </div>
 
 
-<!-- CONEXIÓN CON JAVASCRIPT -->
 <script src="script.js"></script>
 
 </body>

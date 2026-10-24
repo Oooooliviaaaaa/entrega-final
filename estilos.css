@@ -1,34 +1,24 @@
 
 /* ==========================================
-   PORTAFOLIO DIGITAL
-
-   COLORES Y VARIABLES PRINCIPALES
+   COLORES PRINCIPALES
    ========================================== */
 
 :root {
-  /* ROJO DE LA FRANJA SUPERIOR */
   --rojo: #7a1111;
-
-  /* FONDO GENERAL AHUESADO */
   --crema: #f8ecdf;
-
-  /* COLORES DE LOS ELEMENTOS */
   --verde: #7ed953;
   --gris: #cbd3db;
   --negro: #000;
 
-  /* ANIMACIÓN DEL LIBRO */
   --duracion-libro: 2s;
 
-  /* SEPARACIÓN DE LAS COLUMNAS CIRCULARES */
+  /* SEPARACIÓN DE TEXTOS EN LOS ENCARGOS */
   --separacion-central: 30px;
 }
 
 
 /* ==========================================
    CONFIGURACIÓN GENERAL
-
-   AHORA TODO EL FONDO ES AHUESADO.
    ========================================== */
 
 * {
@@ -40,6 +30,7 @@ body {
   margin: 0;
   width: 100%;
   height: 100%;
+
   overflow: hidden;
 
   background: var(--crema);
@@ -67,13 +58,12 @@ body {
 
   overflow: hidden;
 
-  /* FONDO AHUESADO */
   background: var(--crema);
 }
 
 
 /* ==========================================
-   CONFIGURACIÓN DE LAS TRES DIAPOSITIVAS
+   PANTALLAS DEL PORTAFOLIO
    ========================================== */
 
 .diapositiva {
@@ -82,7 +72,6 @@ body {
 
   display: none;
 
-  /* FONDO AHUESADO EN TODAS */
   background: var(--crema);
 }
 
@@ -92,7 +81,7 @@ body {
 
 
 /* ==========================================
-   DIAPOSITIVA 1: PANTALLA INICIAL
+   PANTALLA 1: INICIO
    ========================================== */
 
 #inicio {
@@ -101,9 +90,9 @@ body {
 
 
 /* ==========================================
-   FRANJA SUPERIOR
+   CABECERA ROJA
 
-   ÚNICA ZONA ROJA DEL PORTAFOLIO.
+   NUEVA ALTURA: 165 PX
    ========================================== */
 
 .cabecera-inicio {
@@ -113,39 +102,64 @@ body {
   top: 0;
 
   width: 100%;
-  height: 140px;
+  height: 165px;
 
   background: var(--rojo);
+
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+
+  padding: 0 90px;
 }
 
 
 /* ==========================================
-   TÍTULO PRINCIPAL
+   PORTAFOLIO DIGITAL
+   LADO SUPERIOR IZQUIERDO
    ========================================== */
 
 .titulo-principal {
-  position: absolute;
+  position: static;
 
-  top: 40px;
-  left: 0;
-
-  width: 100%;
-
+  width: auto;
   margin: 0;
+
+  font-family: Georgia, "Times New Roman", serif;
+
+  font-size: 25px;
+  font-weight: bold;
+  line-height: 1.2;
 
   color: white;
 
-  font-family: Georgia, "Times New Roman", serif;
-  font-size: 45px;
-  line-height: 1.1;
-  font-weight: bold;
-
-  text-align: center;
+  text-align: left;
 }
 
 
 /* ==========================================
-   CONTENIDO INFERIOR DEL INICIO
+   NOMBRE DE LA AUTORA
+   LADO SUPERIOR DERECHO
+   ========================================== */
+
+.nombre-autora {
+  font-family: Georgia, "Times New Roman", serif;
+
+  font-size: 25px;
+  font-weight: normal;
+  line-height: 1.2;
+
+  color: white;
+
+  text-align: right;
+}
+
+
+/* ==========================================
+   CONTENIDO CON FONDO AHUESADO
+
+   COMIENZA JUSTO DESPUÉS
+   DE LA CABECERA DE 165 PX
    ========================================== */
 
 .contenido-inicio {
@@ -154,7 +168,7 @@ body {
   left: 0;
   right: 0;
 
-  top: 140px;
+  top: 165px;
   bottom: 0;
 
   background: var(--crema);
@@ -163,17 +177,23 @@ body {
 
 /* ==========================================
    TÍTULO IMAGEN ESCRITA
+
+   Se mantiene cerca de la franja roja.
+
+   top: 85px significa 85px por debajo
+   del comienzo del fondo ahuesado.
    ========================================== */
 
 .titulo-seccion {
   position: absolute;
 
   left: 101px;
-  top: 227px;
+  top: 85px;
 
   margin: 0;
 
   font-family: Georgia, "Times New Roman", serif;
+
   font-size: 49px;
   font-weight: bold;
   line-height: 1.1;
@@ -183,19 +203,16 @@ body {
 
 
 /* ==========================================
-   DESCRIPCIÓN INICIAL
+   DESCRIPCIÓN EN DOS COLUMNAS
 
-   DOS COLUMNAS INDEPENDIENTES.
-
-   La distancia entre las columnas
-   se controla con column-gap: 55px.
+   SEPARACIÓN DE COLUMNAS: 55 PX
    ========================================== */
 
 .descripcion-inicio {
   position: absolute;
 
   left: 120px;
-  top: 305px;
+  top: 260px;
 
   width: 1120px;
 
@@ -205,6 +222,7 @@ body {
   column-gap: 55px;
 
   font-family: Georgia, "Times New Roman", serif;
+
   font-size: 20px;
   line-height: 1.3;
   font-weight: normal;
@@ -214,19 +232,18 @@ body {
   text-align: justify;
   text-justify: inter-word;
   hyphens: auto;
-
-  margin: 0;
 }
 
 .descripcion-inicio p {
   margin: 0;
   padding: 0;
+
   min-width: 0;
 }
 
 
 /* ==========================================
-   BOTONES INFERIORES
+   BOTONES DE LA PANTALLA INICIAL
    ========================================== */
 
 .botones-inicio {
@@ -241,10 +258,10 @@ body {
 
 
 /* ==========================================
-   BOTONES IMAGEN ESCRITA Y WIKI
+   BOTONES ENCARGOS Y WIKI
 
-   - Borde negro de 2px
-   - Aumento de 6% al pasar el mouse
+   Borde: 2 px
+   Aumento al pasar el mouse: 6 %
    ========================================== */
 
 .boton-inicio {
@@ -282,7 +299,7 @@ body {
 }
 
 
-/* EFECTO HOVER */
+/* PASAR EL MOUSE */
 
 .boton-inicio:hover {
   transform: scale(1.06);
@@ -291,7 +308,7 @@ body {
 }
 
 
-/* EFECTO AL HACER CLIC */
+/* PRESIONAR EL BOTÓN */
 
 .boton-inicio:active {
   transform: scale(1.02);
@@ -306,21 +323,21 @@ body {
 }
 
 
-/* UBICACIÓN DEL BOTÓN IMAGEN ESCRITA */
+/* BOTÓN ENCARGOS */
 
 .boton-imagen {
   left: 400px;
 }
 
 
-/* UBICACIÓN DEL BOTÓN WIKI */
+/* BOTÓN WIKI */
 
 .boton-wiki {
   left: 945px;
 }
 
 
-/* REDUCIR MOVIMIENTO SI ESTÁ CONFIGURADO */
+/* OPCIÓN DE MOVIMIENTO REDUCIDO */
 
 @media (prefers-reduced-motion: reduce) {
   .boton-inicio {
@@ -343,8 +360,8 @@ body {
   height: 79px;
 
   padding: 0;
-  border: 0;
 
+  border: 0;
   background: none;
 
   cursor: pointer;
@@ -363,9 +380,7 @@ body {
 
 
 /* ==========================================
-   DIAPOSITIVA 2: RUEDA INTERACTIVA
-
-   FONDO AHUESADO
+   PANTALLA 2: RUEDA
    ========================================== */
 
 #imagen-escrita {
@@ -476,7 +491,7 @@ body {
 
 
 /* ==========================================
-   AGUJA DE LA PERILLA
+   AGUJA
    ========================================== */
 
 .aguja {
@@ -507,19 +522,17 @@ body {
   height: 84px;
 
   border: 8px solid #3b3c3e;
-
   border-radius: 12px;
 
   background: #79a5ff;
 
   transform: rotate(-3deg);
-
   transform-origin: bottom center;
 }
 
 
 /* ==========================================
-   RECTÁNGULO DERECHO DE LA RUEDA
+   MARCO DERECHO DE LA RUEDA
    ========================================== */
 
 .marco-derecho {
@@ -539,9 +552,7 @@ body {
 
 
 /* ==========================================
-   PANEL VERDE
-
-   FOTOGRAFÍAS, VIDEOS Y P5.JS
+   FOTOS, VIDEOS Y P5.JS
    ========================================== */
 
 .panel-verde {
@@ -582,9 +593,7 @@ body {
 
 
 /* ==========================================
-   DIAPOSITIVA 3: ENCARGO ABIERTO
-
-   FONDO AHUESADO
+   PANTALLA 3: ENCARGO ABIERTO
    ========================================== */
 
 #detalle {
@@ -592,7 +601,7 @@ body {
 }
 
 
-/* RECTÁNGULO IZQUIERDO */
+/* MARCO IZQUIERDO */
 
 .marco-izquierdo {
   position: absolute;
@@ -609,7 +618,7 @@ body {
 }
 
 
-/* RECTÁNGULO DERECHO */
+/* MARCO DERECHO */
 
 .marco-texto {
   position: absolute;
@@ -660,26 +669,21 @@ body {
 
   margin: 0;
 
-  text-align: center;
-
   color: black;
 
   font-size: 40px;
   line-height: 1.1;
+
+  text-align: center;
 
   z-index: 5;
 }
 
 
 /* ==========================================
-   DOS COLUMNAS CON FORMA CIRCULAR
+   DOS COLUMNAS CIRCULARES
 
-   Separación entre contenedores: 30px.
-
-   Conservan:
-   - Curva exterior
-   - Curva interior
-   - Desplazamiento vertical
+   Separación central: 30 px
    ========================================== */
 
 .texto-izquierda,
@@ -737,7 +741,7 @@ body {
 }
 
 
-/* DESACTIVAR FORMAS ANTIGUAS */
+/* DESACTIVAR PSEUDOELEMENTOS ANTERIORES */
 
 .texto-izquierda::before,
 .texto-izquierda::after,
@@ -864,7 +868,7 @@ body {
 
 
 /* ==========================================
-   CONTENIDO DE LOS TEXTOS CIRCULARES
+   TEXTO DE LOS ENCARGOS
    ========================================== */
 
 .texto-contenido {
@@ -933,7 +937,7 @@ body {
 
 
 /* ==========================================
-   ENLACES JP5 Y WIKI DE CADA ENCARGO
+   ENLACES DE CADA ENCARGO
    ========================================== */
 
 .enlaces {
@@ -967,8 +971,6 @@ body {
 
 /* ==========================================
    ANIMACIÓN DE APERTURA DE LIBRO
-
-   DURACIÓN: 2 SEGUNDOS
    ========================================== */
 
 .libro-escena {
@@ -1019,9 +1021,7 @@ body {
 }
 
 
-/* ==========================================
-   MOVIMIENTO DE APERTURA
-   ========================================== */
+/* ANIMACIÓN DE 2 SEGUNDOS */
 
 @keyframes abrir-libro {
   from {
