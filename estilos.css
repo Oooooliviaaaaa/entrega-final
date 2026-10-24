@@ -2,33 +2,33 @@
 /* ==========================================
    PORTAFOLIO DIGITAL
 
-   COLORES Y CONFIGURACIÓN GENERAL
+   COLORES Y VARIABLES PRINCIPALES
    ========================================== */
 
 :root {
+  /* ROJO DE LA FRANJA SUPERIOR */
   --rojo: #7a1111;
+
+  /* FONDO GENERAL AHUESADO */
+  --crema: #f8ecdf;
+
+  /* COLORES DE LOS ELEMENTOS */
   --verde: #7ed953;
   --gris: #cbd3db;
   --negro: #000;
 
-  /* DURACIÓN DE LA ANIMACIÓN DEL LIBRO */
+  /* ANIMACIÓN DEL LIBRO */
   --duracion-libro: 2s;
 
-  /* ======================================
-     SEPARACIÓN ENTRE LAS COLUMNAS
-
-     CAMBIA ESTE NÚMERO SI QUIERES
-     AUMENTAR O REDUCIR LA DISTANCIA.
-
-     SEPARACIÓN ACTUAL: 30px
-     ====================================== */
-
+  /* SEPARACIÓN DE LAS COLUMNAS CIRCULARES */
   --separacion-central: 30px;
 }
 
 
 /* ==========================================
    CONFIGURACIÓN GENERAL
+
+   AHORA TODO EL FONDO ES AHUESADO.
    ========================================== */
 
 * {
@@ -41,7 +41,8 @@ body {
   width: 100%;
   height: 100%;
   overflow: hidden;
-  background: var(--rojo);
+
+  background: var(--crema);
 }
 
 body {
@@ -65,12 +66,14 @@ body {
   transform-origin: top left;
 
   overflow: hidden;
-  background: var(--rojo);
+
+  /* FONDO AHUESADO */
+  background: var(--crema);
 }
 
 
 /* ==========================================
-   CONFIGURACIÓN DE DIAPOSITIVAS
+   CONFIGURACIÓN DE LAS TRES DIAPOSITIVAS
    ========================================== */
 
 .diapositiva {
@@ -79,7 +82,8 @@ body {
 
   display: none;
 
-  background: var(--rojo);
+  /* FONDO AHUESADO EN TODAS */
+  background: var(--crema);
 }
 
 .diapositiva.activa {
@@ -91,103 +95,107 @@ body {
    DIAPOSITIVA 1: PANTALLA INICIAL
    ========================================== */
 
+#inicio {
+  background: var(--crema);
+}
+
+
+/* ==========================================
+   FRANJA SUPERIOR
+
+   ÚNICA ZONA ROJA DEL PORTAFOLIO.
+   ========================================== */
+
+.cabecera-inicio {
+  position: absolute;
+
+  left: 0;
+  top: 0;
+
+  width: 100%;
+  height: 140px;
+
+  background: var(--rojo);
+}
+
+
+/* ==========================================
+   TÍTULO PRINCIPAL
+   ========================================== */
+
 .titulo-principal {
   position: absolute;
 
-  top: 46px;
+  top: 40px;
   left: 0;
 
   width: 100%;
 
   margin: 0;
 
-  color: black;
+  color: white;
 
-  font-size: 50px;
+  font-family: Georgia, "Times New Roman", serif;
+  font-size: 45px;
   line-height: 1.1;
-  font-weight: 700;
+  font-weight: bold;
 
   text-align: center;
 }
 
 
 /* ==========================================
-   BARRA DE NAVEGACIÓN
+   CONTENIDO INFERIOR DEL INICIO
    ========================================== */
 
-.barra {
+.contenido-inicio {
   position: absolute;
 
   left: 0;
   right: 0;
-  top: 194px;
 
-  height: 50px;
+  top: 140px;
+  bottom: 0;
 
-  display: grid;
-
-  grid-template-columns:
-    232px 286px 301px 265px 1fr;
-
-  border-top: 4px solid white;
-  border-bottom: 4px solid white;
-}
-
-.celda {
-  height: 46px;
-
-  border-right: 4px solid white;
-
-  display: flex;
-  align-items: center;
-  justify-content: center;
-
-  color: white;
-
-  text-decoration: none;
-
-  font-weight: bold;
-  font-size: 23px;
-
-  white-space: nowrap;
-}
-
-.celda:last-child {
-  border-right: none;
+  background: var(--crema);
 }
 
 
 /* ==========================================
-   TÍTULO "IMAGEN ESCRITA"
+   TÍTULO IMAGEN ESCRITA
    ========================================== */
 
 .titulo-seccion {
   position: absolute;
 
-  left: 140px;
-  top: 288px;
+  left: 101px;
+  top: 227px;
 
   margin: 0;
 
-  color: black;
-
+  font-family: Georgia, "Times New Roman", serif;
   font-size: 49px;
   font-weight: bold;
+  line-height: 1.1;
+
+  color: black;
 }
 
 
 /* ==========================================
-   DESCRIPCIÓN DE LA PANTALLA INICIAL
+   DESCRIPCIÓN INICIAL
 
-   Estas columnas mantienen la separación
-   original de 55px.
+   DOS COLUMNAS INDEPENDIENTES.
+
+   La distancia entre las columnas
+   se controla con column-gap: 55px.
    ========================================== */
 
 .descripcion-inicio {
   position: absolute;
 
-  left: 140px;
-  top: 370px;
+  left: 120px;
+  top: 305px;
 
   width: 1120px;
 
@@ -197,15 +205,14 @@ body {
   column-gap: 55px;
 
   font-family: Georgia, "Times New Roman", serif;
-  font-size: 28px;
+  font-size: 20px;
+  line-height: 1.3;
   font-weight: normal;
-  line-height: 1.35;
 
   color: black;
 
   text-align: justify;
   text-justify: inter-word;
-
   hyphens: auto;
 
   margin: 0;
@@ -214,6 +221,111 @@ body {
 .descripcion-inicio p {
   margin: 0;
   padding: 0;
+  min-width: 0;
+}
+
+
+/* ==========================================
+   BOTONES INFERIORES
+   ========================================== */
+
+.botones-inicio {
+  position: absolute;
+
+  left: 0;
+  bottom: 24px;
+
+  width: 100%;
+  height: 72px;
+}
+
+
+/* ==========================================
+   BOTONES IMAGEN ESCRITA Y WIKI
+
+   - Borde negro de 2px
+   - Aumento de 6% al pasar el mouse
+   ========================================== */
+
+.boton-inicio {
+  position: absolute;
+
+  width: 138px;
+  height: 72px;
+
+  border: 2px solid black;
+  border-radius: 10px;
+
+  background: transparent;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  color: black;
+
+  font-family: Arial, Helvetica, sans-serif;
+  font-size: 19px;
+  font-weight: normal;
+  line-height: 1.28;
+
+  text-align: center;
+  text-decoration: none;
+
+  cursor: pointer;
+
+  transform-origin: center center;
+
+  transition:
+    transform 0.25s ease,
+    background-color 0.25s ease;
+}
+
+
+/* EFECTO HOVER */
+
+.boton-inicio:hover {
+  transform: scale(1.06);
+
+  background-color: rgba(122, 17, 17, 0.05);
+}
+
+
+/* EFECTO AL HACER CLIC */
+
+.boton-inicio:active {
+  transform: scale(1.02);
+}
+
+
+/* NAVEGACIÓN CON TECLADO */
+
+.boton-inicio:focus-visible {
+  outline: 2px solid black;
+  outline-offset: 5px;
+}
+
+
+/* UBICACIÓN DEL BOTÓN IMAGEN ESCRITA */
+
+.boton-imagen {
+  left: 400px;
+}
+
+
+/* UBICACIÓN DEL BOTÓN WIKI */
+
+.boton-wiki {
+  left: 945px;
+}
+
+
+/* REDUCIR MOVIMIENTO SI ESTÁ CONFIGURADO */
+
+@media (prefers-reduced-motion: reduce) {
+  .boton-inicio {
+    transition: none;
+  }
 }
 
 
@@ -252,7 +364,13 @@ body {
 
 /* ==========================================
    DIAPOSITIVA 2: RUEDA INTERACTIVA
+
+   FONDO AHUESADO
    ========================================== */
+
+#imagen-escrita {
+  background: var(--crema);
+}
 
 .rueda {
   position: absolute;
@@ -421,7 +539,9 @@ body {
 
 
 /* ==========================================
-   PANEL VERDE: FOTOGRAFÍAS, VIDEOS Y P5.JS
+   PANEL VERDE
+
+   FOTOGRAFÍAS, VIDEOS Y P5.JS
    ========================================== */
 
 .panel-verde {
@@ -462,8 +582,14 @@ body {
 
 
 /* ==========================================
-   DIAPOSITIVA 3: DETALLE DEL ENCARGO
+   DIAPOSITIVA 3: ENCARGO ABIERTO
+
+   FONDO AHUESADO
    ========================================== */
+
+#detalle {
+  background: var(--crema);
+}
 
 
 /* RECTÁNGULO IZQUIERDO */
@@ -513,6 +639,7 @@ body {
   height: 502px;
 
   border-radius: 50%;
+
   background: var(--gris);
 
   overflow: hidden;
@@ -534,6 +661,7 @@ body {
   margin: 0;
 
   text-align: center;
+
   color: black;
 
   font-size: 40px;
@@ -544,19 +672,13 @@ body {
 
 
 /* ==========================================
-   DOS COLUMNAS DE TEXTO CON FORMA CIRCULAR
+   DOS COLUMNAS CON FORMA CIRCULAR
 
-   SEPARACIÓN ACTUAL: 30px
-
-   La mitad del círculo mide 251px.
-
-   Cada columna se estrecha 15px
-   para dejar un espacio central de 30px.
+   Separación entre contenedores: 30px.
 
    Conservan:
-   - Curvatura exterior
-   - Curvatura del círculo central
-   - Textos independientes
+   - Curva exterior
+   - Curva interior
    - Desplazamiento vertical
    ========================================== */
 
@@ -566,7 +688,6 @@ body {
 
   top: 140px;
 
-  /* ANCHO AJUSTADO A 30px DE SEPARACIÓN */
   width: calc(
     251px - var(--separacion-central) / 2
   );
@@ -600,9 +721,7 @@ body {
 }
 
 
-/* ==========================================
-   COLUMNA IZQUIERDA
-   ========================================== */
+/* COLUMNA IZQUIERDA */
 
 .texto-izquierda {
   left: 0;
@@ -610,9 +729,7 @@ body {
 }
 
 
-/* ==========================================
-   COLUMNA DERECHA
-   ========================================== */
+/* COLUMNA DERECHA */
 
 .texto-derecha {
   right: 0;
@@ -620,9 +737,7 @@ body {
 }
 
 
-/* ==========================================
-   DESACTIVAR FORMAS ANTIGUAS
-   ========================================== */
+/* DESACTIVAR FORMAS ANTIGUAS */
 
 .texto-izquierda::before,
 .texto-izquierda::after,
@@ -634,9 +749,6 @@ body {
 
 /* ==========================================
    FORMAS FLOTANTES INVISIBLES
-
-   JavaScript crea estas formas antes
-   del contenido de cada columna.
    ========================================== */
 
 .forma-exterior,
@@ -752,10 +864,7 @@ body {
 
 
 /* ==========================================
-   CONTENIDO DEL TEXTO
-
-   Debe mantenerse en línea para respetar
-   las formas flotantes.
+   CONTENIDO DE LOS TEXTOS CIRCULARES
    ========================================== */
 
 .texto-contenido {
@@ -788,7 +897,7 @@ body {
 
 
 /* ==========================================
-   CÍRCULO CENTRAL
+   CÍRCULO PEQUEÑO CENTRAL
    ========================================== */
 
 .anillo-gris {
@@ -824,7 +933,7 @@ body {
 
 
 /* ==========================================
-   ENLACES JP5 Y WIKI
+   ENLACES JP5 Y WIKI DE CADA ENCARGO
    ========================================== */
 
 .enlaces {
@@ -859,7 +968,7 @@ body {
 /* ==========================================
    ANIMACIÓN DE APERTURA DE LIBRO
 
-   Duración: 2 segundos
+   DURACIÓN: 2 SEGUNDOS
    ========================================== */
 
 .libro-escena {
@@ -899,7 +1008,6 @@ body {
 
 .libro-cara {
   position: absolute;
-
   inset: 0;
 
   backface-visibility: hidden;

@@ -1,313 +1,522 @@
+
 <!DOCTYPE html>
 <html lang="es">
+
 <head>
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="viewport"
+        content="width=device-width, initial-scale=1.0">
+
   <title>Portafolio Digital</title>
   <link rel="stylesheet" href="estilos.css">
 </head>
+
 <body>
 
-  <!-- ==========================================
-       CONTENIDO EDITABLE DE LOS 6 ENCARGOS
-       Aquí puedes cambiar:
-       - foto miniatura
-       - video
-       - link p5.js
-       - título
-       - textos
-       - links
-       ========================================== -->
+<!-- ==========================================
+     CONTENIDOS EDITABLES DE LOS SEIS ENCARGOS
 
-  <!-- ENCARGO 1 -->
-  <template id="encargo-1">
-    <!-- FOTO MINIATURA -->
-    <img class="foto-encargo"
-         src="imagenes/Miniatura encargo 1 IE.png"
-         alt="Fotografía del encargo 1">
+     Aquí puedes modificar:
+     - Imágenes de miniaturas
+     - Videos
+     - Proyectos p5.js
+     - Títulos
+     - Textos
+     - Enlaces JP5 y Wiki
 
-    <!-- VIDEO OPCIONAL -->
-    <video class="video-encargo"
-           src=""
-           controls
-           playsinline></video>
+     PRIORIDAD AL ABRIR:
+     1. Proyecto p5.js
+     2. Video
+     3. Fotografía
 
-    <!-- P5.JS -->
-    <iframe class="p5-encargo"
-            src=""
-            title="Proyecto p5.js del encargo 1"
-            allow="camera; microphone; fullscreen"
-            allowfullscreen></iframe>
+     Si no utilizas video o proyecto p5.js,
+     deja su atributo src="" vacío.
+     ========================================== -->
 
-    <!-- TÍTULO -->
-    <h3 class="titulo-dato">Encargo 1</h3>
 
-    <!-- TEXTO IZQUIERDO -->
-    <p class="texto-izquierdo-dato">
-      El primer acercamiento a p5.js fue crear la portada de algún disco de nuestra elección, en la primera clase solamente aprendimos lo básico de formas, líneas y el sistema de coordenadas en el que funciona.
-    </p>
+<!-- ==========================================
+     ENCARGO 1
+     ========================================== -->
 
-    <!-- TEXTO DERECHO -->
-    <p class="texto-derecho-dato">
-      Como elección yo opté por el disco "El gran Santiago" de Teleradio Donoso, banda que aunque actualmente no sigue activa, el vocalista Alex Anwandter continúa su recorrido como solista en una carrera muy prolífica y personalmente de mi gusto, y tocando ocasionalmente canciones de la banda, como "Amar en el Campo", "Bailar y Llorar" y "Éramos Todos Felices". La banda se sitúa en los principios de los 2000, con un sonido indie, conformado por batería, dos guitarras y un bajo en sus presentaciones en vivo.
-    </p>
+<template id="encargo-1">
 
-    <!-- LINKS -->
-    <a class="link-jp5-dato" href="">LINK JP5</a>
-    <a class="link-wiki-dato" href="">LINK WIKI</a>
-  </template>
+  <!-- MINIATURA -->
+  <img class="foto-encargo"
+       src="imagenes/Miniatura encargo 1 IE.png"
+       alt="Fotografía del encargo 1">
 
-  <!-- ENCARGO 2 -->
-  <template id="encargo-2">
-    <img class="foto-encargo"
-         src="imagenes/Miniatura encargo 2 IE.png"
-         alt="Fotografía del encargo 2">
+  <!-- VIDEO OPCIONAL -->
+  <video class="video-encargo"
+         src=""
+         controls
+         playsinline></video>
 
-    <video class="video-encargo"
-           src=""
-           controls
-           playsinline></video>
+  <!-- P5.JS -->
+  <iframe class="p5-encargo"
+          src=""
+          title="Proyecto p5.js del encargo 1"
+          allow="camera; microphone; fullscreen"
+          allowfullscreen></iframe>
 
-    <iframe class="p5-encargo"
-            src="https://editor.p5js.org/Oooolivia/full/JbzLVOZFd"
-            title="Proyecto p5.js del encargo 2"
-            allow="camera; microphone; fullscreen"
-            allowfullscreen></iframe>
+  <!-- TÍTULO -->
+  <h3 class="titulo-dato">Encargo 1</h3>
 
-    <h3 class="titulo-dato">Encargo 2</h3>
+  <!-- DESCRIPCIÓN IZQUIERDA -->
+  <p class="texto-izquierdo-dato">
+    El primer acercamiento a p5.js fue crear la protada de algun disco de nuestra eleccion, en la primera clase solamente aprendimos lo basico de formas, lineas y el sistema de coordenadas en el que funcióna.
+  </p>
 
-    <p class="texto-izquierdo-dato">
-      ¿Qué situación cotidiana desencadena en una repetición? La gota de agua cae al vaso y genera un "eco", eso es lo que se quiso replicar en este encargo. Se utilizó la IA como herramienta para, en un inicio, concretar la idea abstracta. Escribí un prompt con mi idea y le pedí el código, lo analicé, entendí algunas partes y se las preguntaba para obtener la respuesta y lograr modificar la propuesta inicial a mi idea más cercana.
-    </p>
+  <!-- DESCRIPCIÓN DERECHA -->
+  <p class="texto-derecho-dato">
+    Como elección yo opte por el disco "El gran Santiago" de Teleradio Donoso, banda que aunque actualmente no sigue activa, el vocalista Alex Andwanter continua su recorrido como solistas en una carrera muy prolifica y personalemente de mi gusto, y tocando ocasionalmente canciones de la banda, como "Amar en el Campo" "Bailar y Llorar" "Eramos Todos Felices". La banda se situa en los principios de los 2000, un sonido indie, conformado por bateria, dos guitarras y un bajo en sus presentaciónes en vivo.
+  </p>
 
-    <p class="texto-derecho-dato">
-      Prompt: Quiero hacer un loop de círculos con centro en 250,250 y que partan desde el diámetro 50, y luego de 100 en 100 hasta el 700; que el loop inicie cuando la línea llegue al punto 250 y el color de los círculos sea del mismo tono desde uno más fuerte hasta más oscuro. La línea debe mantener el mismo degradé que los círculos hasta que se genere el círculo de diámetro 700 y parta de nuevo dibujándose.
-    </p>
+  <!-- ENLACES -->
+  <a class="link-jp5-dato" href="">LINK JP5</a>
+  <a class="link-wiki-dato" href="">LINK WIKI</a>
 
-    <a class="link-jp5-dato" href="">LINK JP5</a>
-    <a class="link-wiki-dato" href="">LINK WIKI</a>
-  </template>
+</template>
 
-  <!-- ENCARGO 3 -->
-  <template id="encargo-3">
-    <img class="foto-encargo"
-         src="imagenes/Miniatura encargo 3 IE.png"
-         alt="Fotografía del encargo 3">
 
-    <video class="video-encargo"
-           src=""
-           controls
-           playsinline></video>
+<!-- ==========================================
+     ENCARGO 2
+     ========================================== -->
 
-    <iframe class="p5-encargo"
-            src="https://editor.p5js.org/Oooolivia/full/Qn4XNRZUi"
-            title="Proyecto p5.js del encargo 3"
-            allow="camera; microphone; fullscreen"
-            allowfullscreen></iframe>
+<template id="encargo-2">
 
-    <h3 class="titulo-dato">Encargo 3</h3>
+  <img class="foto-encargo"
+       src="imagenes/Miniatura encargo 2 IE.png"
+       alt="Fotografía del encargo 2">
 
-    <p class="texto-izquierdo-dato">
-      El tercer encargo consistía en ocupar las siguientes opciones: funciones de transformación `translate()`, `rotate()`, `scale()`, funciones `push()` y `pop()`, identidad circular y generación de patrones complejos aplicando transformaciones. La premisa era crear un patrón complejo con las herramientas previamente nombradas.
-    </p>
+  <video class="video-encargo"
+         src=""
+         controls
+         playsinline></video>
 
-    <p class="texto-derecho-dato">
-      Desde las mandalas y el caleidoscopio, se recuerdan estas imágenes con repeticiones, giros y colores que se mantienen y luego se desvanecen, como inspiración para el encargo.
-    </p>
+  <!-- ENLACE P5.JS CONSERVADO -->
+  <iframe class="p5-encargo"
+          src="https://editor.p5js.org/Oooolivia/full/JbzLVOZFd"
+          title="Proyecto p5.js del encargo 2"
+          allow="camera; microphone; fullscreen"
+          allowfullscreen></iframe>
 
-    <a class="link-jp5-dato" href="">LINK JP5</a>
-    <a class="link-wiki-dato" href="">LINK WIKI</a>
-  </template>
+  <h3 class="titulo-dato">Encargo 2</h3>
 
-  <!-- ENCARGO 4 -->
-  <template id="encargo-4">
-    <img class="foto-encargo"
-         src="imagenes/Miniatura encargo 4 IE.png"
-         alt="Fotografía del encargo 4">
+  <p class="texto-izquierdo-dato">
+    ¿Que situación cotidiana desencadena en una repetición? La gota de agua cae al vaso y genera un "eco", eso es lo que se quizo replicar en este encargo. Se utilizo la IA como herramienta para, en un inicio, concretar la idea abstracta. Escribi un prompt con mi idea y le pedi el codigo, lo analice, entendi algunas partes y se las preguntaba para obtener la respuesta y lograr modificar la propuesta inicial a mi idea mas cercana.
+  </p>
 
-    <video class="video-encargo"
-           src=""
-           controls
-           playsinline></video>
+  <p class="texto-derecho-dato">
+    Prompt: Quiero hacer un loop de circulos con centro en 250,250 y que partan desde el diametro 50, y luego de 100 en 100 hasta el 700, que el loop inicia cuando la linea llegue al punto 250 y el color de los circulos sea del mismo tono desde uno mas fuerte hasta mas oscuro, la linea debe mantener el mismo degrade que los circulos hasta que se genere el circulo de diametro 700 y parta de nuevo dibujandose
+  </p>
 
-    <iframe class="p5-encargo"
-            src="https://editor.p5js.org/Oooolivia/full/7vfrkykC2"
-            title="Proyecto p5.js del encargo 4"
-            allow="camera; microphone; fullscreen"
-            allowfullscreen></iframe>
+  <a class="link-jp5-dato" href="">LINK JP5</a>
+  <a class="link-wiki-dato" href="">LINK WIKI</a>
 
-    <h3 class="titulo-dato">Encargo 4</h3>
+</template>
 
-    <p class="texto-izquierdo-dato">
-      En este ejercicio, buscamos algún patrón recursivo que interactúe con el mouse, con el click, mantener el click o movimiento de este.
-    </p>
 
-    <p class="texto-derecho-dato">
-      En el encargo se ocupa el mouse como una herramienta de interacción, consta entonces de una "lluvia de pelotitas", pero la gracia es que nosotros podemos controlarlo. Por un momento decidimos la intensidad de la lluvia: mientras el mouse esté más a la derecha, aumentará la cantidad y velocidad; por lo contrario, a la izquierda empieza la ausencia de estas. Cada pelota obtiene una tonalidad de color, un tamaño y velocidad dentro de un rango, y el mouse es quien indica el comportamiento de ellas.
-    </p>
+<!-- ==========================================
+     ENCARGO 3
+     ========================================== -->
 
-    <a class="link-jp5-dato" href="">LINK JP5</a>
-    <a class="link-wiki-dato" href="">LINK WIKI</a>
-  </template>
+<template id="encargo-3">
 
-  <!-- ENCARGO 5 -->
-  <template id="encargo-5">
-    <img class="foto-encargo"
-         src="imagenes/Miniatura encargo 5 IE.png"
-         alt="Fotografía del encargo 5">
+  <img class="foto-encargo"
+       src="imagenes/Miniatura encargo 3 IE.png"
+       alt="Fotografía del encargo 3">
 
-    <video class="video-encargo"
-           src=""
-           controls
-           playsinline></video>
+  <video class="video-encargo"
+         src=""
+         controls
+         playsinline></video>
 
-    <iframe class="p5-encargo"
-            src="https://editor.p5js.org/Oooolivia/full/iesaQkATe"
-            title="Proyecto p5.js del encargo 5"
-            allow="camera; microphone; fullscreen"
-            allowfullscreen></iframe>
+  <!-- ENLACE P5.JS CONSERVADO -->
+  <iframe class="p5-encargo"
+          src="https://editor.p5js.org/Oooolivia/full/Qn4XNRZUi"
+          title="Proyecto p5.js del encargo 3"
+          allow="camera; microphone; fullscreen"
+          allowfullscreen></iframe>
 
-    <h3 class="titulo-dato">Encargo 5</h3>
+  <h3 class="titulo-dato">Encargo 3</h3>
 
-    <p class="texto-izquierdo-dato">
-      En este encargo se buscaba crear un sistema de partículas, donde cada una de ellas tenga una particularidad visual, experimentar con sus propiedades y composiciones, como tamaño, color, forma, movimiento, condicionantes de este mismo, etc.
-    </p>
+  <p class="texto-izquierdo-dato">
+    El tercer encargo consistia de ocupar las siguientes opciones Funciones de transformación: translate(), rotate(), scale(), Funciones push() y pop(), Identidad circular y Generación de patrones complejos aplicando transformaciones. La premisa era crear un patrón complejo con las herramientas previamente nombradas
+  </p>
 
-    <p class="texto-derecho-dato">
-      Recordando y observando la flor diente de león, se ocupa su forma y movimiento para crear el encargo. Tiene una interacción con el mouse en donde cada rama sale desde dentro hacia afuera, al igual que si la sopláramos. La flor en sí está formada por varias varillas que dentro de ellas tienen otro abanico, cambian entre ellas su altura, así dando la cualidad de flor.
-    </p>
+  <p class="texto-derecho-dato">
+    Desde las mandalas y el caleidoscopio, se recuerdan estas imagenes con repeticiones, giros y colores que se mantienen y luego se desvanecen, como inspiración para el encargo.
+  </p>
 
-    <a class="link-jp5-dato" href="">LINK JP5</a>
-    <a class="link-wiki-dato" href="">LINK WIKI</a>
-  </template>
+  <a class="link-jp5-dato" href="">LINK JP5</a>
+  <a class="link-wiki-dato" href="">LINK WIKI</a>
 
-  <!-- ENCARGO 6 -->
-  <template id="encargo-6">
-    <img class="foto-encargo"
-         src="imagenes/Miniatura encargo 6 IE.png"
-         alt="Fotografía del encargo 6">
+</template>
 
-    <video class="video-encargo"
-           src=""
-           controls
-           playsinline></video>
 
-    <iframe class="p5-encargo"
-            src="https://editor.p5js.org/Oooolivia/full/MQi_dVf2_"
-            title="Proyecto p5.js del encargo 6"
-            allow="camera; microphone; fullscreen"
-            allowfullscreen></iframe>
+<!-- ==========================================
+     ENCARGO 4
+     ========================================== -->
 
-    <h3 class="titulo-dato">Encargo 6</h3>
+<template id="encargo-4">
 
-    <p class="texto-izquierdo-dato">
-      Decidimos observar los rayos del sol cuando lo miramos de frente y terminamos encandilados, es un exceso de luz que absorbemos en nuestros ojos, y se expande en ellos, nos sesga, la luz nos termina por deslumbrar. Nuestro concepto se centra en esta luminosidad excesiva de la luz directa y las formas de líneas proyectadas que aparecen en la vista.
-    </p>
+  <img class="foto-encargo"
+       src="imagenes/Miniatura encargo 4 IE.png"
+       alt="Fotografía del encargo 4">
 
-    <p class="texto-derecho-dato">
-      Lo primero que realizamos fue abstraer y dibujar las formas de estos rayos de luz para poder pasarlos a una forma realizable con códigos. A partir de esto determinamos que para dibujar una gran cantidad de líneas que simularan los rayos debíamos utilizar un sistema de partículas. Ya con la forma central definida, pensamos en cómo esta se presentaría en el espacio. Pensamos en utilizar un input externo, la cámara, para que los rayos de luz se dibujaran sobre la propia imagen que graba la cámara.
-    </p>
+  <video class="video-encargo"
+         src=""
+         controls
+         playsinline></video>
 
-    <a class="link-jp5-dato" href="">LINK JP5</a>
-    <a class="link-wiki-dato" href="">LINK WIKI</a>
-  </template>
+  <!-- ENLACE P5.JS CONSERVADO -->
+  <iframe class="p5-encargo"
+          src="https://editor.p5js.org/Oooolivia/full/7vfrkykC2"
+          title="Proyecto p5.js del encargo 4"
+          allow="camera; microphone; fullscreen"
+          allowfullscreen></iframe>
 
-  <div id="escenario">
+  <h3 class="titulo-dato">Encargo 4</h3>
 
-    <!-- ======================================
-         DIAPOSITIVA 1
-         ====================================== -->
-    <section class="diapositiva activa" id="inicio">
-      <h1 class="titulo-principal">Portafolio Digital</h1>
+  <p class="texto-izquierdo-dato">
+    En estre ejercicio, buscamos algun patron recursivo que interactue con el mouse, con el click, mantener el click o movimiento de este.
+  </p>
 
-      <nav class="barra">
-        <span class="celda"></span>
-        <a class="celda" href="#wiki">Wiki Casiopea</a>
-        <a class="celda" id="abrir-imagen" href="#imagen-escrita">Imagen escrita</a>
-        <a class="celda" href="#sobre-mi">Sobre Mi</a>
-        <span class="celda"></span>
-      </nav>
+  <p class="texto-derecho-dato">
+    En el encargo se ocupa el mouse como una herramienta de interacción, consta entonces de una "lluvia de pelotitas", pero la gracia es que nosotros podemos controlarlo, por un momento decidimos la intensidad de la lluvia, mientras el mouse este mas a la derecha, aumentara la cantidad y velocidad, por lo contrario a la izquierda, empieza la ausencia de estas. Cada pelota obtiene una tonalidad de color, un tamaño y velocidad desde un rango por su puesto, y el mouse es quien indica el comportamiento de ellas.
+  </p>
 
-      <h2 class="titulo-seccion">Imagen Escrita</h2>
+  <a class="link-jp5-dato" href="">LINK JP5</a>
+  <a class="link-wiki-dato" href="">LINK WIKI</a>
 
+</template>
+
+
+<!-- ==========================================
+     ENCARGO 5
+     ========================================== -->
+
+<template id="encargo-5">
+
+  <img class="foto-encargo"
+       src="imagenes/Miniatura encargo 5 IE.png"
+       alt="Fotografía del encargo 5">
+
+  <video class="video-encargo"
+         src=""
+         controls
+         playsinline></video>
+
+  <!-- ENLACE P5.JS CONSERVADO -->
+  <iframe class="p5-encargo"
+          src="https://editor.p5js.org/Oooolivia/full/iesaQkATe"
+          title="Proyecto p5.js del encargo 5"
+          allow="camera; microphone; fullscreen"
+          allowfullscreen></iframe>
+
+  <h3 class="titulo-dato">Encargo 5</h3>
+
+  <p class="texto-izquierdo-dato">
+    En este encargo se buscaba crear un sistema de particulas, donde cada una de ellas tenga una aprticularidad visual, experimentar cons sus propiedades y composiciones, como tamaño, color, forma, movimiento, condicionantes de este mismo, etc.
+  </p>
+
+  <p class="texto-derecho-dato">
+    Recordando y observando la flore diente de león, se ocupa su forma y movimiento para crear el encargo, tiene una interacción con el mouse en donde cada rama sale desde dentro hacia afuera, al igual que si la soplaramos. La flor en si esta formada por varias varillas que dentro de ellas tienen otro abanico, cambian entre ellas su altura, asi dando la cualidad de flor.
+  </p>
+
+  <a class="link-jp5-dato" href="">LINK JP5</a>
+  <a class="link-wiki-dato" href="">LINK WIKI</a>
+
+</template>
+
+
+<!-- ==========================================
+     ENCARGO 6
+     ========================================== -->
+
+<template id="encargo-6">
+
+  <img class="foto-encargo"
+       src="imagenes/Miniatura encargo 6 IE.png"
+       alt="Fotografía del encargo 6">
+
+  <video class="video-encargo"
+         src=""
+         controls
+         playsinline></video>
+
+  <!-- ENLACE P5.JS CONSERVADO -->
+  <iframe class="p5-encargo"
+          src="https://editor.p5js.org/Oooolivia/full/MQi_dVf2_"
+          title="Proyecto p5.js del encargo 6"
+          allow="camera; microphone; fullscreen"
+          allowfullscreen></iframe>
+
+  <h3 class="titulo-dato">Encargo 6</h3>
+
+  <p class="texto-izquierdo-dato">
+    Decidimos observar los rayos del sol cuando lo miramos de frente y terminamos encandilados, es un exceso de luz que absorbemos en nuestros ojos, y se expande en ellos, nos sesga, la luz nos termina por deslumbrar.
+
+    Nuestro concepto se centra en esta luminosidad excesiva de la luz directa y las formas de líneas proyectadas que aparecen en la vista.
+  </p>
+
+  <p class="texto-derecho-dato">
+    Lo primero que realizamos fue abstraer y dibujar las formas de estos rayos de luz para poder pasarlos a una forma realizable con códigos. A partir de esto determinamos que para dibujar una gran cantidad de líneas que simularán los rayos debíamos utilizar un sistema de partículas.
+
+    Ya con la forma central definida, pensamos en cómo esta se presentaría en el espacio.
+
+    Pensamos en utilizar un input externo, la cámara, para que los rayos de luz se dibujaran sobre la propia imagen que graba la cámara.
+  </p>
+
+  <a class="link-jp5-dato" href="">LINK JP5</a>
+  <a class="link-wiki-dato" href="">LINK WIKI</a>
+
+</template>
+
+
+<!-- ==========================================
+     ESTRUCTURA VISUAL DEL PORTAFOLIO
+     ========================================== -->
+
+<div id="escenario">
+
+
+  <!-- ======================================
+       DIAPOSITIVA 1: PANTALLA INICIAL
+       ====================================== -->
+
+  <section class="diapositiva activa" id="inicio">
+
+    <!-- ÚNICA FRANJA ROJA -->
+    <header class="cabecera-inicio">
+
+      <h1 class="titulo-principal">
+        Portafolio Digital
+      </h1>
+
+    </header>
+
+
+    <!-- CONTENIDO CON FONDO AHUESADO -->
+    <div class="contenido-inicio">
+
+      <h2 class="titulo-seccion">
+        Imagen Escrita
+      </h2>
+
+      <!-- DESCRIPCIÓN EN DOS COLUMNAS -->
       <div class="descripcion-inicio">
+
+        <!-- PRIMERA COLUMNA -->
         <p>
-          La asignatura consiste en adentrarnos al mundo de la codificación como diseñadores, trabajando con p5.js y su variedad de opciones. Desde el primer encargo hasta el último, indagamos cada vez más en el movimiento y la interacción que el código nos puede brindar.
+          La asignatura consiste en adentrarnos al mundo
+          de la codificación como diseñadores, trabajando
+          con p5.js y su variedad de opciones. Desde el
+          primer encargo hasta el último, indagamos cada
+          vez más en el movimiento y la interacción que
+          el código nos puede brindar.
         </p>
+
+        <!-- SEGUNDA COLUMNA -->
         <p>
-          Se insiste en el proceso creativo y en cómo lograr que la codificación sea una herramienta para el mundo del diseño, desde la conceptualización hasta la ejecución. En este proceso, la inteligencia artificial resulta una gran compañera, en la medida en que su uso sea explicitado y se utilice como editora de código.
+          Se insiste en el proceso creativo y en cómo
+          lograr que la codificación sea una herramienta
+          para el mundo del diseño, desde la
+          conceptualización hasta la ejecución. En este
+          proceso, la inteligencia artificial resulta
+          una gran compañera, en la medida en que su uso
+          sea explicitado y se utilice como editora de
+          código.
         </p>
+
       </div>
-    </section>
 
-    <!-- ======================================
-         DIAPOSITIVA 2
-         ====================================== -->
-    <section class="diapositiva" id="imagen-escrita">
-      <!-- Flecha: vuelve a inicio -->
-      <button class="volver" id="volver-inicio" type="button" aria-label="Volver al inicio">
-        <svg viewBox="0 0 80 80">
-          <path d="M39 0 L0 39 L39 78 L39 57 L77 57 L77 20 L39 20 Z"/>
-        </svg>
-      </button>
+    </div>
 
-      <div class="rueda">
-        <svg class="rueda-svg" viewBox="0 0 520 520">
-          <defs id="clips-rueda"></defs>
-          <g id="sectores-rueda"></g>
-          <circle cx="260" cy="260" r="247" fill="none" stroke="black" stroke-width="19" pointer-events="none"/>
-        </svg>
 
-        <div class="perilla" id="perilla" title="Arrastra para seleccionar un encargo">
-          <div class="perilla-interior"></div>
-          <div class="aguja" id="aguja"></div>
+    <!-- BOTONES INFERIORES -->
+    <nav class="botones-inicio"
+         aria-label="Navegación principal">
+
+      <!-- ABRE LA RUEDA -->
+      <a class="boton-inicio boton-imagen"
+         id="abrir-imagen"
+         href="#imagen-escrita">
+        Imagen<br>escrita
+      </a>
+
+      <!-- CAMBIAR # POR TU ENLACE WIKI -->
+      <a class="boton-inicio boton-wiki"
+         id="abrir-wiki"
+         href="#">
+        Wiki
+      </a>
+
+    </nav>
+
+  </section>
+
+
+  <!-- ======================================
+       DIAPOSITIVA 2: RUEDA INTERACTIVA
+       FONDO AHUESADO
+       ====================================== -->
+
+  <section class="diapositiva" id="imagen-escrita">
+
+    <!-- FLECHA: REGRESA AL INICIO -->
+    <button class="volver"
+            id="volver-inicio"
+            type="button"
+            aria-label="Volver al inicio">
+
+      <svg viewBox="0 0 80 80">
+        <path d="
+          M39 0
+          L0 39
+          L39 78
+          L39 57
+          L77 57
+          L77 20
+          L39 20
+          Z"/>
+      </svg>
+
+    </button>
+
+
+    <!-- RUEDA DE SEIS MINIATURAS -->
+    <div class="rueda">
+
+      <svg class="rueda-svg"
+           viewBox="0 0 520 520">
+
+        <defs id="clips-rueda"></defs>
+        <g id="sectores-rueda"></g>
+
+        <circle cx="260"
+                cy="260"
+                r="247"
+                fill="none"
+                stroke="black"
+                stroke-width="19"
+                pointer-events="none"/>
+
+      </svg>
+
+
+      <!-- PERILLA GIRATORIA -->
+      <div class="perilla"
+           id="perilla"
+           title="Arrastra para seleccionar un encargo">
+
+        <div class="perilla-interior"></div>
+        <div class="aguja" id="aguja"></div>
+
+      </div>
+
+    </div>
+
+
+    <!-- FOTOGRAFÍA DEL ENCARGO SELECCIONADO -->
+    <div class="marco-derecho">
+
+      <div class="panel-verde"
+           id="imagen-grande"></div>
+
+    </div>
+
+  </section>
+
+
+  <!-- ======================================
+       DIAPOSITIVA 3: ENCARGO ABIERTO
+       FONDO AHUESADO
+       ====================================== -->
+
+  <section class="diapositiva" id="detalle">
+
+    <!-- FLECHA: REGRESA A LA RUEDA -->
+    <button class="volver"
+            id="volver-rueda"
+            type="button"
+            aria-label="Volver a la rueda">
+
+      <svg viewBox="0 0 80 80">
+        <path d="
+          M39 0
+          L0 39
+          L39 78
+          L39 57
+          L77 57
+          L77 20
+          L39 20
+          Z"/>
+      </svg>
+
+    </button>
+
+
+    <!-- FOTO, VIDEO O PROYECTO P5.JS -->
+    <div class="marco-izquierdo">
+
+      <div class="panel-verde"
+           id="imagen-detalle"></div>
+
+    </div>
+
+
+    <!-- MARCO DE DESCRIPCIONES -->
+    <div class="marco-texto">
+
+      <div class="circulo-gris">
+
+        <h2 id="titulo-encargo">
+          Encargo 1
+        </h2>
+
+        <!-- DOS COLUMNAS CIRCULARES -->
+        <div class="texto-izquierda"
+             id="texto-izquierda"></div>
+
+        <div class="texto-derecha"
+             id="texto-derecha"></div>
+
+        <!-- CÍRCULO PEQUEÑO -->
+        <div class="anillo-gris">
+          <div class="orificio"></div>
         </div>
-      </div>
 
-      <div class="marco-derecho">
-        <div id="imagen-grande" class="panel-verde"></div>
-      </div>
-    </section>
+        <!-- ENLACES -->
+        <div class="enlaces">
 
-    <!-- ======================================
-         DIAPOSITIVA 3
-         ====================================== -->
-    <section class="diapositiva" id="detalle">
-      <!-- Flecha: vuelve a la rueda -->
-      <button class="volver" id="volver-rueda" type="button" aria-label="Volver a la rueda">
-        <svg viewBox="0 0 80 80">
-          <path d="M39 0 L0 39 L39 78 L39 57 L77 57 L77 20 L39 20 Z"/>
-        </svg>
-      </button>
+          <a id="link-jp5"
+             href="#"
+             target="_blank"
+             rel="noopener noreferrer">
+            LINK JP5
+          </a>
 
-      <div class="marco-izquierdo">
-        <div id="imagen-detalle" class="panel-verde"></div>
-      </div>
+          <a id="link-wiki"
+             href="#"
+             target="_blank"
+             rel="noopener noreferrer">
+            LINK WIKI
+          </a>
 
-      <div class="marco-texto">
-        <div class="circulo-gris">
-          <h2 id="titulo-encargo">Encargo 1</h2>
-
-          <!-- columnas de texto -->
-          <div class="texto-izquierda" id="texto-izquierda"></div>
-          <div class="texto-derecha" id="texto-derecha"></div>
-
-          <!-- círculo central -->
-          <div class="anillo-gris">
-            <div class="orificio"></div>
-          </div>
-
-          <!-- links -->
-          <div class="enlaces">
-            <a id="link-jp5" href="#" target="_blank" rel="noopener noreferrer">LINK JP5</a>
-            <a id="link-wiki" href="#" target="_blank" rel="noopener noreferrer">LINK WIKI</a>
-          </div>
         </div>
+
       </div>
-    </section>
 
-  </div>
+    </div>
 
-  <script src="script.js"></script>
+  </section>
+
+</div>
+
+
+<!-- CONEXIÓN CON JAVASCRIPT -->
+<script src="script.js"></script>
+
 </body>
 </html>
