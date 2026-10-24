@@ -2,7 +2,7 @@
 /* ==========================================
    PORTAFOLIO DIGITAL
 
-   CONFIGURACIÓN GENERAL
+   COLORES Y CONFIGURACIÓN GENERAL
    ========================================== */
 
 :root {
@@ -11,13 +11,25 @@
   --gris: #cbd3db;
   --negro: #000;
 
-  /* DURACIÓN ANIMACIÓN LIBRO */
+  /* DURACIÓN DE LA ANIMACIÓN DEL LIBRO */
   --duracion-libro: 2s;
 
-  /* NUEVO: SEPARACIÓN ADICIONAL
-     ENTRE LAS DOS COLUMNAS */
-  --margen-central-textos: 15px;
+  /* ======================================
+     SEPARACIÓN ENTRE LAS COLUMNAS
+
+     CAMBIA ESTE NÚMERO SI QUIERES
+     AUMENTAR O REDUCIR LA DISTANCIA.
+
+     SEPARACIÓN ACTUAL: 30px
+     ====================================== */
+
+  --separacion-central: 30px;
 }
+
+
+/* ==========================================
+   CONFIGURACIÓN GENERAL
+   ========================================== */
 
 * {
   box-sizing: border-box;
@@ -43,6 +55,7 @@ body {
 
 #escenario {
   position: absolute;
+
   left: 0;
   top: 0;
 
@@ -50,14 +63,22 @@ body {
   height: 768px;
 
   transform-origin: top left;
+
   overflow: hidden;
   background: var(--rojo);
 }
 
+
+/* ==========================================
+   CONFIGURACIÓN DE DIAPOSITIVAS
+   ========================================== */
+
 .diapositiva {
   position: absolute;
   inset: 0;
+
   display: none;
+
   background: var(--rojo);
 }
 
@@ -67,31 +88,42 @@ body {
 
 
 /* ==========================================
-   DIAPOSITIVA 1: INICIO
+   DIAPOSITIVA 1: PANTALLA INICIAL
    ========================================== */
 
 .titulo-principal {
   position: absolute;
+
   top: 46px;
   left: 0;
+
   width: 100%;
 
   margin: 0;
+
   color: black;
 
   font-size: 50px;
   line-height: 1.1;
   font-weight: 700;
+
   text-align: center;
 }
 
+
+/* ==========================================
+   BARRA DE NAVEGACIÓN
+   ========================================== */
+
 .barra {
   position: absolute;
+
   left: 0;
   right: 0;
   top: 194px;
 
   height: 50px;
+
   display: grid;
 
   grid-template-columns:
@@ -103,6 +135,7 @@ body {
 
 .celda {
   height: 46px;
+
   border-right: 4px solid white;
 
   display: flex;
@@ -110,10 +143,12 @@ body {
   justify-content: center;
 
   color: white;
+
   text-decoration: none;
 
   font-weight: bold;
   font-size: 23px;
+
   white-space: nowrap;
 }
 
@@ -122,14 +157,18 @@ body {
 }
 
 
-/* TÍTULO IMAGEN ESCRITA */
+/* ==========================================
+   TÍTULO "IMAGEN ESCRITA"
+   ========================================== */
 
 .titulo-seccion {
   position: absolute;
+
   left: 140px;
   top: 288px;
 
   margin: 0;
+
   color: black;
 
   font-size: 49px;
@@ -137,10 +176,16 @@ body {
 }
 
 
-/* DESCRIPCIÓN INICIAL EN DOS COLUMNAS */
+/* ==========================================
+   DESCRIPCIÓN DE LA PANTALLA INICIAL
+
+   Estas columnas mantienen la separación
+   original de 55px.
+   ========================================== */
 
 .descripcion-inicio {
   position: absolute;
+
   left: 140px;
   top: 370px;
 
@@ -148,14 +193,19 @@ body {
 
   display: grid;
   grid-template-columns: 1fr 1fr;
+
   column-gap: 55px;
 
+  font-family: Georgia, "Times New Roman", serif;
   font-size: 28px;
+  font-weight: normal;
   line-height: 1.35;
 
   color: black;
+
   text-align: justify;
   text-justify: inter-word;
+
   hyphens: auto;
 
   margin: 0;
@@ -163,6 +213,7 @@ body {
 
 .descripcion-inicio p {
   margin: 0;
+  padding: 0;
 }
 
 
@@ -172,6 +223,7 @@ body {
 
 .volver {
   position: absolute;
+
   top: 10px;
   left: 26px;
 
@@ -180,26 +232,31 @@ body {
 
   padding: 0;
   border: 0;
+
   background: none;
 
   cursor: pointer;
+
   z-index: 10;
 }
 
 .volver svg {
   display: block;
+
   width: 100%;
   height: 100%;
+
   fill: black;
 }
 
 
 /* ==========================================
-   DIAPOSITIVA 2: RUEDA
+   DIAPOSITIVA 2: RUEDA INTERACTIVA
    ========================================== */
 
 .rueda {
   position: absolute;
+
   left: 101px;
   top: 122px;
 
@@ -209,10 +266,17 @@ body {
 
 .rueda-svg {
   display: block;
+
   width: 520px;
   height: 520px;
+
   overflow: visible;
 }
+
+
+/* ==========================================
+   SECTORES DE LA RUEDA
+   ========================================== */
 
 .sector {
   cursor: pointer;
@@ -227,16 +291,19 @@ body {
 
 .sector.seleccionado {
   transform: scale(1.065);
+
   filter: brightness(1.1);
 }
 
 .sector:focus {
   outline: none;
+
   filter: brightness(1.15);
 }
 
 .sector .contorno-sector {
   stroke: black;
+
   stroke-width: 3;
   stroke-linejoin: round;
 }
@@ -248,6 +315,7 @@ body {
 
 .perilla {
   position: absolute;
+
   left: 198px;
   top: 198px;
 
@@ -255,6 +323,7 @@ body {
   height: 124px;
 
   border-radius: 50%;
+
   background: #3d4041;
 
   display: flex;
@@ -264,6 +333,7 @@ body {
   z-index: 4;
 
   cursor: grab;
+
   touch-action: none;
   user-select: none;
 }
@@ -272,17 +342,28 @@ body {
   cursor: grabbing;
 }
 
+
+/* INTERIOR DE LA PERILLA */
+
 .perilla-interior {
   width: 109px;
   height: 109px;
 
   background: #5d606a;
+
   border-radius: 50%;
+
   pointer-events: none;
 }
 
+
+/* ==========================================
+   AGUJA DE LA PERILLA
+   ========================================== */
+
 .aguja {
   position: absolute;
+
   top: 0;
   left: 0;
 
@@ -292,11 +373,13 @@ body {
   transform: rotate(30deg);
 
   transition: transform 0.3s ease-in-out;
+
   pointer-events: none;
 }
 
 .aguja::before {
   content: "";
+
   position: absolute;
 
   top: 8px;
@@ -306,11 +389,13 @@ body {
   height: 84px;
 
   border: 8px solid #3b3c3e;
+
   border-radius: 12px;
 
   background: #79a5ff;
 
   transform: rotate(-3deg);
+
   transform-origin: bottom center;
 }
 
@@ -321,6 +406,7 @@ body {
 
 .marco-derecho {
   position: absolute;
+
   left: 710px;
   top: 113px;
 
@@ -335,7 +421,7 @@ body {
 
 
 /* ==========================================
-   FOTOGRAFÍAS, VIDEOS Y P5.JS
+   PANEL VERDE: FOTOGRAFÍAS, VIDEOS Y P5.JS
    ========================================== */
 
 .panel-verde {
@@ -343,6 +429,7 @@ body {
   height: 100%;
 
   background: var(--verde);
+
   overflow: hidden;
 }
 
@@ -350,6 +437,7 @@ body {
 .panel-verde video,
 .panel-verde iframe {
   display: block;
+
   width: 100%;
   height: 100%;
 }
@@ -366,17 +454,23 @@ body {
 
 .panel-verde iframe {
   border: none;
+
   background: var(--verde);
+
   pointer-events: auto;
 }
 
 
 /* ==========================================
-   DIAPOSITIVA 3: MARCOS
+   DIAPOSITIVA 3: DETALLE DEL ENCARGO
    ========================================== */
+
+
+/* RECTÁNGULO IZQUIERDO */
 
 .marco-izquierdo {
   position: absolute;
+
   left: 117px;
   top: 113px;
 
@@ -384,11 +478,16 @@ body {
   height: 542px;
 
   border: 4px solid black;
+
   padding: 10px 0;
 }
 
+
+/* RECTÁNGULO DERECHO */
+
 .marco-texto {
   position: absolute;
+
   left: 660px;
   top: 113px;
 
@@ -406,6 +505,7 @@ body {
 
 .circulo-gris {
   position: absolute;
+
   left: 17px;
   top: 16px;
 
@@ -425,10 +525,12 @@ body {
 
 #titulo-encargo {
   position: absolute;
+
   top: 62px;
   left: 0;
 
   width: 100%;
+
   margin: 0;
 
   text-align: center;
@@ -442,14 +544,20 @@ body {
 
 
 /* ==========================================
-   DOS COLUMNAS CON FORMA CIRCULAR
+   DOS COLUMNAS DE TEXTO CON FORMA CIRCULAR
 
-   CONSERVAN:
-   - Borde exterior del círculo grande
-   - Circunferencia del círculo central
+   SEPARACIÓN ACTUAL: 30px
 
-   NUEVO:
-   - Mayor espacio entre columnas
+   La mitad del círculo mide 251px.
+
+   Cada columna se estrecha 15px
+   para dejar un espacio central de 30px.
+
+   Conservan:
+   - Curvatura exterior
+   - Curvatura del círculo central
+   - Textos independientes
+   - Desplazamiento vertical
    ========================================== */
 
 .texto-izquierda,
@@ -458,13 +566,18 @@ body {
 
   top: 140px;
 
-  width: 251px;
+  /* ANCHO AJUSTADO A 30px DE SEPARACIÓN */
+  width: calc(
+    251px - var(--separacion-central) / 2
+  );
+
   height: 240px;
 
   margin: 0;
   padding: 0;
 
   font-family: Georgia, "Times New Roman", serif;
+
   font-size: 13px;
   line-height: 18px;
   font-weight: normal;
@@ -487,21 +600,29 @@ body {
 }
 
 
-/* COLUMNA IZQUIERDA */
+/* ==========================================
+   COLUMNA IZQUIERDA
+   ========================================== */
 
 .texto-izquierda {
   left: 0;
+  right: auto;
 }
 
 
-/* COLUMNA DERECHA */
+/* ==========================================
+   COLUMNA DERECHA
+   ========================================== */
 
 .texto-derecha {
   right: 0;
+  left: auto;
 }
 
 
-/* ELIMINAR FORMAS ANTIGUAS */
+/* ==========================================
+   DESACTIVAR FORMAS ANTIGUAS
+   ========================================== */
 
 .texto-izquierda::before,
 .texto-izquierda::after,
@@ -513,15 +634,20 @@ body {
 
 /* ==========================================
    FORMAS FLOTANTES INVISIBLES
+
+   JavaScript crea estas formas antes
+   del contenido de cada columna.
    ========================================== */
 
 .forma-exterior,
 .forma-interior {
   display: block;
+
   height: 240px;
 
   pointer-events: none;
-  shape-margin: 3px;
+
+  shape-margin: 2px;
 }
 
 
@@ -531,6 +657,7 @@ body {
 
 .texto-izquierda .forma-exterior {
   float: left;
+
   width: 85px;
 
   shape-outside: polygon(
@@ -551,17 +678,12 @@ body {
 
 /* ==========================================
    CURVA INTERIOR IZQUIERDA
-
-   CAMBIO:
-   Ampliar el margen hacia el centro.
    ========================================== */
 
 .texto-izquierda .forma-interior {
   float: right;
 
-  /* ANCHO ORIGINAL: 86px
-     NUEVO: 101px */
-  width: calc(86px + var(--margen-central-textos));
+  width: 66px;
 
   shape-outside: polygon(
     100% 0%,
@@ -585,6 +707,7 @@ body {
 
 .texto-derecha .forma-exterior {
   float: right;
+
   width: 85px;
 
   shape-outside: polygon(
@@ -605,18 +728,12 @@ body {
 
 /* ==========================================
    CURVA INTERIOR DERECHA
-
-   CAMBIO:
-   La misma separación adicional
-   hacia el centro.
    ========================================== */
 
 .texto-derecha .forma-interior {
   float: left;
 
-  /* ANCHO ORIGINAL: 86px
-     NUEVO: 101px */
-  width: calc(86px + var(--margen-central-textos));
+  width: 66px;
 
   shape-outside: polygon(
     0% 0%,
@@ -636,9 +753,14 @@ body {
 
 /* ==========================================
    CONTENIDO DEL TEXTO
+
+   Debe mantenerse en línea para respetar
+   las formas flotantes.
    ========================================== */
 
 .texto-contenido {
+  display: inline;
+
   white-space: pre-line;
 }
 
@@ -655,6 +777,7 @@ body {
 .texto-izquierda::-webkit-scrollbar-thumb,
 .texto-derecha::-webkit-scrollbar-thumb {
   background: #78818a;
+
   border-radius: 8px;
 }
 
@@ -670,6 +793,7 @@ body {
 
 .anillo-gris {
   position: absolute;
+
   top: 184px;
   left: 184px;
 
@@ -677,6 +801,7 @@ body {
   height: 134px;
 
   border-radius: 50%;
+
   background: #6d7981;
 
   display: flex;
@@ -684,6 +809,7 @@ body {
   justify-content: center;
 
   z-index: 4;
+
   pointer-events: none;
 }
 
@@ -692,16 +818,18 @@ body {
   height: 75px;
 
   border-radius: 50%;
+
   background: #3e4346;
 }
 
 
 /* ==========================================
-   ENLACES DEL ENCARGO
+   ENLACES JP5 Y WIKI
    ========================================== */
 
 .enlaces {
   position: absolute;
+
   top: 388px;
   left: 0;
 
@@ -719,6 +847,7 @@ body {
 
 .enlaces a {
   color: black;
+
   text-decoration: none;
 }
 
@@ -728,13 +857,14 @@ body {
 
 
 /* ==========================================
-   ANIMACIÓN DEL LIBRO
+   ANIMACIÓN DE APERTURA DE LIBRO
 
-   DURACIÓN: 2 SEGUNDOS
+   Duración: 2 segundos
    ========================================== */
 
 .libro-escena {
   position: absolute;
+
   left: 710px;
   top: 113px;
 
@@ -745,11 +875,13 @@ body {
   perspective-origin: center center;
 
   z-index: 20;
+
   pointer-events: none;
 }
 
 .libro-hoja {
   position: relative;
+
   width: 100%;
   height: 100%;
 
@@ -767,6 +899,7 @@ body {
 
 .libro-cara {
   position: absolute;
+
   inset: 0;
 
   backface-visibility: hidden;
@@ -776,6 +909,11 @@ body {
 .libro-cara-trasera {
   transform: rotateY(180deg);
 }
+
+
+/* ==========================================
+   MOVIMIENTO DE APERTURA
+   ========================================== */
 
 @keyframes abrir-libro {
   from {
