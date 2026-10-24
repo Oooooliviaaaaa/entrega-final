@@ -1,21 +1,19 @@
 
+
 /* ==========================================
-   COLORES PRINCIPALES
+   COLORES Y PROPORCIONES
    ========================================== */
 
 :root {
   --rojo: #7a1111;
-  --crema:  #f5f1eb;
+  --crema: #f5f1eb;
   --verde: #7ed953;
   --gris: #cbd3db;
   --negro: #000;
 
   --duracion-libro: 2s;
-
-  /* SEPARACIÓN DE TEXTOS EN LOS ENCARGOS */
   --separacion-central: 30px;
 }
-
 
 /* ==========================================
    CONFIGURACIÓN GENERAL
@@ -30,9 +28,7 @@ body {
   margin: 0;
   width: 100%;
   height: 100%;
-
   overflow: hidden;
-
   background: var(--crema);
 }
 
@@ -40,38 +36,21 @@ body {
   font-family: Georgia, "Times New Roman", serif;
 }
 
-
-/* ==========================================
-   ESCENARIO PRINCIPAL
-   ========================================== */
-
 #escenario {
   position: absolute;
-
   left: 0;
   top: 0;
-
   width: 1366px;
   height: 768px;
-
   transform-origin: top left;
-
   overflow: hidden;
-
   background: var(--crema);
 }
-
-
-/* ==========================================
-   PANTALLAS DEL PORTAFOLIO
-   ========================================== */
 
 .diapositiva {
   position: absolute;
   inset: 0;
-
   display: none;
-
   background: var(--crema);
 }
 
@@ -79,28 +58,20 @@ body {
   display: block;
 }
 
-
 /* ==========================================
-   PANTALLA 1: INICIO
+   PANTALLA INICIAL
    ========================================== */
 
 #inicio {
   background: var(--crema);
 }
 
-
-/* ==========================================
-   CABECERA ROJA
-
-   NUEVA ALTURA: 165 PX
-   ========================================== */
+/* CABECERA ROJA DE 165 PX */
 
 .cabecera-inicio {
   position: absolute;
-
   left: 0;
   top: 0;
-
   width: 100%;
   height: 165px;
 
@@ -113,87 +84,55 @@ body {
   padding: 0 90px;
 }
 
-
-/* ==========================================
-   PORTAFOLIO DIGITAL
-   LADO SUPERIOR IZQUIERDO
-   ========================================== */
+/* PORTAFOLIO DIGITAL */
 
 .titulo-principal {
   position: static;
-
   width: auto;
   margin: 0;
 
   font-family: Georgia, "Times New Roman", serif;
-
   font-size: 25px;
   font-weight: bold;
   line-height: 1.2;
 
   color: white;
-
   text-align: left;
 }
 
-
-/* ==========================================
-   NOMBRE DE LA AUTORA
-   LADO SUPERIOR DERECHO
-   ========================================== */
+/* OLIVIA RODRIGUEZ CORNEJO */
 
 .nombre-autora {
   font-family: Georgia, "Times New Roman", serif;
-
   font-size: 25px;
   font-weight: normal;
   line-height: 1.2;
 
   color: white;
-
   text-align: right;
 }
 
-
-/* ==========================================
-   CONTENIDO CON FONDO AHUESADO
-
-   COMIENZA JUSTO DESPUÉS
-   DE LA CABECERA DE 165 PX
-   ========================================== */
+/* ZONA DE FONDO AHUESADO */
 
 .contenido-inicio {
   position: absolute;
-
   left: 0;
   right: 0;
-
   top: 165px;
   bottom: 0;
 
   background: var(--crema);
 }
 
-
-/* ==========================================
-   TÍTULO IMAGEN ESCRITA
-
-   Se mantiene cerca de la franja roja.
-
-   top: 85px significa 85px por debajo
-   del comienzo del fondo ahuesado.
-   ========================================== */
+/* TÍTULO IMAGEN ESCRITA */
 
 .titulo-seccion {
   position: absolute;
-
   left: 101px;
   top: 85px;
-
   margin: 0;
 
   font-family: Georgia, "Times New Roman", serif;
-
   font-size: 49px;
   font-weight: bold;
   line-height: 1.1;
@@ -201,34 +140,26 @@ body {
   color: black;
 }
 
-
 /* ==========================================
-   DESCRIPCIÓN EN DOS COLUMNAS
-
-   SEPARACIÓN DE COLUMNAS: 55 PX
+   DOS COLUMNAS DE TEXTO INICIAL
    ========================================== */
 
 .descripcion-inicio {
   position: absolute;
-
   left: 120px;
   top: 260px;
-
   width: 1120px;
 
   display: grid;
   grid-template-columns: 1fr 1fr;
-
   column-gap: 55px;
 
   font-family: Georgia, "Times New Roman", serif;
-
   font-size: 20px;
   line-height: 1.3;
   font-weight: normal;
 
   color: black;
-
   text-align: justify;
   text-justify: inter-word;
   hyphens: auto;
@@ -237,32 +168,20 @@ body {
 .descripcion-inicio p {
   margin: 0;
   padding: 0;
-
   min-width: 0;
 }
 
-
 /* ==========================================
-   BOTONES DE LA PANTALLA INICIAL
+   BOTONES ENCARGOS Y WIKI
    ========================================== */
 
 .botones-inicio {
   position: absolute;
-
   left: 0;
   bottom: 24px;
-
   width: 100%;
   height: 72px;
 }
-
-
-/* ==========================================
-   BOTONES ENCARGOS Y WIKI
-
-   Borde: 2 px
-   Aumento al pasar el mouse: 6 %
-   ========================================== */
 
 .boton-inicio {
   position: absolute;
@@ -280,7 +199,6 @@ body {
   justify-content: center;
 
   color: black;
-
   font-family: Arial, Helvetica, sans-serif;
   font-size: 19px;
   font-weight: normal;
@@ -290,54 +208,38 @@ body {
   text-decoration: none;
 
   cursor: pointer;
-
-  transform-origin: center center;
+  transform-origin: center;
 
   transition:
     transform 0.25s ease,
     background-color 0.25s ease;
 }
 
-
-/* PASAR EL MOUSE */
+/* CRECIMIENTO AL PASAR EL MOUSE */
 
 .boton-inicio:hover {
   transform: scale(1.06);
-
   background-color: rgba(122, 17, 17, 0.05);
 }
-
-
-/* PRESIONAR EL BOTÓN */
 
 .boton-inicio:active {
   transform: scale(1.02);
 }
-
-
-/* NAVEGACIÓN CON TECLADO */
 
 .boton-inicio:focus-visible {
   outline: 2px solid black;
   outline-offset: 5px;
 }
 
-
-/* BOTÓN ENCARGOS */
+/* POSICIÓN DE LOS BOTONES */
 
 .boton-imagen {
   left: 400px;
 }
 
-
-/* BOTÓN WIKI */
-
 .boton-wiki {
   left: 945px;
 }
-
-
-/* OPCIÓN DE MOVIMIENTO REDUCIDO */
 
 @media (prefers-reduced-motion: reduce) {
   .boton-inicio {
@@ -345,14 +247,12 @@ body {
   }
 }
 
-
 /* ==========================================
    FLECHAS DE REGRESO
    ========================================== */
 
 .volver {
   position: absolute;
-
   top: 10px;
   left: 26px;
 
@@ -360,36 +260,26 @@ body {
   height: 79px;
 
   padding: 0;
-
   border: 0;
   background: none;
 
   cursor: pointer;
-
   z-index: 10;
 }
 
 .volver svg {
   display: block;
-
   width: 100%;
   height: 100%;
-
   fill: black;
 }
-
 
 /* ==========================================
    PANTALLA 2: RUEDA
    ========================================== */
 
-#imagen-escrita {
-  background: var(--crema);
-}
-
 .rueda {
   position: absolute;
-
   left: 101px;
   top: 122px;
 
@@ -399,17 +289,12 @@ body {
 
 .rueda-svg {
   display: block;
-
   width: 520px;
   height: 520px;
-
   overflow: visible;
 }
 
-
-/* ==========================================
-   SECTORES DE LA RUEDA
-   ========================================== */
+/* SECTORES */
 
 .sector {
   cursor: pointer;
@@ -424,23 +309,19 @@ body {
 
 .sector.seleccionado {
   transform: scale(1.065);
-
   filter: brightness(1.1);
 }
 
 .sector:focus {
   outline: none;
-
   filter: brightness(1.15);
 }
 
 .sector .contorno-sector {
   stroke: black;
-
   stroke-width: 3;
   stroke-linejoin: round;
 }
-
 
 /* ==========================================
    PERILLA GIRATORIA
@@ -448,7 +329,6 @@ body {
 
 .perilla {
   position: absolute;
-
   left: 198px;
   top: 198px;
 
@@ -456,7 +336,6 @@ body {
   height: 124px;
 
   border-radius: 50%;
-
   background: #3d4041;
 
   display: flex;
@@ -466,7 +345,6 @@ body {
   z-index: 4;
 
   cursor: grab;
-
   touch-action: none;
   user-select: none;
 }
@@ -475,28 +353,18 @@ body {
   cursor: grabbing;
 }
 
-
-/* INTERIOR DE LA PERILLA */
-
 .perilla-interior {
   width: 109px;
   height: 109px;
 
   background: #5d606a;
-
   border-radius: 50%;
 
   pointer-events: none;
 }
 
-
-/* ==========================================
-   AGUJA
-   ========================================== */
-
 .aguja {
   position: absolute;
-
   top: 0;
   left: 0;
 
@@ -506,7 +374,6 @@ body {
   transform: rotate(30deg);
 
   transition: transform 0.3s ease-in-out;
-
   pointer-events: none;
 }
 
@@ -514,7 +381,6 @@ body {
   content: "";
 
   position: absolute;
-
   top: 8px;
   left: 54px;
 
@@ -529,7 +395,6 @@ body {
   transform: rotate(-3deg);
   transform-origin: bottom center;
 }
-
 
 /* ==========================================
    MARCO DERECHO DE LA RUEDA
@@ -550,9 +415,8 @@ body {
   padding: 10px 0;
 }
 
-
 /* ==========================================
-   FOTOS, VIDEOS Y P5.JS
+   PANELES CON FOTOS, VIDEOS Y P5.JS
    ========================================== */
 
 .panel-verde {
@@ -560,7 +424,6 @@ body {
   height: 100%;
 
   background: var(--verde);
-
   overflow: hidden;
 }
 
@@ -568,7 +431,6 @@ body {
 .panel-verde video,
 .panel-verde iframe {
   display: block;
-
   width: 100%;
   height: 100%;
 }
@@ -579,29 +441,19 @@ body {
   object-position: center;
 }
 
-.panel-verde video {
+.panel-verde video,
+.panel-verde iframe {
   background: var(--verde);
 }
 
 .panel-verde iframe {
-  border: none;
-
-  background: var(--verde);
-
+  border: 0;
   pointer-events: auto;
 }
-
 
 /* ==========================================
    PANTALLA 3: ENCARGO ABIERTO
    ========================================== */
-
-#detalle {
-  background: var(--crema);
-}
-
-
-/* MARCO IZQUIERDO */
 
 .marco-izquierdo {
   position: absolute;
@@ -613,12 +465,8 @@ body {
   height: 542px;
 
   border: 4px solid black;
-
   padding: 10px 0;
 }
-
-
-/* MARCO DERECHO */
 
 .marco-texto {
   position: absolute;
@@ -633,10 +481,7 @@ body {
   border-left-width: 48px;
 }
 
-
-/* ==========================================
-   CÍRCULO GRIS
-   ========================================== */
+/* CÍRCULO GRIS */
 
 .circulo-gris {
   position: absolute;
@@ -650,14 +495,10 @@ body {
   border-radius: 50%;
 
   background: var(--gris);
-
   overflow: hidden;
 }
 
-
-/* ==========================================
-   TÍTULO DEL ENCARGO
-   ========================================== */
+/* TÍTULO DEL ENCARGO */
 
 #titulo-encargo {
   position: absolute;
@@ -666,49 +507,39 @@ body {
   left: 0;
 
   width: 100%;
-
   margin: 0;
-
-  color: black;
 
   font-size: 40px;
   line-height: 1.1;
 
   text-align: center;
+  color: black;
 
   z-index: 5;
 }
 
-
 /* ==========================================
    DOS COLUMNAS CIRCULARES
-
-   Separación central: 30 px
+   SEPARACIÓN CENTRAL DE 30 PX
    ========================================== */
 
 .texto-izquierda,
 .texto-derecha {
   position: absolute;
-
   top: 140px;
 
-  width: calc(
-    251px - var(--separacion-central) / 2
-  );
-
+  width: calc(251px - var(--separacion-central) / 2);
   height: 240px;
 
   margin: 0;
   padding: 0;
 
   font-family: Georgia, "Times New Roman", serif;
-
   font-size: 13px;
   line-height: 18px;
   font-weight: normal;
 
   color: black;
-
   text-align: justify;
   text-justify: inter-word;
 
@@ -724,24 +555,17 @@ body {
   z-index: 2;
 }
 
-
-/* COLUMNA IZQUIERDA */
-
 .texto-izquierda {
   left: 0;
   right: auto;
 }
-
-
-/* COLUMNA DERECHA */
 
 .texto-derecha {
   right: 0;
   left: auto;
 }
 
-
-/* DESACTIVAR PSEUDOELEMENTOS ANTERIORES */
+/* DESACTIVAR FORMAS ANTERIORES */
 
 .texto-izquierda::before,
 .texto-izquierda::after,
@@ -750,30 +574,21 @@ body {
   content: none;
 }
 
-
-/* ==========================================
-   FORMAS FLOTANTES INVISIBLES
-   ========================================== */
+/* FORMAS FLOTANTES INVISIBLES */
 
 .forma-exterior,
 .forma-interior {
   display: block;
-
   height: 240px;
 
   pointer-events: none;
-
   shape-margin: 2px;
 }
 
-
-/* ==========================================
-   CURVA EXTERIOR IZQUIERDA
-   ========================================== */
+/* CURVA EXTERIOR IZQUIERDA */
 
 .texto-izquierda .forma-exterior {
   float: left;
-
   width: 85px;
 
   shape-outside: polygon(
@@ -791,14 +606,10 @@ body {
   );
 }
 
-
-/* ==========================================
-   CURVA INTERIOR IZQUIERDA
-   ========================================== */
+/* CURVA INTERIOR IZQUIERDA */
 
 .texto-izquierda .forma-interior {
   float: right;
-
   width: 66px;
 
   shape-outside: polygon(
@@ -816,14 +627,10 @@ body {
   );
 }
 
-
-/* ==========================================
-   CURVA EXTERIOR DERECHA
-   ========================================== */
+/* CURVA EXTERIOR DERECHA */
 
 .texto-derecha .forma-exterior {
   float: right;
-
   width: 85px;
 
   shape-outside: polygon(
@@ -841,14 +648,10 @@ body {
   );
 }
 
-
-/* ==========================================
-   CURVA INTERIOR DERECHA
-   ========================================== */
+/* CURVA INTERIOR DERECHA */
 
 .texto-derecha .forma-interior {
   float: left;
-
   width: 66px;
 
   shape-outside: polygon(
@@ -866,21 +669,14 @@ body {
   );
 }
 
-
-/* ==========================================
-   TEXTO DE LOS ENCARGOS
-   ========================================== */
+/* CONTENIDO TEXTUAL */
 
 .texto-contenido {
   display: inline;
-
   white-space: pre-line;
 }
 
-
-/* ==========================================
-   BARRAS DE DESPLAZAMIENTO
-   ========================================== */
+/* BARRAS DE SCROLL */
 
 .texto-izquierda::-webkit-scrollbar,
 .texto-derecha::-webkit-scrollbar {
@@ -890,7 +686,6 @@ body {
 .texto-izquierda::-webkit-scrollbar-thumb,
 .texto-derecha::-webkit-scrollbar-thumb {
   background: #78818a;
-
   border-radius: 8px;
 }
 
@@ -899,9 +694,8 @@ body {
   background: transparent;
 }
 
-
 /* ==========================================
-   CÍRCULO PEQUEÑO CENTRAL
+   CÍRCULO CENTRAL
    ========================================== */
 
 .anillo-gris {
@@ -914,7 +708,6 @@ body {
   height: 134px;
 
   border-radius: 50%;
-
   background: #6d7981;
 
   display: flex;
@@ -922,7 +715,6 @@ body {
   justify-content: center;
 
   z-index: 4;
-
   pointer-events: none;
 }
 
@@ -931,13 +723,11 @@ body {
   height: 75px;
 
   border-radius: 50%;
-
   background: #3e4346;
 }
 
-
 /* ==========================================
-   ENLACES DE CADA ENCARGO
+   ENLACES DE LOS ENCARGOS
    ========================================== */
 
 .enlaces {
@@ -960,17 +750,22 @@ body {
 
 .enlaces a {
   color: black;
-
   text-decoration: none;
+  cursor: pointer;
 }
 
 .enlaces a:hover {
   text-decoration: underline;
 }
 
+.enlaces a:focus-visible {
+  outline: 2px solid black;
+  outline-offset: 2px;
+}
 
 /* ==========================================
-   ANIMACIÓN DE APERTURA DE LIBRO
+   ANIMACIÓN DE LIBRO
+   DURACIÓN: 2 SEGUNDOS
    ========================================== */
 
 .libro-escena {
@@ -986,7 +781,6 @@ body {
   perspective-origin: center center;
 
   z-index: 20;
-
   pointer-events: none;
 }
 
@@ -1020,9 +814,6 @@ body {
   transform: rotateY(180deg);
 }
 
-
-/* ANIMACIÓN DE 2 SEGUNDOS */
-
 @keyframes abrir-libro {
   from {
     transform: rotateY(0deg);
@@ -1033,10 +824,7 @@ body {
   }
 }
 
-
-/* ==========================================
-   APARICIÓN PROGRESIVA DEL DETALLE
-   ========================================== */
+/* APARICIÓN DEL DETALLE */
 
 #detalle.detalle-entrando .marco-izquierdo,
 #detalle.detalle-entrando .marco-texto {
@@ -1048,11 +836,7 @@ body {
 }
 
 @keyframes aparecer-contenido {
-  0% {
-    opacity: 0;
-  }
-
-  30% {
+  0%, 30% {
     opacity: 0;
   }
 

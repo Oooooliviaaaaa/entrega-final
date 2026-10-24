@@ -1,170 +1,202 @@
 
+'use strict';
+
 /* ==========================================
-   PORTAFOLIO DIGITAL
+   1. LEER LOS DATOS DESDE EL HTML
    ========================================== */
 
-/* 1. LEER EL CONTENIDO DEL HTML */
+function dato(template, selector, atributo) {
 
-function leerEncargo(numero) {
-  const plantilla = document.getElementById(
-    `encargo-${numero}`
-  );
+  const elemento = template.content.querySelector(selector);
 
-  const contenido = plantilla.content;
+  if (!elemento) return '';
 
-  const foto = contenido.querySelector('.foto-encargo');
-  const video = contenido.querySelector('.video-encargo');
-  const p5 = contenido.querySelector('.p5-encargo');
+  if (atributo) {
+    return (
+      elemento.getAttribute(atributo) || ''
+    ).trim();
+  }
 
-  const titulo = contenido.querySelector('.titulo-dato');
-  const textoIzquierdo = contenido.querySelector(
-    '.texto-izquierdo-dato'
-  );
-  const textoDerecho = contenido.querySelector(
-    '.texto-derecho-dato'
-  );
-
-  const linkJP5 = contenido.querySelector(
-    '.link-jp5-dato'
-  );
-  const linkWiki = contenido.querySelector(
-    '.link-wiki-dato'
-  );
-
-  return {
-    imagen: foto.getAttribute('src')?.trim() || '',
-    video: video.getAttribute('src')?.trim() || '',
-    p5: p5.getAttribute('src')?.trim() || '',
-
-    permisosP5:
-      p5.getAttribute('allow') ||
-      'camera; microphone; fullscreen',
-
-    titulo: titulo.textContent.trim(),
-
-    textoIzquierdo: textoIzquierdo.textContent.trim(),
-    textoDerecho: textoDerecho.textContent.trim(),
-
-    linkJP5: linkJP5.getAttribute('href') || '',
-    linkWiki: linkWiki.getAttribute('href') || ''
-  };
-}
-
-const encargos = [];
-
-for (let i = 1; i <= 6; i++) {
-  encargos.push(leerEncargo(i));
+  return elemento.textContent.trim();
 }
 
 
+/* LEER LOS SEIS ENCARGOS */
+
+const encargos = Array.from(
+  { length: 6 },
+  (_, i) => {
+
+    const t = document.getElementById(
+      `encargo-${i + 1}`
+    );
+
+    return {
+      imagen: dato(t, '.foto-encargo', 'src'),
+
+      video: dato(t, '.video-encargo', 'src'),
+
+      p5: dato(t, '.p5-encargo', 'src'),
+
+      permisosP5:
+        dato(t, '.p5-encargo', 'allow') ||
+        'camera; microphone; fullscreen',
+
+      titulo: dato(t, '.titulo-dato'),
+
+      textoIzquierdo:
+        dato(t, '.texto-izquierdo-dato'),
+
+      textoDerecho:
+        dato(t, '.texto-derecho-dato'),
+
+      linkJP5:
+        dato(t, '.link-jp5-dato', 'href'),
+
+      linkWiki:
+        dato(t, '.link-wiki-dato', 'href')
+    };
+
+  }
+);
+
+
 /* ==========================================
-   2. ADAPTAR EL ESCENARIO A LA PANTALLA
+   2. ADAPTAR EL ESCENARIO AL NAVEGADOR
    ========================================== */
+
+const escenario = document.getElementById(
+  'escenario'
+);
 
 function adaptarPantalla() {
+
   const escala = Math.min(
     window.innerWidth / 1366,
     window.innerHeight / 768
   );
 
-  const escenario = document.getElementById(
-    'escenario'
-  );
-
   escenario.style.transform = `scale(${escala})`;
+
   escenario.style.left =
     `${(window.innerWidth - 1366 * escala) / 2}px`;
+
   escenario.style.top =
     `${(window.innerHeight - 768 * escala) / 2}px`;
+
 }
 
-window.addEventListener('resize', adaptarPantalla);
+window.addEventListener(
+  'resize',
+  adaptarPantalla
+);
+
 adaptarPantalla();
 
 
 /* ==========================================
-   3. VARIABLES GENERALES
+   3. ESTADO DE LA INTERFAZ
    ========================================== */
 
 let actual = 0;
+
 let transicionEnCurso = false;
+
 let arrastrandoPerilla = false;
+
+const panelMiniatura = document.getElementById(
+  'imagen-grande'
+);
+
+const panelDetalle = document.getElementById(
+  'imagen-detalle'
+);
 
 
 /* ==========================================
-   4. CAMBIO DE DIAPOSITIVA
+   4. CAMBIAR ENTRE LAS TRES PANTALLAS
    ========================================== */
 
 function mostrar(id) {
+
   document.querySelectorAll('.diapositiva')
-    .forEach(diapositiva => {
-      diapositiva.classList.toggle(
+    .forEach(elemento => {
+
+      elemento.classList.toggle(
         'activa',
-        diapositiva.id === id
+        elemento.id === id
       );
+
     });
+
 }
 
 
 /* ==========================================
-   5. ENTRAR A LA RUEDA
+   5. DETENER CONTENIDOS AL REGRESAR
+   ========================================== */
+
+function detenerContenido() {
+
+  panelDetalle.querySelectorAll('video')
+    .forEach(video => video.pause());
+
+  /* Eliminar un iframe también detiene
+     esa instancia del proyecto p5.js. */
+
+  panelDetalle.replaceChildren();
+
+}
+
+
+/* ==========================================
+   6. BOTÓN ENCARGOS
    ========================================== */
 
 document.getElementById('abrir-imagen')
   .addEventListener('click', evento => {
+
     evento.preventDefault();
+
     mostrar('imagen-escrita');
+
   });
-
-
-/* ==========================================
-   6. DETENER VIDEO O PROYECTO P5.JS
-   ========================================== */
-
-function detenerContenido() {
-  document.querySelectorAll('#escenario video')
-    .forEach(video => video.pause());
-
-  const panel = document.getElementById(
-    'imagen-detalle'
-  );
-
-  /* Al eliminar el iframe se cierra
-     esa instancia del proyecto p5.js. */
-  panel.replaceChildren();
-}
 
 
 /* ==========================================
    7. FLECHAS DE REGRESO
    ========================================== */
 
-/* DESDE LA RUEDA -> PANTALLA INICIAL */
+/* RUEDA -> INICIO */
 
 document.getElementById('volver-inicio')
   .addEventListener('click', () => {
+
     if (transicionEnCurso) return;
 
     detenerContenido();
+
     mostrar('inicio');
+
   });
 
 
-/* DESDE EL ENCARGO -> RUEDA */
+/* DETALLE -> RUEDA */
 
 document.getElementById('volver-rueda')
   .addEventListener('click', () => {
+
     if (transicionEnCurso) return;
 
     detenerContenido();
 
-    /* Se conserva la selección de la rueda */
     mostrar('imagen-escrita');
+
   });
 
 
 /* ==========================================
-   8. CONSTRUIR LA RUEDA SVG
+   8. ELEMENTOS SVG
    ========================================== */
 
 const NS = 'http://www.w3.org/2000/svg';
@@ -173,435 +205,530 @@ const grupo = document.getElementById(
   'sectores-rueda'
 );
 
-const definiciones = document.getElementById(
+const defs = document.getElementById(
   'clips-rueda'
 );
 
 const sectores = [];
 
-function crearSVG(nombre) {
-  return document.createElementNS(NS, nombre);
+
+function svg(tag) {
+
+  return document.createElementNS(
+    NS,
+    tag
+  );
+
 }
 
-function coordenada(radio, grados) {
+
+/* ==========================================
+   9. COORDENADAS DE LA RUEDA
+   ========================================== */
+
+function polar(radio, grados) {
+
   const angulo = grados * Math.PI / 180;
 
   return [
     260 + radio * Math.cos(angulo),
     260 + radio * Math.sin(angulo)
   ];
+
 }
 
 
 /* ==========================================
-   9. CREAR LOS SEIS SECTORES
+   10. MOSTRAR UNA FOTOGRAFÍA
+   ========================================== */
+
+function mostrarFoto(panel, src) {
+
+  panel.replaceChildren();
+
+  if (!src) return;
+
+  const img = document.createElement('img');
+
+  img.src = src;
+
+  img.alt = 'Miniatura del encargo';
+
+  panel.appendChild(img);
+
+}
+
+
+/* ==========================================
+   11. SELECCIONAR UN ENCARGO
+   ========================================== */
+
+function seleccionar(i) {
+
+  if (transicionEnCurso) return;
+
+  actual = i;
+
+  sectores.forEach((elemento, numero) => {
+
+    elemento.classList.toggle(
+      'seleccionado',
+      numero === i
+    );
+
+  });
+
+  document.getElementById('aguja')
+    .style.transform =
+    `rotate(${30 + i * 60}deg)`;
+
+  mostrarFoto(
+    panelMiniatura,
+    encargos[i].imagen
+  );
+
+}
+
+
+/* ==========================================
+   12. CREAR LOS SEIS SECTORES
    ========================================== */
 
 for (let i = 0; i < 6; i++) {
-  const inicio = -90 + i * 60;
-  const fin = inicio + 60;
 
-  const p = coordenada(250, inicio);
-  const q = coordenada(250, fin);
+  const a = polar(
+    250,
+    -90 + i * 60
+  );
+
+  const b = polar(
+    250,
+    -30 + i * 60
+  );
 
   const forma = `
     M260 260
-    L${p[0]} ${p[1]}
-    A250 250 0 0 1 ${q[0]} ${q[1]}
+    L${a[0]} ${a[1]}
+    A250 250 0 0 1 ${b[0]} ${b[1]}
     Z
   `;
 
-  const sector = crearSVG('g');
 
-  sector.setAttribute('class', 'sector');
-  sector.setAttribute('role', 'button');
-  sector.setAttribute('tabindex', '0');
-  sector.setAttribute(
+  /* GRUPO SVG */
+
+  const g = svg('g');
+
+  g.classList.add('sector');
+
+  g.setAttribute('tabindex', '0');
+
+  g.setAttribute('role', 'button');
+
+  g.setAttribute(
     'aria-label',
     `Abrir Encargo ${i + 1}`
   );
 
-  /* FOTO CORRESPONDIENTE AL SECTOR */
 
-  let relleno = '#7a1111';
+  /* PATRÓN CON LA MINIATURA */
 
-  if (encargos[i].imagen) {
-    const patron = crearSVG('pattern');
+  const patron = svg('pattern');
 
-    patron.setAttribute(
-      'id',
-      `patron-encargo-${i}`
-    );
-    patron.setAttribute(
-      'patternUnits',
-      'userSpaceOnUse'
-    );
-    patron.setAttribute('x', '0');
-    patron.setAttribute('y', '0');
-    patron.setAttribute('width', '520');
-    patron.setAttribute('height', '520');
+  patron.id = `patron-encargo-${i}`;
 
-    const imagen = crearSVG('image');
+  patron.setAttribute('x', '0');
+  patron.setAttribute('y', '0');
 
-    imagen.setAttribute(
-      'href',
-      encargos[i].imagen
-    );
-    imagen.setAttribute('x', '0');
-    imagen.setAttribute('y', '0');
-    imagen.setAttribute('width', '520');
-    imagen.setAttribute('height', '520');
-    imagen.setAttribute(
-      'preserveAspectRatio',
-      'xMidYMid slice'
-    );
+  patron.setAttribute('width', '520');
+  patron.setAttribute('height', '520');
 
-    patron.appendChild(imagen);
-    definiciones.appendChild(patron);
-
-    relleno = `url(#patron-encargo-${i})`;
-  }
-
-  const contorno = crearSVG('path');
-
-  contorno.setAttribute(
-    'class',
-    'contorno-sector'
+  patron.setAttribute(
+    'patternUnits',
+    'userSpaceOnUse'
   );
-  contorno.setAttribute('d', forma);
-  contorno.setAttribute('fill', relleno);
 
-  sector.appendChild(contorno);
 
-  /* SELECCIONAR AL PASAR EL MOUSE */
+  /* IMAGEN DEL PATRÓN */
 
-  sector.addEventListener('mouseenter', () => {
-    if (!transicionEnCurso && !arrastrandoPerilla) {
+  const img = svg('image');
+
+  img.setAttribute(
+    'href',
+    encargos[i].imagen
+  );
+
+  img.setAttribute('x', '0');
+  img.setAttribute('y', '0');
+
+  img.setAttribute('width', '520');
+  img.setAttribute('height', '520');
+
+  img.setAttribute(
+    'preserveAspectRatio',
+    'xMidYMid slice'
+  );
+
+  patron.appendChild(img);
+
+  defs.appendChild(patron);
+
+
+  /* DIBUJAR EL SECTOR */
+
+  const path = svg('path');
+
+  path.classList.add('contorno-sector');
+
+  path.setAttribute('d', forma);
+
+  path.setAttribute(
+    'fill',
+    `url(#patron-encargo-${i})`
+  );
+
+  g.appendChild(path);
+
+
+  /* SELECCIÓN CON EL MOUSE */
+
+  g.addEventListener('mouseenter', () => {
+
+    if (
+      !transicionEnCurso &&
+      !arrastrandoPerilla
+    ) {
+
       seleccionar(i);
+
     }
+
   });
 
-  /* SELECCIONAR CON TECLADO */
 
-  sector.addEventListener('focus', () => {
+  /* SELECCIÓN CON EL TECLADO */
+
+  g.addEventListener('focus', () => {
+
     if (!transicionEnCurso) {
       seleccionar(i);
     }
+
   });
+
 
   /* ABRIR ENCARGO */
 
-  sector.addEventListener('click', () => {
+  g.addEventListener('click', () => {
+
     abrirDetalle(i);
+
   });
 
-  sector.addEventListener('keydown', evento => {
+
+  /* ABRIR CON ENTER O ESPACIO */
+
+  g.addEventListener('keydown', evento => {
+
     if (
       evento.key === 'Enter' ||
       evento.key === ' '
     ) {
+
       evento.preventDefault();
+
       abrirDetalle(i);
+
     }
+
   });
 
-  grupo.appendChild(sector);
-  sectores.push(sector);
+
+  grupo.appendChild(g);
+
+  sectores.push(g);
+
 }
 
 
 /* ==========================================
-   10. MOSTRAR FOTOGRAFÍAS
-   ========================================== */
-
-function mostrarImagen(panel, ruta) {
-  panel.replaceChildren();
-
-  if (!ruta) return;
-
-  const imagen = document.createElement('img');
-
-  imagen.src = ruta;
-  imagen.alt = 'Fotografía del encargo';
-
-  panel.appendChild(imagen);
-}
-
-
-/* ==========================================
-   11. MOSTRAR VIDEOS
-   ========================================== */
-
-function mostrarVideo(panel, ruta, controles = false) {
-  panel.replaceChildren();
-
-  if (!ruta) return;
-
-  const video = document.createElement('video');
-
-  video.src = ruta;
-  video.controls = controles;
-  video.playsInline = true;
-  video.preload = 'metadata';
-  video.autoplay = false;
-
-  panel.appendChild(video);
-}
-
-
-/* ==========================================
-   12. MOSTRAR P5.JS
-
-   Conserva los permisos de cámara.
-   ========================================== */
-
-function mostrarP5(panel, ruta, permisos) {
-  panel.replaceChildren();
-
-  if (!ruta) return;
-
-  const iframe = document.createElement('iframe');
-
-  iframe.title = 'Proyecto interactivo p5.js';
-
-  iframe.setAttribute(
-    'allow',
-    permisos || 'camera; microphone; fullscreen'
-  );
-
-  iframe.setAttribute('allowfullscreen', '');
-  iframe.setAttribute('loading', 'eager');
-
-  iframe.src = ruta;
-
-  panel.appendChild(iframe);
-}
-
-
-/* ==========================================
-   13. SELECCIONAR SECTOR
-
-   Sincroniza:
-   - Rueda
-   - Perilla
-   - Imagen del panel derecho
-   ========================================== */
-
-function seleccionar(indice) {
-  if (transicionEnCurso) return;
-
-  actual = indice;
-
-  sectores.forEach((sector, i) => {
-    sector.classList.toggle(
-      'seleccionado',
-      i === indice
-    );
-  });
-
-  const giro = 30 + indice * 60;
-
-  document.getElementById('aguja')
-    .style.transform = `rotate(${giro}deg)`;
-
-  const item = encargos[indice];
-  const panel = document.getElementById(
-    'imagen-grande'
-  );
-
-  if (item.imagen) {
-    mostrarImagen(panel, item.imagen);
-  } else if (item.video) {
-    mostrarVideo(panel, item.video, false);
-  } else {
-    panel.replaceChildren();
-  }
-}
-
-
-/* ==========================================
-   14. ARRASTRAR LA PERILLA
+   13. PERILLA ARRASTRABLE
    ========================================== */
 
 const perilla = document.getElementById(
   'perilla'
 );
 
-function seleccionarDesdePerilla(evento) {
-  const caja = perilla.getBoundingClientRect();
 
-  const centroX = caja.left + caja.width / 2;
-  const centroY = caja.top + caja.height / 2;
+function elegirSegunPuntero(evento) {
 
-  const dx = evento.clientX - centroX;
-  const dy = evento.clientY - centroY;
+  const rectangulo = perilla.getBoundingClientRect();
 
-  const angulo =
-    Math.atan2(dy, dx) * 180 / Math.PI;
+  const centroX =
+    rectangulo.left + rectangulo.width / 2;
 
-  const anguloNormalizado =
-    (angulo + 90 + 360) % 360;
+  const centroY =
+    rectangulo.top + rectangulo.height / 2;
 
-  const indice =
-    Math.floor(anguloNormalizado / 60) % 6;
+  const angulo = (
+    Math.atan2(
+      evento.clientY - centroY,
+      evento.clientX - centroX
+    ) * 180 / Math.PI + 90 + 360
+  ) % 360;
+
+  const indice = Math.floor(
+    angulo / 60
+  ) % 6;
 
   seleccionar(indice);
+
 }
 
+
 perilla.addEventListener('pointerdown', evento => {
+
   if (transicionEnCurso) return;
 
   arrastrandoPerilla = true;
 
-  perilla.setPointerCapture(evento.pointerId);
-  seleccionarDesdePerilla(evento);
+  perilla.setPointerCapture(
+    evento.pointerId
+  );
+
+  elegirSegunPuntero(evento);
+
 });
+
 
 perilla.addEventListener('pointermove', evento => {
-  if (!arrastrandoPerilla) return;
 
-  seleccionarDesdePerilla(evento);
+  if (arrastrandoPerilla) {
+    elegirSegunPuntero(evento);
+  }
+
 });
 
-function terminarArrastre() {
-  arrastrandoPerilla = false;
-}
 
-perilla.addEventListener(
+for (const tipo of [
   'pointerup',
-  terminarArrastre
-);
-
-perilla.addEventListener(
   'pointercancel',
-  terminarArrastre
-);
+  'lostpointercapture'
+]) {
 
-perilla.addEventListener(
-  'lostpointercapture',
-  terminarArrastre
-);
+  perilla.addEventListener(tipo, () => {
+
+    arrastrandoPerilla = false;
+
+  });
+
+}
 
 
 /* ==========================================
-   15. NUEVO: TEXTO ENTRE AMBAS CURVAS
-
-   Se colocan dos elementos flotantes
-   ANTES de las palabras:
-
-   - forma-exterior
-   - forma-interior
-
-   Esto permite que shape-outside
-   reserve espacio para ambas curvas.
-
-   IMPORTANTE:
-   El contenido es un span en línea.
-   No debe ser display:block.
+   14. TEXTOS CON FORMA CIRCULAR
    ========================================== */
 
 function mostrarTextoConForma(id, texto) {
+
   const contenedor = document.getElementById(id);
 
   contenedor.replaceChildren();
 
-  /* FORMA DEL BORDE EXTERIOR */
 
-  const formaExterior = document.createElement(
-    'span'
-  );
+  /* FORMAS INVISIBLES PARA EL TEXTO */
 
-  formaExterior.className = 'forma-exterior';
+  for (const nombre of [
+    'forma-exterior',
+    'forma-interior'
+  ]) {
 
-  formaExterior.setAttribute(
-    'aria-hidden',
-    'true'
-  );
+    const span = document.createElement('span');
 
-  /* FORMA DEL CÍRCULO CENTRAL */
+    span.className = nombre;
 
-  const formaInterior = document.createElement(
-    'span'
-  );
+    span.setAttribute(
+      'aria-hidden',
+      'true'
+    );
 
-  formaInterior.className = 'forma-interior';
+    contenedor.appendChild(span);
 
-  formaInterior.setAttribute(
-    'aria-hidden',
-    'true'
-  );
+  }
 
-  /* INSERTAR AMBAS FORMAS ANTES DEL TEXTO */
 
-  contenedor.appendChild(formaExterior);
-  contenedor.appendChild(formaInterior);
+  /* TEXTO DEL ENCARGO */
 
-  /* INSERTAR TEXTO EN LÍNEA */
-
-  const contenido = document.createElement(
-    'span'
-  );
+  const contenido = document.createElement('span');
 
   contenido.className = 'texto-contenido';
+
   contenido.textContent = texto;
 
   contenedor.appendChild(contenido);
 
-  /* MOSTRAR INICIO DEL TEXTO */
-
   contenedor.scrollTop = 0;
+
 }
 
 
 /* ==========================================
-   16. ENLACES
+   15. ENLACES EXTERNOS
+
+   IMPORTANTE PARA GITHUB PAGES:
+
+   Los enlaces se leen del HTML y se
+   asignan directamente al elemento <a>.
+
+   No se utiliza preventDefault()
+   sobre los enlaces válidos.
    ========================================== */
 
 function asignarEnlace(id, url) {
+
   const enlace = document.getElementById(id);
 
-  enlace.href = url || '#';
+  const direccion = (url || '').trim();
 
-  enlace.onclick = url
-    ? null
-    : evento => evento.preventDefault();
+
+  /* SOLO HABILITAR URLS HTTP O HTTPS */
+
+  if (/^https?:\/\//i.test(direccion)) {
+
+    enlace.href = direccion;
+
+    enlace.target = '_blank';
+
+    enlace.rel = 'noopener noreferrer';
+
+    enlace.removeAttribute(
+      'aria-disabled'
+    );
+
+    enlace.style.pointerEvents = 'auto';
+
+  } else {
+
+    /* SI NO EXISTE DIRECCIÓN,
+       NO ABRIR UNA PÁGINA VACÍA */
+
+    enlace.removeAttribute('href');
+
+    enlace.setAttribute(
+      'aria-disabled',
+      'true'
+    );
+
+    enlace.style.pointerEvents = 'none';
+
+  }
+
 }
 
 
 /* ==========================================
-   17. ABRIR UN ENCARGO
+   16. CARGAR PROYECTOS P5.JS
 
-   1. Seleccionar fotografía
-   2. Cargar título y textos
-   3. Ejecutar la animación de libro
-   4. Mostrar p5.js, video o foto
+   PRIORIDAD:
+   1. P5.JS
+   2. VIDEO
+   3. FOTO
    ========================================== */
 
-function abrirDetalle(indice) {
+function cargarProyecto(item) {
+
+  panelDetalle.replaceChildren();
+
+
+  /* PROYECTO P5.JS */
+
+  if (item.p5) {
+
+    const iframe = document.createElement('iframe');
+
+    iframe.title = `Proyecto p5.js: ${item.titulo}`;
+
+    iframe.allow = item.permisosP5;
+
+    iframe.setAttribute(
+      'allowfullscreen',
+      ''
+    );
+
+    iframe.referrerPolicy =
+      'strict-origin-when-cross-origin';
+
+    /* CONSERVAR LA DIRECCIÓN ORIGINAL */
+
+    iframe.src = item.p5;
+
+    panelDetalle.appendChild(iframe);
+
+
+  /* VIDEO */
+
+  } else if (item.video) {
+
+    const video = document.createElement('video');
+
+    video.src = item.video;
+
+    video.controls = true;
+
+    video.playsInline = true;
+
+    panelDetalle.appendChild(video);
+
+
+  /* FOTOGRAFÍA */
+
+  } else {
+
+    mostrarFoto(
+      panelDetalle,
+      item.imagen
+    );
+
+  }
+
+}
+
+
+/* ==========================================
+   17. ABRIR DETALLE DEL ENCARGO
+   ========================================== */
+
+function abrirDetalle(i) {
+
   if (transicionEnCurso) return;
 
-  seleccionar(indice);
+  seleccionar(i);
 
-  const item = encargos[indice];
+  const item = encargos[i];
+
 
   /* TÍTULO */
 
   document.getElementById('titulo-encargo')
     .textContent = item.titulo;
 
-  /* TEXTOS CON AMBAS CURVAS */
+
+  /* DESCRIPCIÓN IZQUIERDA */
 
   mostrarTextoConForma(
     'texto-izquierda',
     item.textoIzquierdo
   );
 
+
+  /* DESCRIPCIÓN DERECHA */
+
   mostrarTextoConForma(
     'texto-derecha',
     item.textoDerecho
   );
 
-  /* ENLACES */
+
+  /* ENLACES ORIGINALES */
 
   asignarEnlace(
     'link-jp5',
@@ -613,65 +740,81 @@ function abrirDetalle(indice) {
     item.linkWiki
   );
 
-  /* FOTO INICIAL DEL DETALLE */
 
-  const panelDetalle = document.getElementById(
-    'imagen-detalle'
+  /* FOTOGRAFÍA DURANTE LA ANIMACIÓN */
+
+  mostrarFoto(
+    panelDetalle,
+    item.imagen
   );
-
-  mostrarImagen(panelDetalle, item.imagen);
 
   transicionEnCurso = true;
 
-  /* ESCENA DE LIBRO */
 
-  const escenario = document.getElementById(
-    'escenario'
-  );
+  /* ======================================
+     CONSTRUIR EL LIBRO
+     ====================================== */
 
-  const escenaLibro = document.createElement(
-    'div'
-  );
+  const escena = document.createElement('div');
 
-  escenaLibro.className = 'libro-escena';
+  escena.className = 'libro-escena';
+
 
   const hoja = document.createElement('div');
 
   hoja.className = 'libro-hoja';
 
-  /* COPIAR EL MARCO Y LA FOTOGRAFÍA */
 
-  const frontal = document.querySelector(
-    '#imagen-escrita .marco-derecho'
+  /* CARA DELANTERA */
+
+  const frente = document.querySelector(
+    '.marco-derecho'
   ).cloneNode(true);
 
-  frontal.classList.add('libro-cara');
+  frente.classList.add('libro-cara');
 
-  frontal.querySelectorAll('[id]')
+
+  /* EVITAR IDS DUPLICADOS */
+
+  frente.querySelectorAll('[id]')
     .forEach(elemento => {
+
       elemento.removeAttribute('id');
+
     });
 
-  frontal.style.left = '0';
-  frontal.style.top = '0';
-  frontal.style.width = '100%';
-  frontal.style.height = '100%';
 
-  /* CARA POSTERIOR */
+  Object.assign(frente.style, {
+    left: '0',
+    top: '0',
+    width: '100%',
+    height: '100%'
+  });
 
-  const trasera = frontal.cloneNode(true);
 
-  trasera.classList.add(
+  /* CARA TRASERA */
+
+  const detras = frente.cloneNode(true);
+
+  detras.classList.add(
     'libro-cara-trasera'
   );
 
-  hoja.appendChild(frontal);
-  hoja.appendChild(trasera);
 
-  escenaLibro.appendChild(hoja);
-  escenario.appendChild(escenaLibro);
+  /* ARMAR LA ESCENA */
 
-  /* MOSTRAR TERCERA DIAPOSITIVA */
+  hoja.appendChild(frente);
+
+  hoja.appendChild(detras);
+
+  escena.appendChild(hoja);
+
+  escenario.appendChild(escena);
+
+
+  /* ======================================
+     ACTIVAR LA PANTALLA DE DETALLE
+     ====================================== */
 
   const detalle = document.getElementById(
     'detalle'
@@ -689,54 +832,43 @@ function abrirDetalle(indice) {
 
   mostrar('detalle');
 
-  /* FINALIZAR LA APERTURA */
 
-  hoja.addEventListener('animationend', evento => {
-    if (evento.animationName !== 'abrir-libro') {
-      return;
-    }
+  /* ======================================
+     AL TERMINAR EL GIRO DEL LIBRO
+     ====================================== */
 
-    escenaLibro.remove();
+  hoja.addEventListener(
+    'animationend',
+    evento => {
 
-    detalle.classList.remove(
-      'detalle-entrando'
-    );
+      if (
+        evento.animationName !== 'abrir-libro'
+      ) {
+        return;
+      }
 
-    /* PRIORIDAD 1: P5.JS */
+      escena.remove();
 
-    if (item.p5) {
-      mostrarP5(
-        panelDetalle,
-        item.p5,
-        item.permisosP5
+      detalle.classList.remove(
+        'detalle-entrando'
       );
 
-    /* PRIORIDAD 2: VIDEO */
 
-    } else if (item.video) {
-      mostrarVideo(
-        panelDetalle,
-        item.video,
-        true
-      );
+      /* CARGAR EL PROYECTO REAL */
 
-    /* PRIORIDAD 3: FOTOGRAFÍA */
+      cargarProyecto(item);
 
-    } else {
-      mostrarImagen(
-        panelDetalle,
-        item.imagen
-      );
-    }
+      transicionEnCurso = false;
 
-    transicionEnCurso = false;
+    },
+    { once: true }
+  );
 
-  }, { once: true });
 }
 
 
 /* ==========================================
-   18. ESTADO INICIAL
+   18. CONFIGURACIÓN INICIAL
    ========================================== */
 
 seleccionar(0);
@@ -747,15 +879,24 @@ sectores[0].classList.remove(
 
 
 /* ==========================================
-   19. ACCESO MEDIANTE ENLACES INTERNOS
+   19. ENLACE WIKI PRINCIPAL
+
+   Se abre en otra pestaña.
    ========================================== */
 
-const hash = location.hash.substring(1);
+const botonWiki = document.getElementById(
+  'abrir-wiki'
+);
 
-if (hash === 'imagen-escrita') {
-  mostrar('imagen-escrita');
+if (
+  botonWiki &&
+  /^https?:\/\//i.test(
+    botonWiki.getAttribute('href') || ''
+  )
+) {
 
-} else if (hash === 'detalle') {
-  mostrar('imagen-escrita');
-  abrirDetalle(0);
+  botonWiki.target = '_blank';
+
+  botonWiki.rel = 'noopener noreferrer';
+
 }
