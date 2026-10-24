@@ -1,50 +1,25 @@
 
 /* ==========================================
    PORTAFOLIO DIGITAL
-
-   FUNCIONES:
-   - Leer fotografías, videos y p5.js del HTML
-   - Mostrar las seis miniaturas
-   - Girar la perilla
-   - Sincronizar la imagen derecha
-   - Abrir los encargos como un libro
-   - Mostrar p5.js con permiso de cámara
-   - Detener el contenido al salir
    ========================================== */
 
-
-/* ==========================================
-   1. LEER CONTENIDOS DESDE HTML
-   ========================================== */
+/* 1. LEER EL CONTENIDO DEL HTML */
 
 function leerEncargo(numero) {
-
   const plantilla = document.getElementById(
     `encargo-${numero}`
   );
 
   const contenido = plantilla.content;
 
-  const foto = contenido.querySelector(
-    '.foto-encargo'
-  );
+  const foto = contenido.querySelector('.foto-encargo');
+  const video = contenido.querySelector('.video-encargo');
+  const p5 = contenido.querySelector('.p5-encargo');
 
-  const video = contenido.querySelector(
-    '.video-encargo'
-  );
-
-  const p5 = contenido.querySelector(
-    '.p5-encargo'
-  );
-
-  const titulo = contenido.querySelector(
-    '.titulo-dato'
-  );
-
+  const titulo = contenido.querySelector('.titulo-dato');
   const textoIzquierdo = contenido.querySelector(
     '.texto-izquierdo-dato'
   );
-
   const textoDerecho = contenido.querySelector(
     '.texto-derecho-dato'
   );
@@ -52,43 +27,28 @@ function leerEncargo(numero) {
   const linkJP5 = contenido.querySelector(
     '.link-jp5-dato'
   );
-
   const linkWiki = contenido.querySelector(
     '.link-wiki-dato'
   );
 
   return {
-
     imagen: foto.getAttribute('src')?.trim() || '',
-
     video: video.getAttribute('src')?.trim() || '',
-
     p5: p5.getAttribute('src')?.trim() || '',
 
-    /* PERMISOS ESCRITOS EN EL HTML */
     permisosP5:
       p5.getAttribute('allow') ||
       'camera; microphone; fullscreen',
 
     titulo: titulo.textContent.trim(),
 
-    textoIzquierdo:
-      textoIzquierdo.textContent.trim(),
+    textoIzquierdo: textoIzquierdo.textContent.trim(),
+    textoDerecho: textoDerecho.textContent.trim(),
 
-    textoDerecho:
-      textoDerecho.textContent.trim(),
-
-    linkJP5:
-      linkJP5.getAttribute('href') || '',
-
-    linkWiki:
-      linkWiki.getAttribute('href') || ''
-
+    linkJP5: linkJP5.getAttribute('href') || '',
+    linkWiki: linkWiki.getAttribute('href') || ''
   };
 }
-
-
-/* LEER LOS SEIS ENCARGOS */
 
 const encargos = [];
 
@@ -98,11 +58,10 @@ for (let i = 1; i <= 6; i++) {
 
 
 /* ==========================================
-   2. ADAPTAR PANTALLA
+   2. ADAPTAR EL ESCENARIO A LA PANTALLA
    ========================================== */
 
 function adaptarPantalla() {
-
   const escala = Math.min(
     window.innerWidth / 1366,
     window.innerHeight / 768
@@ -112,18 +71,14 @@ function adaptarPantalla() {
     'escenario'
   );
 
-  escenario.style.transform =
-    `scale(${escala})`;
-
+  escenario.style.transform = `scale(${escala})`;
   escenario.style.left =
     `${(window.innerWidth - 1366 * escala) / 2}px`;
-
   escenario.style.top =
     `${(window.innerHeight - 768 * escala) / 2}px`;
 }
 
 window.addEventListener('resize', adaptarPantalla);
-
 adaptarPantalla();
 
 
@@ -137,86 +92,79 @@ let arrastrandoPerilla = false;
 
 
 /* ==========================================
-   4. MOSTRAR DIAPOSITIVAS
+   4. CAMBIO DE DIAPOSITIVA
    ========================================== */
 
 function mostrar(id) {
-
   document.querySelectorAll('.diapositiva')
     .forEach(diapositiva => {
-
       diapositiva.classList.toggle(
         'activa',
         diapositiva.id === id
       );
-
     });
-
 }
 
 
 /* ==========================================
-   5. NAVEGACIÓN
+   5. ENTRAR A LA RUEDA
    ========================================== */
 
 document.getElementById('abrir-imagen')
   .addEventListener('click', evento => {
-
     evento.preventDefault();
-
     mostrar('imagen-escrita');
-
   });
 
 
 /* ==========================================
-   6. DETENER CONTENIDO AL SALIR
-
-   Al eliminar el iframe de p5.js,
-   se cierra la página incrustada y
-   se libera la captura de cámara
-   iniciada por ese proyecto.
+   6. DETENER VIDEO O PROYECTO P5.JS
    ========================================== */
 
 function detenerContenido() {
+  document.querySelectorAll('#escenario video')
+    .forEach(video => video.pause());
 
-  document.querySelectorAll(
-    '#escenario video'
-  ).forEach(video => {
-
-    video.pause();
-
-  });
-
-  const panelDetalle = document.getElementById(
+  const panel = document.getElementById(
     'imagen-detalle'
   );
 
-  panelDetalle.replaceChildren();
-
+  /* Al eliminar el iframe se cierra
+     esa instancia del proyecto p5.js. */
+  panel.replaceChildren();
 }
 
 
-/* FLECHAS DE REGRESO */
+/* ==========================================
+   7. FLECHAS DE REGRESO
+   ========================================== */
 
-document.querySelectorAll('.volver')
-  .forEach(boton => {
+/* DESDE LA RUEDA -> PANTALLA INICIAL */
 
-    boton.addEventListener('click', () => {
+document.getElementById('volver-inicio')
+  .addEventListener('click', () => {
+    if (transicionEnCurso) return;
 
-      if (transicionEnCurso) return;
+    detenerContenido();
+    mostrar('inicio');
+  });
 
-      detenerContenido();
 
-      mostrar('inicio');
+/* DESDE EL ENCARGO -> RUEDA */
 
-    });
+document.getElementById('volver-rueda')
+  .addEventListener('click', () => {
+    if (transicionEnCurso) return;
 
+    detenerContenido();
+
+    /* Se conserva la selección de la rueda */
+    mostrar('imagen-escrita');
   });
 
 
 /* ==========================================
-   7. RUEDA SVG
+   8. CONSTRUIR LA RUEDA SVG
    ========================================== */
 
 const NS = 'http://www.w3.org/2000/svg';
@@ -231,76 +179,63 @@ const definiciones = document.getElementById(
 
 const sectores = [];
 
-
 function crearSVG(nombre) {
-
-  return document.createElementNS(
-    NS,
-    nombre
-  );
-
+  return document.createElementNS(NS, nombre);
 }
 
-
 function coordenada(radio, grados) {
-
   const angulo = grados * Math.PI / 180;
 
   return [
     260 + radio * Math.cos(angulo),
     260 + radio * Math.sin(angulo)
   ];
-
 }
 
 
 /* ==========================================
-   8. CREAR LOS SEIS SECTORES CON FOTOS
+   9. CREAR LOS SEIS SECTORES
    ========================================== */
 
 for (let i = 0; i < 6; i++) {
-
   const inicio = -90 + i * 60;
   const fin = inicio + 60;
 
   const p = coordenada(250, inicio);
   const q = coordenada(250, fin);
 
-  const forma =
-    `M260 260
-     L${p[0]} ${p[1]}
-     A250 250 0 0 1 ${q[0]} ${q[1]}
-     Z`;
+  const forma = `
+    M260 260
+    L${p[0]} ${p[1]}
+    A250 250 0 0 1 ${q[0]} ${q[1]}
+    Z
+  `;
 
   const sector = crearSVG('g');
 
   sector.setAttribute('class', 'sector');
   sector.setAttribute('role', 'button');
   sector.setAttribute('tabindex', '0');
-
   sector.setAttribute(
     'aria-label',
     `Abrir Encargo ${i + 1}`
   );
 
-  /* FOTOGRAFÍA DE CADA SECTOR */
+  /* FOTO CORRESPONDIENTE AL SECTOR */
 
   let relleno = '#7a1111';
 
   if (encargos[i].imagen) {
-
     const patron = crearSVG('pattern');
 
     patron.setAttribute(
       'id',
       `patron-encargo-${i}`
     );
-
     patron.setAttribute(
       'patternUnits',
       'userSpaceOnUse'
     );
-
     patron.setAttribute('x', '0');
     patron.setAttribute('y', '0');
     patron.setAttribute('width', '520');
@@ -312,12 +247,10 @@ for (let i = 0; i < 6; i++) {
       'href',
       encargos[i].imagen
     );
-
     imagen.setAttribute('x', '0');
     imagen.setAttribute('y', '0');
     imagen.setAttribute('width', '520');
     imagen.setAttribute('height', '520');
-
     imagen.setAttribute(
       'preserveAspectRatio',
       'xMidYMid slice'
@@ -327,7 +260,6 @@ for (let i = 0; i < 6; i++) {
     definiciones.appendChild(patron);
 
     relleno = `url(#patron-encargo-${i})`;
-
   }
 
   const contorno = crearSVG('path');
@@ -336,70 +268,53 @@ for (let i = 0; i < 6; i++) {
     'class',
     'contorno-sector'
   );
-
   contorno.setAttribute('d', forma);
   contorno.setAttribute('fill', relleno);
 
   sector.appendChild(contorno);
 
-  /* INTERACCIONES */
+  /* SELECCIONAR AL PASAR EL MOUSE */
 
-  sector.addEventListener(
-    'mouseenter',
-    () => {
-
-      if (!transicionEnCurso && !arrastrandoPerilla) {
-        seleccionar(i);
-      }
-
+  sector.addEventListener('mouseenter', () => {
+    if (!transicionEnCurso && !arrastrandoPerilla) {
+      seleccionar(i);
     }
-  );
+  });
 
-  sector.addEventListener(
-    'focus',
-    () => {
+  /* SELECCIONAR CON TECLADO */
 
-      if (!transicionEnCurso) {
-        seleccionar(i);
-      }
-
+  sector.addEventListener('focus', () => {
+    if (!transicionEnCurso) {
+      seleccionar(i);
     }
-  );
+  });
 
-  sector.addEventListener(
-    'click',
-    () => abrirDetalle(i)
-  );
+  /* ABRIR ENCARGO */
 
-  sector.addEventListener(
-    'keydown',
-    evento => {
+  sector.addEventListener('click', () => {
+    abrirDetalle(i);
+  });
 
-      if (
-        evento.key === 'Enter' ||
-        evento.key === ' '
-      ) {
-
-        evento.preventDefault();
-        abrirDetalle(i);
-
-      }
-
+  sector.addEventListener('keydown', evento => {
+    if (
+      evento.key === 'Enter' ||
+      evento.key === ' '
+    ) {
+      evento.preventDefault();
+      abrirDetalle(i);
     }
-  );
+  });
 
   grupo.appendChild(sector);
   sectores.push(sector);
-
 }
 
 
 /* ==========================================
-   9. MOSTRAR FOTOGRAFÍA
+   10. MOSTRAR FOTOGRAFÍAS
    ========================================== */
 
 function mostrarImagen(panel, ruta) {
-
   panel.replaceChildren();
 
   if (!ruta) return;
@@ -407,20 +322,17 @@ function mostrarImagen(panel, ruta) {
   const imagen = document.createElement('img');
 
   imagen.src = ruta;
-
   imagen.alt = 'Fotografía del encargo';
 
   panel.appendChild(imagen);
-
 }
 
 
 /* ==========================================
-   10. MOSTRAR VIDEO
+   11. MOSTRAR VIDEOS
    ========================================== */
 
 function mostrarVideo(panel, ruta, controles = false) {
-
   panel.replaceChildren();
 
   if (!ruta) return;
@@ -434,27 +346,16 @@ function mostrarVideo(panel, ruta, controles = false) {
   video.autoplay = false;
 
   panel.appendChild(video);
-
 }
 
 
 /* ==========================================
-   11. MOSTRAR P5.JS CON PERMISO DE CÁMARA
+   12. MOSTRAR P5.JS
 
-   CAMBIO PRINCIPAL:
-
-   Se agrega:
-   allow="camera; microphone; fullscreen"
-
-   Esto permite que el proyecto incrustado
-   solicite acceso a esos dispositivos.
-
-   No concede acceso automáticamente:
-   la persona debe aceptar el permiso.
+   Conserva los permisos de cámara.
    ========================================== */
 
 function mostrarP5(panel, ruta, permisos) {
-
   panel.replaceChildren();
 
   if (!ruta) return;
@@ -463,88 +364,70 @@ function mostrarP5(panel, ruta, permisos) {
 
   iframe.title = 'Proyecto interactivo p5.js';
 
-  /* HABILITAR PERMISO DE CÁMARA */
   iframe.setAttribute(
     'allow',
     permisos || 'camera; microphone; fullscreen'
   );
 
   iframe.setAttribute('allowfullscreen', '');
-
   iframe.setAttribute('loading', 'eager');
 
-  /* CONFIGURAR SRC DESPUÉS DE LOS PERMISOS */
   iframe.src = ruta;
 
   panel.appendChild(iframe);
-
 }
 
 
 /* ==========================================
-   12. SELECCIONAR SECTOR
+   13. SELECCIONAR SECTOR
 
-   Sincroniza miniatura, perilla
-   y rectángulo derecho.
+   Sincroniza:
+   - Rueda
+   - Perilla
+   - Imagen del panel derecho
    ========================================== */
 
 function seleccionar(indice) {
-
   if (transicionEnCurso) return;
 
   actual = indice;
 
   sectores.forEach((sector, i) => {
-
     sector.classList.toggle(
       'seleccionado',
       i === indice
     );
-
   });
 
-  /* GIRAR AGUJA */
   const giro = 30 + indice * 60;
 
   document.getElementById('aguja')
-    .style.transform =
-    `rotate(${giro}deg)`;
+    .style.transform = `rotate(${giro}deg)`;
 
-  /* ACTUALIZAR FOTOGRAFÍA DERECHA */
   const item = encargos[indice];
-
   const panel = document.getElementById(
     'imagen-grande'
   );
 
   if (item.imagen) {
-
     mostrarImagen(panel, item.imagen);
-
   } else if (item.video) {
-
     mostrarVideo(panel, item.video, false);
-
   } else {
-
     panel.replaceChildren();
-
   }
-
 }
 
 
 /* ==========================================
-   13. ARRASTRAR LA PERILLA
+   14. ARRASTRAR LA PERILLA
    ========================================== */
 
 const perilla = document.getElementById(
   'perilla'
 );
 
-
 function seleccionarDesdePerilla(evento) {
-
   const caja = perilla.getBoundingClientRect();
 
   const centroX = caja.left + caja.width / 2;
@@ -563,31 +446,22 @@ function seleccionarDesdePerilla(evento) {
     Math.floor(anguloNormalizado / 60) % 6;
 
   seleccionar(indice);
-
 }
 
-
 perilla.addEventListener('pointerdown', evento => {
-
   if (transicionEnCurso) return;
 
   arrastrandoPerilla = true;
 
   perilla.setPointerCapture(evento.pointerId);
-
   seleccionarDesdePerilla(evento);
-
 });
 
-
 perilla.addEventListener('pointermove', evento => {
-
   if (!arrastrandoPerilla) return;
 
   seleccionarDesdePerilla(evento);
-
 });
-
 
 function terminarArrastre() {
   arrastrandoPerilla = false;
@@ -610,11 +484,80 @@ perilla.addEventListener(
 
 
 /* ==========================================
-   14. ENLACES
+   15. NUEVO: TEXTO ENTRE AMBAS CURVAS
+
+   Se colocan dos elementos flotantes
+   ANTES de las palabras:
+
+   - forma-exterior
+   - forma-interior
+
+   Esto permite que shape-outside
+   reserve espacio para ambas curvas.
+
+   IMPORTANTE:
+   El contenido es un span en línea.
+   No debe ser display:block.
+   ========================================== */
+
+function mostrarTextoConForma(id, texto) {
+  const contenedor = document.getElementById(id);
+
+  contenedor.replaceChildren();
+
+  /* FORMA DEL BORDE EXTERIOR */
+
+  const formaExterior = document.createElement(
+    'span'
+  );
+
+  formaExterior.className = 'forma-exterior';
+
+  formaExterior.setAttribute(
+    'aria-hidden',
+    'true'
+  );
+
+  /* FORMA DEL CÍRCULO CENTRAL */
+
+  const formaInterior = document.createElement(
+    'span'
+  );
+
+  formaInterior.className = 'forma-interior';
+
+  formaInterior.setAttribute(
+    'aria-hidden',
+    'true'
+  );
+
+  /* INSERTAR AMBAS FORMAS ANTES DEL TEXTO */
+
+  contenedor.appendChild(formaExterior);
+  contenedor.appendChild(formaInterior);
+
+  /* INSERTAR TEXTO EN LÍNEA */
+
+  const contenido = document.createElement(
+    'span'
+  );
+
+  contenido.className = 'texto-contenido';
+  contenido.textContent = texto;
+
+  contenedor.appendChild(contenido);
+
+  /* MOSTRAR INICIO DEL TEXTO */
+
+  contenedor.scrollTop = 0;
+}
+
+
+/* ==========================================
+   16. ENLACES
    ========================================== */
 
 function asignarEnlace(id, url) {
-
   const enlace = document.getElementById(id);
 
   enlace.href = url || '#';
@@ -622,48 +565,55 @@ function asignarEnlace(id, url) {
   enlace.onclick = url
     ? null
     : evento => evento.preventDefault();
-
 }
 
 
 /* ==========================================
-   15. ABRIR DETALLE DEL ENCARGO
+   17. ABRIR UN ENCARGO
 
-   SECUENCIA:
-   1. Seleccionar la fotografía.
-   2. Actualizar textos.
-   3. Animar apertura de libro.
-   4. Al finalizar, cargar p5.js con cámara.
-
-   PRIORIDAD:
-   p5.js -> video -> fotografía
+   1. Seleccionar fotografía
+   2. Cargar título y textos
+   3. Ejecutar la animación de libro
+   4. Mostrar p5.js, video o foto
    ========================================== */
 
 function abrirDetalle(indice) {
-
   if (transicionEnCurso) return;
 
   seleccionar(indice);
 
   const item = encargos[indice];
 
-  /* ACTUALIZAR TEXTOS */
+  /* TÍTULO */
 
   document.getElementById('titulo-encargo')
     .textContent = item.titulo;
 
-  document.getElementById('texto-izquierda')
-    .textContent = item.textoIzquierdo;
+  /* TEXTOS CON AMBAS CURVAS */
 
-  document.getElementById('texto-derecha')
-    .textContent = item.textoDerecho;
+  mostrarTextoConForma(
+    'texto-izquierda',
+    item.textoIzquierdo
+  );
 
-  /* ACTUALIZAR ENLACES */
+  mostrarTextoConForma(
+    'texto-derecha',
+    item.textoDerecho
+  );
 
-  asignarEnlace('link-jp5', item.linkJP5);
-  asignarEnlace('link-wiki', item.linkWiki);
+  /* ENLACES */
 
-  /* MOSTRAR FOTO TEMPORAL EN EL DETALLE */
+  asignarEnlace(
+    'link-jp5',
+    item.linkJP5
+  );
+
+  asignarEnlace(
+    'link-wiki',
+    item.linkWiki
+  );
+
+  /* FOTO INICIAL DEL DETALLE */
 
   const panelDetalle = document.getElementById(
     'imagen-detalle'
@@ -671,17 +621,17 @@ function abrirDetalle(indice) {
 
   mostrarImagen(panelDetalle, item.imagen);
 
-  /* BLOQUEAR ANIMACIONES REPETIDAS */
-
   transicionEnCurso = true;
 
-  /* CREAR ESCENA DE LIBRO */
+  /* ESCENA DE LIBRO */
 
   const escenario = document.getElementById(
     'escenario'
   );
 
-  const escenaLibro = document.createElement('div');
+  const escenaLibro = document.createElement(
+    'div'
+  );
 
   escenaLibro.className = 'libro-escena';
 
@@ -689,7 +639,7 @@ function abrirDetalle(indice) {
 
   hoja.className = 'libro-hoja';
 
-  /* COPIAR MARCO NEGRO Y MINIATURA */
+  /* COPIAR EL MARCO Y LA FOTOGRAFÍA */
 
   const frontal = document.querySelector(
     '#imagen-escrita .marco-derecho'
@@ -699,9 +649,7 @@ function abrirDetalle(indice) {
 
   frontal.querySelectorAll('[id]')
     .forEach(elemento => {
-
       elemento.removeAttribute('id');
-
     });
 
   frontal.style.left = '0';
@@ -709,11 +657,13 @@ function abrirDetalle(indice) {
   frontal.style.width = '100%';
   frontal.style.height = '100%';
 
-  /* CREAR CARA TRASERA */
+  /* CARA POSTERIOR */
 
   const trasera = frontal.cloneNode(true);
 
-  trasera.classList.add('libro-cara-trasera');
+  trasera.classList.add(
+    'libro-cara-trasera'
+  );
 
   hoja.appendChild(frontal);
   hoja.appendChild(trasera);
@@ -721,81 +671,72 @@ function abrirDetalle(indice) {
   escenaLibro.appendChild(hoja);
   escenario.appendChild(escenaLibro);
 
-  /* MOSTRAR LA TERCERA DIAPOSITIVA */
+  /* MOSTRAR TERCERA DIAPOSITIVA */
 
   const detalle = document.getElementById(
     'detalle'
   );
 
-  detalle.classList.remove('detalle-entrando');
+  detalle.classList.remove(
+    'detalle-entrando'
+  );
 
   void detalle.offsetWidth;
 
-  detalle.classList.add('detalle-entrando');
+  detalle.classList.add(
+    'detalle-entrando'
+  );
 
   mostrar('detalle');
 
-
-  /* ======================================
-     FINALIZAR APERTURA DE LIBRO
-
-     Cuando termine la animación de 2s,
-     cargar el proyecto p5.js.
-
-     La cámara NO se inicia mientras
-     la página está pasando.
-     ====================================== */
+  /* FINALIZAR LA APERTURA */
 
   hoja.addEventListener('animationend', evento => {
-
     if (evento.animationName !== 'abrir-libro') {
       return;
     }
 
     escenaLibro.remove();
 
-    detalle.classList.remove('detalle-entrando');
+    detalle.classList.remove(
+      'detalle-entrando'
+    );
 
-    /* P5.JS CON PERMISO DE CÁMARA */
+    /* PRIORIDAD 1: P5.JS */
 
     if (item.p5) {
-
       mostrarP5(
         panelDetalle,
         item.p5,
         item.permisosP5
       );
 
-    /* VIDEO NORMAL */
+    /* PRIORIDAD 2: VIDEO */
 
     } else if (item.video) {
-
       mostrarVideo(
         panelDetalle,
         item.video,
         true
       );
 
-    /* FOTOGRAFÍA */
+    /* PRIORIDAD 3: FOTOGRAFÍA */
 
     } else {
-
       mostrarImagen(
         panelDetalle,
         item.imagen
       );
-
     }
 
     transicionEnCurso = false;
 
   }, { once: true });
-
 }
 
 
 /* ==========================================
-   16. ESTADO INICIAL
+   18. ESTADO INICIAL
    ========================================== */
 
 seleccionar(0);
@@ -806,19 +747,15 @@ sectores[0].classList.remove(
 
 
 /* ==========================================
-   17. ENLACES INTERNOS
+   19. ACCESO MEDIANTE ENLACES INTERNOS
    ========================================== */
 
 const hash = location.hash.substring(1);
 
 if (hash === 'imagen-escrita') {
-
   mostrar('imagen-escrita');
 
 } else if (hash === 'detalle') {
-
   mostrar('imagen-escrita');
   abrirDetalle(0);
-
 }
-
