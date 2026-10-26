@@ -1,29 +1,42 @@
 
 /* ==========================================
-   PORTAFOLIO DIGITAL
-   COLORES Y VARIABLES
+   PORTAFOLIO DIGITAL IE 2026
+   CSS COMPLETO CON REPRODUCTOR DE MÚSICA
    ========================================== */
 
 :root {
-  --rojo: #070000;
+  --rojo: #7a1111;
   --crema: #f5f1eb;
   --verde: #7ed953;
   --gris: #cbd3db;
   --negro: #000;
 
-  /* ANIMACIÓN DEL LIBRO */
+  --duracion-pantalla: 0.8s;
+  --duracion-cassette: 1.3s;
   --duracion-libro: 2s;
 
-  /* SEPARACIÓN DE TEXTOS CIRCULARES */
   --separacion-central: 30px;
 
-  /* EFECTO IRIDISCENTE DEL CD */
-  --intensidad-iridiscencia: 0.74;
-  --velocidad-destello: 7s;
-
-  /* EFECTO PLÁSTICO DE LA CARÁTULA */
   --intensidad-plastico: 0.75;
   --velocidad-plastico: 5.5s;
+
+  --intensidad-iridiscencia: 0.92;
+  --velocidad-destello: 8s;
+
+  --caratula-x: 673px;
+  --caratula-y: 194px;
+  --caratula-ancho: 493px;
+  --caratula-alto: 493px;
+
+  --disco-x: 960px;
+  --disco-y: 253px;
+  --disco-tamano: 360px;
+
+  /* TAPA DEL LIBRO A TAMAÑO FINAL */
+  --tapa-final-x: 660px;
+  --tapa-final-y: 113px;
+  --tapa-final-ancho: 643px;
+  --tapa-final-alto: 542px;
 }
 
 
@@ -37,9 +50,10 @@
 
 html,
 body {
-  margin: 0;
   width: 100%;
   height: 100%;
+  margin: 0;
+  padding: 0;
   overflow: hidden;
   background: var(--crema);
 }
@@ -48,239 +62,580 @@ body {
   font-family: Georgia, "Times New Roman", serif;
 }
 
+button,
+a {
+  -webkit-tap-highlight-color: transparent;
+}
+
 #escenario {
   position: absolute;
-  left: 0;
   top: 0;
+  left: 0;
 
   width: 1366px;
   height: 768px;
 
-  transform-origin: top left;
   overflow: hidden;
   background: var(--crema);
-}
-
-.diapositiva {
-  position: absolute;
-  inset: 0;
-
-  display: none;
-  background: var(--crema);
-}
-
-.diapositiva.activa {
-  display: block;
+  transform-origin: top left;
 }
 
 
 /* ==========================================
-   PANTALLA 1: INICIO
+   TRANSICIÓN SUAVE ENTRE PANTALLAS
    ========================================== */
 
-#inicio {
+.diapositiva {
+  position: absolute;
+  inset: 0;
+  display: block;
+
   background: var(--crema);
+
+  opacity: 0;
+  visibility: hidden;
+  pointer-events: none;
+
+  transform: translateX(35px);
+
+  transition:
+    opacity var(--duracion-pantalla) ease,
+    transform var(--duracion-pantalla)
+      cubic-bezier(0.22, 0.75, 0.25, 1),
+    visibility 0s linear var(--duracion-pantalla);
+}
+
+.diapositiva.activa {
+  opacity: 1;
+  visibility: visible;
+  pointer-events: auto;
+
+  transform: translateX(0);
+  z-index: 2;
+
+  transition:
+    opacity var(--duracion-pantalla) ease,
+    transform var(--duracion-pantalla)
+      cubic-bezier(0.22, 0.75, 0.25, 1),
+    visibility 0s;
+}
+
+.diapositiva.saliendo {
+  opacity: 0;
+  visibility: visible;
+  pointer-events: none;
+
+  transform: translateX(-35px);
+  z-index: 1;
+
+  transition:
+    opacity var(--duracion-pantalla) ease,
+    transform var(--duracion-pantalla)
+      cubic-bezier(0.22, 0.75, 0.25, 1);
 }
 
 
-/* CABECERA ROJA */
+/* ==========================================
+   HEADER INICIAL
+   ========================================== */
 
 .cabecera-inicio {
   position: absolute;
-  left: 0;
   top: 0;
+  left: 0;
 
   width: 100%;
   height: 165px;
-
-  background: var(--rojo);
+  padding: 0 90px;
 
   display: flex;
   justify-content: space-between;
   align-items: center;
 
-  padding: 0 90px;
+  background: #171717;
 }
-
-
-/* PORTAFOLIO DIGITAL */
 
 .titulo-principal {
-  position: static;
-  width: auto;
   margin: 0;
-
-  font-family: Georgia, "Times New Roman", serif;
-  font-size: 25px;
-  font-weight: bold;
-  line-height: 1.2;
-
-  color: white;
-  text-align: left;
-}
-
-
-/* NOMBRE DE LA AUTORA */
-
-.nombre-autora {
-  font-family: Georgia, "Times New Roman", serif;
-  font-size: 25px;
+  color: var(--crema);
+  font-size: 27px;
   font-weight: normal;
   line-height: 1.2;
+}
 
-  color: white;
+.nombre-autora {
+  color: var(--crema);
+  font-size: 25px;
+  font-weight: normal;
   text-align: right;
+  white-space: nowrap;
 }
 
 
-/* ZONA BLANCO HUESO */
+/* ==========================================
+   PANTALLA INICIAL
+   ========================================== */
 
-.contenido-inicio {
+.zona-inicio {
   position: absolute;
   left: 0;
-  right: 0;
   top: 165px;
-  bottom: 0;
 
+  width: 100%;
+  height: 603px;
   background: var(--crema);
 }
 
-
-/* TÍTULO IMAGEN ESCRITA */
-
-.titulo-seccion {
+.estante-cassettes {
   position: absolute;
-  left: 101px;
-  top: 85px;
+  left: 55px;
+  top: 104px;
 
-  margin: 0;
+  width: 552px;
 
-  font-family: Georgia, "Times New Roman", serif;
-  font-size: 49px;
-  font-weight: bold;
-  line-height: 1.1;
-
-  color: black;
+  display: flex;
+  flex-direction: column;
+  gap: 25px;
+  z-index: 5;
 }
 
+.cassette {
+  position: relative;
 
-/* ==========================================
-   DESCRIPCIÓN INICIAL EN DOS COLUMNAS
-   ========================================== */
+  display: flex;
+  align-items: center;
 
-.descripcion-inicio {
-  position: absolute;
-  left: 120px;
-  top: 260px;
+  width: 552px;
+  height: 106px;
+  padding: 10px;
 
-  width: 1120px;
+  border: 4px solid #161616;
+  border-radius: 12px;
 
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  column-gap: 55px;
+  background: #393939;
+  box-shadow: 0 7px 0 rgba(0, 0, 0, 0.11);
 
-  font-family: Georgia, "Times New Roman", serif;
-  font-size: 20px;
-  line-height: 1.3;
+  text-align: left;
+  text-decoration: none;
+  cursor: pointer;
 
-  color: black;
-
-  text-align: justify;
-  text-justify: inter-word;
-  hyphens: auto;
+  transition:
+    transform 0.25s ease,
+    box-shadow 0.25s ease;
 }
 
-.descripcion-inicio p {
-  margin: 0;
-  padding: 0;
-  min-width: 0;
-}
+.cassette::before,
+.cassette::after {
+  content: "";
 
-
-/* ==========================================
-   BOTONES ENCARGOS Y WIKI
-   ========================================== */
-
-.botones-inicio {
-  position: absolute;
-  left: 0;
-  bottom: 24px;
-
-  width: 100%;
-  height: 72px;
-}
-
-.boton-inicio {
   position: absolute;
 
-  width: 138px;
-  height: 72px;
+  width: 7px;
+  height: 7px;
 
-  border: 2px solid black;
-  border-radius: 10px;
+  border: 2px solid #777;
+  border-radius: 50%;
 
-  background: transparent;
+  background: #191919;
+}
+
+.cassette::before {
+  top: 3px;
+  left: 3px;
+}
+
+.cassette::after {
+  right: 3px;
+  bottom: 3px;
+}
+
+.cassette:hover {
+  transform: scale(1.045);
+  box-shadow: 0 11px 0 rgba(0,0,0,0.14);
+}
+
+.cassette:focus-visible {
+  outline: 3px solid var(--rojo);
+  outline-offset: 6px;
+}
+
+.cassette-extremo {
+  width: 64px;
+  height: 77px;
+  flex-shrink: 0;
 
   display: flex;
   align-items: center;
   justify-content: center;
 
+  border: 2px solid black;
+  border-right: none;
+  border-radius: 5px 0 0 5px;
+
+  background: var(--crema);
+  color: var(--rojo);
+
+  font-size: 27px;
+  font-weight: bold;
+}
+
+.cassette-etiqueta {
+  position: relative;
+
+  height: 77px;
+  flex: 1;
+
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+
+  padding: 0 23px;
+
+  border-top: 2px solid black;
+  border-bottom: 2px solid black;
+
+  background: var(--crema);
+}
+
+.cassette-titulo {
+  font-size: 35px;
+  font-style: italic;
+  line-height: 1.1;
+  color: #181818;
+}
+
+.cassette-subtitulo {
+  margin-top: 5px;
+
+  font-family: Arial, Helvetica, sans-serif;
+  font-size: 10px;
+  letter-spacing: 2px;
+  color: #555;
+}
+
+.cassette-sello {
+  width: 66px;
+  height: 77px;
+  flex-shrink: 0;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  border: 2px solid black;
+  background: #252525;
+  color: var(--crema);
+
+  font-family: Arial, Helvetica, sans-serif;
+  font-size: 20px;
+  font-weight: bold;
+}
+
+.cassette-flecha {
+  width: 34px;
+  height: 77px;
+  flex-shrink: 0;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  border-top: 2px solid black;
+  border-right: 2px solid black;
+  border-bottom: 2px solid black;
+  border-radius: 0 5px 5px 0;
+
+  background: var(--crema);
   color: black;
 
   font-family: Arial, Helvetica, sans-serif;
-  font-size: 19px;
-  font-weight: normal;
-  line-height: 1.28;
-
-  text-align: center;
-  text-decoration: none;
-
-  cursor: pointer;
-  transform-origin: center;
-
-  transition:
-    transform 0.25s ease,
-    background-color 0.25s ease;
+  font-size: 35px;
 }
 
-.boton-inicio:hover {
-  transform: scale(1.06);
-  background-color: rgba(122, 17, 17, 0.05);
+.cassette-imagen.abierto {
+  box-shadow: 0 7px 0 var(--verde);
 }
 
-.boton-inicio:active {
-  transform: scale(1.02);
+.cassette-imagen.abierto .cassette-etiqueta {
+  background: #e4f0dd;
 }
 
-.boton-inicio:focus-visible {
-  outline: 2px solid black;
-  outline-offset: 5px;
+.cassette-encargos .cassette-extremo,
+.cassette-encargos .cassette-etiqueta,
+.cassette-encargos .cassette-flecha {
+  background: #292929;
 }
 
-.boton-imagen {
-  left: 400px;
+.cassette-encargos .cassette-titulo {
+  color: #d997af;
 }
 
-.boton-wiki {
-  left: 945px;
+.cassette-encargos .cassette-subtitulo {
+  color: #ddd;
+}
+
+.cassette-encargos .cassette-extremo {
+  color: var(--verde);
+}
+
+.cassette-encargos .cassette-sello {
+  background: #c6af78;
+  color: black;
+}
+
+.cassette-wiki .cassette-titulo {
+  color: var(--rojo);
+  font-style: normal;
+  font-weight: bold;
+}
+
+.cassette-wiki .cassette-extremo {
+  color: var(--rojo);
 }
 
 
 /* ==========================================
-   FLECHAS DE REGRESO
+   ESTUCHE DEL CASETE IMAGEN ESCRITA
    ========================================== */
+
+.estuche-inicio {
+  position: absolute;
+  left: 681px;
+  top: 81px;
+
+  width: 632px;
+  height: 460px;
+
+  perspective: 1300px;
+  z-index: 2;
+  pointer-events: none;
+}
+
+.estuche-interior {
+  display: flex;
+  width: 100%;
+  height: 100%;
+
+  transform-style: preserve-3d;
+  filter:
+    drop-shadow(6px 9px 5px rgba(0,0,0,0.11));
+}
+
+.estuche-cara {
+  position: relative;
+
+  width: 50%;
+  height: 100%;
+
+  border: 5px solid #222;
+  overflow: hidden;
+
+  opacity: 0;
+
+  backface-visibility: hidden;
+  -webkit-backface-visibility: hidden;
+
+  transition:
+    transform var(--duracion-cassette)
+      cubic-bezier(0.22,0.72,0.27,1),
+    opacity 0.45s ease;
+}
+
+.estuche-cara-izquierda {
+  display: flex;
+
+  background: #f0e8df;
+  border-right-width: 3px;
+
+  transform-origin: right center;
+  transform: rotateY(88deg);
+}
+
+.estuche-cara-derecha {
+  padding: 13px;
+
+  background: #373737;
+  border-left-width: 3px;
+
+  box-shadow: inset 0 0 0 8px #666;
+
+  transform-origin: left center;
+  transform: rotateY(-88deg);
+}
+
+.estuche-inicio.abierto .estuche-cara {
+  transform: rotateY(0deg);
+  opacity: 1;
+}
+
+.estuche-franja {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-between;
+
+  width: 39px;
+  height: 100%;
+  flex-shrink: 0;
+
+  padding: 21px 0;
+
+  background: #252525;
+  color: var(--crema);
+
+  font-family: Arial, Helvetica, sans-serif;
+  font-size: 13px;
+  writing-mode: vertical-rl;
+}
+
+.estuche-papel {
+  position: relative;
+  flex: 1;
+
+  padding: 35px 19px;
+  background: #efe6da;
+}
+
+.estuche-papel h2 {
+  margin: 0 0 24px;
+  color: var(--rojo);
+  font-size: 26px;
+  line-height: 1.1;
+}
+
+.estuche-papel p {
+  margin: 0;
+  font-size: 15px;
+  line-height: 1.45;
+  text-align: justify;
+  hyphens: auto;
+}
+
+.numero-cara {
+  position: absolute;
+  right: 17px;
+  bottom: 15px;
+
+  color: var(--rojo);
+  font-family: Arial, Helvetica, sans-serif;
+  font-size: 11px;
+  letter-spacing: 2px;
+}
+
+.casette-decorativo {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  padding: 18px;
+
+  border: 2px solid #777;
+  border-radius: 9px;
+
+  background: #262626;
+  color: var(--crema);
+}
+
+.cassette-banda-superior {
+  display: flex;
+  justify-content: space-between;
+
+  padding-bottom: 12px;
+  border-bottom: 2px solid #aaa;
+
+  font-family: Arial, Helvetica, sans-serif;
+  font-size: 10px;
+  letter-spacing: 1px;
+}
+
+.cassette-ventana {
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+
+  height: 116px;
+  margin: 18px 0;
+
+  border: 2px solid #777;
+  border-radius: 12px;
+  background: #171717;
+}
+
+.cassette-bobina {
+  width: 58px;
+  height: 58px;
+
+  border: 12px solid #aaa;
+  border-radius: 50%;
+
+  background: #202020;
+  box-shadow: 0 0 0 7px #333;
+}
+
+.cassette-cinta {
+  width: 48px;
+  height: 17px;
+
+  border: 2px solid #777;
+  border-radius: 3px;
+  background: #6b5246;
+}
+
+.casette-decorativo p {
+  margin: 0;
+  font-size: 13px;
+  line-height: 1.4;
+  text-align: justify;
+  hyphens: auto;
+}
+
+.estuche-cara-derecha .numero-cara {
+  color: var(--crema);
+}
+
+
+/* ==========================================
+   PANTALLA 2: RUEDA Y CARÁTULA
+   ========================================== */
+
+#imagen-escrita {
+  background: var(--crema);
+}
+
+#imagen-escrita::before {
+  content: "Portafolio Digital IE 2026";
+
+  position: absolute;
+  top: 0;
+  left: 0;
+
+  display: flex;
+  align-items: center;
+
+  width: 100%;
+  height: 84px;
+  padding: 0 35px;
+
+  background: #171717;
+  color: var(--crema);
+
+  font-size: 30px;
+  z-index: 8;
+  pointer-events: none;
+}
+
+
+/* FLECHAS DE RETORNO */
 
 .volver {
   position: absolute;
-
   top: 10px;
   left: 26px;
 
   width: 77px;
   height: 79px;
-
   padding: 0;
-  border: 0;
+
+  border: none;
   background: none;
 
   cursor: pointer;
@@ -294,23 +649,22 @@ body {
   fill: black;
 }
 
-
-/* ==========================================
-   PANTALLA 2: RUEDA DE ENCARGOS
-   ========================================== */
-
-#imagen-escrita {
-  background: var(--crema);
+#volver-inicio {
+  top: 105px;
+  left: 27px;
 }
+
+
+/* RUEDA DE MINIATURAS */
 
 .rueda {
   position: absolute;
-
-  left: 101px;
-  top: 122px;
+  left: 65px;
+  top: 187px;
 
   width: 520px;
   height: 520px;
+  z-index: 3;
 }
 
 .rueda-svg {
@@ -319,14 +673,11 @@ body {
   height: 520px;
 
   overflow: visible;
+  filter: drop-shadow(0 6px 5px rgba(0,0,0,0.15));
 }
-
-
-/* SECTORES DE LA RUEDA */
 
 .sector {
   cursor: pointer;
-
   transform-box: fill-box;
   transform-origin: center;
 
@@ -352,31 +703,36 @@ body {
 }
 
 
-/* ==========================================
-   PERILLA GIRATORIA
-   ========================================== */
+/* PERILLA EN AMBOS SENTIDOS */
 
 .perilla {
   position: absolute;
-
   left: 198px;
   top: 198px;
-
-  width: 124px;
-  height: 124px;
-
-  border-radius: 50%;
-  background: #3d4041;
 
   display: flex;
   align-items: center;
   justify-content: center;
 
-  z-index: 4;
+  width: 124px;
+  height: 124px;
 
+  border: 5px solid #222;
+  border-radius: 50%;
+
+  background:
+    repeating-conic-gradient(
+      #292929 0deg 5deg,
+      #555 5deg 8deg,
+      #292929 8deg 13deg
+    );
+
+  z-index: 5;
   cursor: grab;
   touch-action: none;
   user-select: none;
+
+  box-shadow: 0 3px 7px rgba(0,0,0,0.26);
 }
 
 .perilla:active {
@@ -384,11 +740,20 @@ body {
 }
 
 .perilla-interior {
-  width: 109px;
-  height: 109px;
+  width: 105px;
+  height: 105px;
 
-  background: #5d606a;
+  border: 2px solid #222;
   border-radius: 50%;
+
+  background:
+    conic-gradient(
+      #3b3b3b,
+      #737373,
+      #333,
+      #595959,
+      #3b3b3b
+    );
 
   pointer-events: none;
 }
@@ -398,11 +763,10 @@ body {
   top: 0;
   left: 0;
 
-  width: 124px;
-  height: 124px;
+  width: 114px;
+  height: 114px;
 
   transform: rotate(30deg);
-
   transition: transform 0.3s ease-in-out;
   pointer-events: none;
 }
@@ -412,12 +776,12 @@ body {
 
   position: absolute;
   top: 8px;
-  left: 54px;
+  left: 49px;
 
-  width: 22px;
-  height: 84px;
+  width: 20px;
+  height: 82px;
 
-  border: 8px solid #3b3c3e;
+  border: 7px solid #303030;
   border-radius: 12px;
 
   background: #79a5ff;
@@ -427,29 +791,142 @@ body {
 }
 
 
-/* ==========================================
-   MARCO DERECHO DE LA RUEDA
-   ========================================== */
+/* CD LATERAL GIRATORIO */
+
+.disco-lateral {
+  position: absolute;
+  left: var(--disco-x);
+  top: var(--disco-y);
+
+  width: var(--disco-tamano);
+  height: var(--disco-tamano);
+
+  border: 5px solid #424242;
+  border-radius: 50%;
+
+  background: #c8cbd0;
+  overflow: hidden;
+
+  z-index: 1;
+  pointer-events: none;
+
+  box-shadow: 0 8px 15px rgba(0,0,0,0.14);
+}
+
+.disco-lateral-giro {
+  position: absolute;
+  inset: 0;
+
+  overflow: hidden;
+  border-radius: 50%;
+
+  animation: girar-disco-lateral 14s linear infinite;
+}
+
+.disco-lateral-imagen {
+  display: block;
+  width: 100%;
+  height: 100%;
+
+  object-fit: cover;
+  border-radius: 50%;
+}
+
+.disco-lateral-giro::before {
+  content: "";
+
+  position: absolute;
+  inset: 0;
+
+  border-radius: 50%;
+
+  background:
+    conic-gradient(
+      from 30deg,
+      transparent 0deg,
+      rgba(150,215,235,0.15) 45deg,
+      rgba(220,160,235,0.16) 95deg,
+      transparent 150deg,
+      rgba(150,245,185,0.14) 225deg,
+      transparent 310deg,
+      transparent 360deg
+    );
+
+  z-index: 2;
+  pointer-events: none;
+}
+
+.disco-lateral-giro::after {
+  content: "";
+
+  position: absolute;
+  left: 50%;
+  top: 50%;
+
+  width: 17%;
+  height: 17%;
+
+  transform: translate(-50%, -50%);
+
+  border: 10px solid #d9dce0;
+  border-radius: 50%;
+
+  background: var(--crema);
+
+  box-shadow:
+    0 0 0 3px rgba(40,40,40,0.45),
+    inset 0 0 0 3px #bcbfc4;
+
+  z-index: 4;
+}
+
+@keyframes girar-disco-lateral {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+
+/* CARÁTULA PLASTIFICADA */
 
 .marco-derecho {
   position: absolute;
 
-  left: 710px;
-  top: 113px;
+  left: var(--caratula-x);
+  top: var(--caratula-y);
 
-  width: 593px;
-  height: 542px;
+  width: var(--caratula-ancho);
+  height: var(--caratula-alto);
 
-  border: 4px solid black;
-  border-left-width: 48px;
+  padding: 10px 8px;
 
-  padding: 10px 0;
+  border: 5px solid #202020;
+  border-left-width: 43px;
+
+  background: #e7e5df;
+
+  z-index: 2;
+  box-shadow: 0 7px 11px rgba(0,0,0,0.15);
 }
 
+.marco-derecho::before {
+  content: "";
 
-/* ==========================================
-   PANELES DE IMAGEN, VIDEO Y P5.JS
-   ========================================== */
+  position: absolute;
+  inset: 0;
+
+  pointer-events: none;
+  z-index: 4;
+
+  background:
+    linear-gradient(
+      132deg,
+      rgba(255,255,255,0.28),
+      transparent 35%,
+      rgba(255,255,255,0.07) 64%,
+      transparent
+    );
+}
 
 .panel-verde {
   width: 100%;
@@ -463,7 +940,6 @@ body {
 .panel-verde video,
 .panel-verde iframe {
   display: block;
-
   width: 100%;
   height: 100%;
 }
@@ -484,137 +960,76 @@ body {
   pointer-events: auto;
 }
 
-
-/* ==========================================
-   NUEVO EFECTO:
-   CARÁTULA CON PLÁSTICO BRILLANTE
-
-   Se aplica a la miniatura grande
-   de la pantalla 2.
-
-   También funciona sobre el libro clonado
-   durante su animación de apertura.
-   ========================================== */
-
-/* CONTENEDOR DE LA CARÁTULA */
-
 .marco-derecho .panel-verde {
   position: relative;
-
-  /* PERMITE SUPERPONER LOS BRILLOS */
   isolation: isolate;
 }
-
-
-/* IMAGEN POR DEBAJO DEL PLÁSTICO */
 
 .marco-derecho .panel-verde img {
   position: relative;
   z-index: 0;
 }
 
-
-/* ==========================================
-   CAPA DE BRILLO DIAGONAL
-
-   Simula un reflejo de luz
-   sobre plástico transparente.
-   ========================================== */
-
 .marco-derecho .panel-verde::before {
   content: "";
 
   position: absolute;
-
   inset: -40%;
 
   background:
     linear-gradient(
       115deg,
-
       transparent 28%,
-
-      rgba(255, 255, 255, 0.03) 36%,
-
-      rgba(255, 255, 255, 0.14) 42%,
-
-      rgba(255, 255, 255, 0.58) 49%,
-
-      rgba(255, 255, 255, 0.16) 55%,
-
+      rgba(255,255,255,0.03) 36%,
+      rgba(255,255,255,0.14) 42%,
+      rgba(255,255,255,0.58) 49%,
+      rgba(255,255,255,0.16) 55%,
       transparent 65%
     );
 
   opacity: var(--intensidad-plastico);
-
   pointer-events: none;
   z-index: 2;
 
   animation:
     mover-brillo-plastico
     var(--velocidad-plastico)
-    ease-in-out
-    infinite alternate;
+    ease-in-out infinite alternate;
 }
-
-
-/* ==========================================
-   CAPA DE LAMINADO TRANSPARENTE
-
-   Añade brillo superior, borde interno
-   y sombra muy suave.
-   ========================================== */
 
 .marco-derecho .panel-verde::after {
   content: "";
 
   position: absolute;
-
   inset: 0;
+
+  pointer-events: none;
+  z-index: 3;
 
   background:
     linear-gradient(
       to bottom,
-
-      rgba(255, 255, 255, 0.25) 0%,
-
-      rgba(255, 255, 255, 0.08) 14%,
-
+      rgba(255,255,255,0.25),
+      rgba(255,255,255,0.08) 14%,
       transparent 35%,
-
       transparent 78%,
-
-      rgba(0, 0, 0, 0.10) 100%
+      rgba(0,0,0,0.10)
     );
 
   box-shadow:
-    inset 0 0 0 2px rgba(255, 255, 255, 0.32),
-    inset 0 14px 24px rgba(255, 255, 255, 0.11),
-    inset 0 -12px 24px rgba(0, 0, 0, 0.05);
-
-  pointer-events: none;
-  z-index: 3;
+    inset 0 0 0 2px rgba(255,255,255,0.32),
+    inset 0 14px 24px rgba(255,255,255,0.11),
+    inset 0 -12px 24px rgba(0,0,0,0.05);
 }
-
-
-/* ==========================================
-   MOVIMIENTO DEL REFLEJO PLÁSTICO
-   ========================================== */
 
 @keyframes mover-brillo-plastico {
   from {
-    transform:
-      translateX(-22%)
-      rotate(-5deg);
-
+    transform: translateX(-22%) rotate(-5deg);
     opacity: 0.45;
   }
 
   to {
-    transform:
-      translateX(22%)
-      rotate(5deg);
-
+    transform: translateX(22%) rotate(5deg);
     opacity: var(--intensidad-plastico);
   }
 }
@@ -655,10 +1070,7 @@ body {
 }
 
 
-/* ==========================================
-   CÍRCULO GRIS GRANDE
-   CON EFECTO IRIDISCENTE TIPO CD
-   ========================================== */
+/* CÍRCULO IRIDISCENTE */
 
 .circulo-gris {
   position: absolute;
@@ -669,68 +1081,68 @@ body {
   width: 502px;
   height: 502px;
 
-  border-radius: 50%;
-  background: var(--gris);
-
   overflow: hidden;
   isolation: isolate;
+
+  border: 2px solid rgba(95,97,101,0.72);
+  border-radius: 50%;
+
+  background: #dce2e7;
+
+  box-shadow:
+    inset 0 0 0 3px rgba(255,255,255,0.65),
+    inset 0 0 18px rgba(255,255,255,0.45),
+    0 3px 7px rgba(0,0,0,0.12);
 }
-
-
-/* ==========================================
-   PRIMERA CAPA:
-   COLORES IRIDISCENTES
-   ========================================== */
 
 .circulo-gris::before {
   content: "";
 
   position: absolute;
-  inset: -15%;
+  inset: -18%;
 
   border-radius: 50%;
 
   background:
     radial-gradient(
-      circle at 27% 22%,
-      rgba(255, 255, 255, 0.65) 0%,
-      rgba(255, 255, 255, 0) 31%
+      ellipse at 30% 22%,
+      rgba(255,255,255,0.78),
+      transparent 36%
     ),
-
+    radial-gradient(
+      circle at 50% 50%,
+      rgba(255,255,255,0.38),
+      rgba(255,255,255,0.06) 42%,
+      transparent 72%
+    ),
     conic-gradient(
-      from 25deg at 50% 50%,
-
-      #cbd3db 0deg,
-      #c5d9e3 28deg,
-      #bce7e9 52deg,
-      #d8c4f2 77deg,
-      #edbfd8 105deg,
-      #e6e6c5 132deg,
-      #c4e7d0 158deg,
-      #cbd3db 184deg,
-      #b8d5ec 218deg,
-      #efd0dd 247deg,
-      #dae8c4 277deg,
-      #c9c7ee 306deg,
-      #cbd3db 338deg,
-      #cbd3db 360deg
+      from 22deg at 50% 50%,
+      #a5f5db 0deg,
+      #8debea 28deg,
+      #8fcaf4 52deg,
+      #b3b3ef 77deg,
+      #ecafe5 98deg,
+      #f6bad4 116deg,
+      #f6e7a1 139deg,
+      #d9f6a9 158deg,
+      #a3edcd 181deg,
+      #a2f3ee 207deg,
+      #bdd3fb 231deg,
+      #e6b5ed 255deg,
+      #fac3d3 279deg,
+      #f5e4a0 303deg,
+      #c3f4b0 330deg,
+      #a5f5db 360deg
     );
 
   opacity: var(--intensidad-iridiscencia);
-
   z-index: 0;
   pointer-events: none;
 
   animation:
-    rotar-iridiscencia
-    28s linear infinite;
+    rotar-iridiscencia-realista
+    36s linear infinite;
 }
-
-
-/* ==========================================
-   SEGUNDA CAPA:
-   DESTELLO DIAGONAL TIPO CD
-   ========================================== */
 
 .circulo-gris::after {
   content: "";
@@ -742,86 +1154,57 @@ body {
 
   background:
     repeating-radial-gradient(
-      circle at center,
-
-      transparent 0px,
-      transparent 3px,
-
-      rgba(255, 255, 255, 0.08) 3.4px,
-
-      transparent 4px
+      circle,
+      transparent 0 2px,
+      rgba(255,255,255,0.14) 2.5px,
+      transparent 3.5px
     ),
-
     linear-gradient(
-      115deg,
-
-      transparent 29%,
-
-      rgba(255, 255, 255, 0.04) 37%,
-
-      rgba(255, 255, 255, 0.18) 43%,
-
-      rgba(255, 255, 255, 0.55) 49%,
-
-      rgba(255, 255, 255, 0.16) 55%,
-
-      transparent 67%
+      118deg,
+      transparent 23%,
+      rgba(255,255,255,0.03) 33%,
+      rgba(255,255,255,0.13) 40%,
+      rgba(255,255,255,0.43) 47%,
+      rgba(255,255,255,0.66) 50%,
+      rgba(255,255,255,0.30) 54%,
+      rgba(255,255,255,0.08) 61%,
+      transparent 72%
     );
 
   mix-blend-mode: screen;
-  opacity: 0.68;
-
+  opacity: 0.72;
   z-index: 1;
   pointer-events: none;
 
   animation:
-    destello-cd
+    destello-cd-realista
     var(--velocidad-destello)
-    ease-in-out
-    infinite alternate;
+    ease-in-out infinite alternate;
 }
 
-
-/* ==========================================
-   ANIMACIONES DEL CD
-   ========================================== */
-
-@keyframes rotar-iridiscencia {
-  from {
-    transform: rotate(0deg);
-  }
-
+@keyframes rotar-iridiscencia-realista {
   to {
     transform: rotate(360deg);
   }
 }
 
-@keyframes destello-cd {
+@keyframes destello-cd-realista {
   from {
-    transform:
-      translateX(-12%)
-      rotate(-7deg);
-
-    opacity: 0.42;
+    transform: translateX(-13%) rotate(-8deg);
+    opacity: 0.4;
   }
 
   to {
-    transform:
-      translateX(12%)
-      rotate(7deg);
-
+    transform: translateX(13%) rotate(8deg);
     opacity: 0.78;
   }
 }
 
 
-/* ==========================================
-   TÍTULO DEL ENCARGO
-   ========================================== */
+/* TÍTULO Y COLUMNAS */
 
 #titulo-encargo {
   position: absolute;
-
   top: 62px;
   left: 0;
 
@@ -829,25 +1212,17 @@ body {
   margin: 0;
 
   font-size: 40px;
+  font-weight: bold;
   line-height: 1.1;
-
   text-align: center;
-  color: black;
 
+  color: black;
   z-index: 5;
 }
-
-
-/* ==========================================
-   COLUMNAS DE TEXTO CIRCULAR
-
-   DISTANCIA CENTRAL: 30 PX
-   ========================================== */
 
 .texto-izquierda,
 .texto-derecha {
   position: absolute;
-
   top: 140px;
 
   width: calc(
@@ -855,21 +1230,15 @@ body {
   );
 
   height: 240px;
-
   margin: 0;
   padding: 0;
 
-  font-family: Georgia, "Times New Roman", serif;
-
   font-size: 13px;
   line-height: 18px;
-  font-weight: normal;
 
-  color: black;
-
+  color: #111;
   text-align: justify;
   text-justify: inter-word;
-
   hyphens: auto;
   overflow-wrap: break-word;
 
@@ -879,21 +1248,17 @@ body {
   scrollbar-width: thin;
   scrollbar-color: #78818a transparent;
 
-  z-index: 2;
+  text-shadow: 0 0 1px rgba(255,255,255,0.35);
+  z-index: 3;
 }
 
 .texto-izquierda {
   left: 0;
-  right: auto;
 }
 
 .texto-derecha {
   right: 0;
-  left: auto;
 }
-
-
-/* DESACTIVAR PSEUDOELEMENTOS ANTIGUOS */
 
 .texto-izquierda::before,
 .texto-izquierda::after,
@@ -902,118 +1267,66 @@ body {
   content: none;
 }
 
-
-/* ==========================================
-   FORMAS FLOTANTES INVISIBLES
-   ========================================== */
-
 .forma-exterior,
 .forma-interior {
   display: block;
   height: 240px;
-
   pointer-events: none;
   shape-margin: 2px;
 }
-
-
-/* CURVA EXTERIOR IZQUIERDA */
 
 .texto-izquierda .forma-exterior {
   float: left;
   width: 85px;
 
   shape-outside: polygon(
-    0% 0%,
-    38% 0%,
-    29% 10%,
-    18% 22%,
-    9% 35%,
-    1% 48%,
-    0% 55%,
-    5% 68%,
-    15% 82%,
-    36% 100%,
-    0% 100%
+    0% 0%,38% 0%,29% 10%,
+    18% 22%,9% 35%,1% 48%,
+    0% 55%,5% 68%,15% 82%,
+    36% 100%,0% 100%
   );
 }
-
-
-/* CURVA INTERIOR IZQUIERDA */
 
 .texto-izquierda .forma-interior {
   float: right;
   width: 66px;
 
   shape-outside: polygon(
-    100% 0%,
-    100% 19%,
-    73% 24%,
-    43% 33%,
-    24% 43%,
-    20% 50%,
-    24% 57%,
-    43% 67%,
-    73% 76%,
-    100% 81%,
-    100% 100%
+    100% 0%,100% 19%,73% 24%,
+    43% 33%,24% 43%,20% 50%,
+    24% 57%,43% 67%,73% 76%,
+    100% 81%,100% 100%
   );
 }
-
-
-/* CURVA EXTERIOR DERECHA */
 
 .texto-derecha .forma-exterior {
   float: right;
   width: 85px;
 
   shape-outside: polygon(
-    100% 0%,
-    62% 0%,
-    71% 10%,
-    82% 22%,
-    91% 35%,
-    99% 48%,
-    100% 55%,
-    95% 68%,
-    85% 82%,
-    64% 100%,
-    100% 100%
+    100% 0%,62% 0%,71% 10%,
+    82% 22%,91% 35%,99% 48%,
+    100% 55%,95% 68%,85% 82%,
+    64% 100%,100% 100%
   );
 }
-
-
-/* CURVA INTERIOR DERECHA */
 
 .texto-derecha .forma-interior {
   float: left;
   width: 66px;
 
   shape-outside: polygon(
-    0% 0%,
-    0% 19%,
-    27% 24%,
-    57% 33%,
-    76% 43%,
-    80% 50%,
-    76% 57%,
-    57% 67%,
-    27% 76%,
-    0% 81%,
-    0% 100%
+    0% 0%,0% 19%,27% 24%,
+    57% 33%,76% 43%,80% 50%,
+    76% 57%,57% 67%,27% 76%,
+    0% 81%,0% 100%
   );
 }
-
-
-/* TEXTO INSERTADO POR JAVASCRIPT */
 
 .texto-contenido {
   display: inline;
   white-space: pre-line;
 }
-
-
-/* BARRAS DE DESPLAZAMIENTO */
 
 .texto-izquierda::-webkit-scrollbar,
 .texto-derecha::-webkit-scrollbar {
@@ -1026,63 +1339,69 @@ body {
   border-radius: 8px;
 }
 
-.texto-izquierda::-webkit-scrollbar-track,
-.texto-derecha::-webkit-scrollbar-track {
-  background: transparent;
-}
 
-
-/* ==========================================
-   CÍRCULO PEQUEÑO CENTRAL
-   ========================================== */
+/* ARO METÁLICO */
 
 .anillo-gris {
   position: absolute;
-
   top: 184px;
   left: 184px;
-
-  width: 134px;
-  height: 134px;
-
-  border-radius: 50%;
-  background: #6d7981;
 
   display: flex;
   align-items: center;
   justify-content: center;
 
-  z-index: 4;
-  pointer-events: none;
+  width: 134px;
+  height: 134px;
+
+  border: 4px solid rgba(110,113,117,0.8);
+  border-radius: 50%;
+
+  background:
+    radial-gradient(
+      circle at 34% 28%,
+      #fff 0%,
+      #f1f1f1 22%,
+      #c6c7ca 48%,
+      #f9f9f9 72%,
+      #a6a9ad 100%
+    );
 
   box-shadow:
-    inset 0 0 10px rgba(255, 255, 255, 0.12);
+    0 0 0 3px rgba(255,255,255,0.6),
+    0 0 0 6px rgba(118,122,127,0.45),
+    inset 0 0 12px rgba(0,0,0,0.13);
+
+  z-index: 4;
+  pointer-events: none;
 }
 
 .orificio {
   width: 75px;
   height: 75px;
 
+  border: 3px solid rgba(155,159,164,0.8);
   border-radius: 50%;
-  background: #3e4346;
+
+  background: var(--crema);
+
+  box-shadow:
+    inset 0 0 7px rgba(0,0,0,0.14);
 }
 
 
-/* ==========================================
-   ENLACES JP5 Y WIKI
-   ========================================== */
+/* ENLACES P5JS Y WIKI */
 
 .enlaces {
   position: absolute;
-
   top: 388px;
   left: 0;
-
-  width: 100%;
 
   display: flex;
   flex-direction: column;
   align-items: center;
+
+  width: 100%;
 
   font-size: 12px;
   line-height: 18px;
@@ -1102,22 +1421,22 @@ body {
 
 .enlaces a:focus-visible {
   outline: 2px solid black;
-  outline-offset: 2px;
+  outline-offset: 3px;
 }
 
 
 /* ==========================================
-   ANIMACIÓN DE APERTURA DE LIBRO
+   APERTURA DEL LIBRO A TAMAÑO FINAL
    ========================================== */
 
 .libro-escena {
   position: absolute;
 
-  left: 710px;
-  top: 113px;
+  left: var(--tapa-final-x);
+  top: var(--tapa-final-y);
 
-  width: 593px;
-  height: 542px;
+  width: var(--tapa-final-ancho);
+  height: var(--tapa-final-alto);
 
   perspective: 1400px;
   perspective-origin: center center;
@@ -1128,19 +1447,17 @@ body {
 
 .libro-hoja {
   position: relative;
-
   width: 100%;
   height: 100%;
 
   transform-style: preserve-3d;
   transform-origin: left center;
-
   will-change: transform;
 
   animation:
     abrir-libro
     var(--duracion-libro)
-    cubic-bezier(0.45, 0, 0.55, 1)
+    cubic-bezier(0.45,0,0.55,1)
     forwards;
 }
 
@@ -1148,8 +1465,16 @@ body {
   position: absolute;
   inset: 0;
 
+  width: 100%;
+  height: 100%;
+
   backface-visibility: hidden;
   -webkit-backface-visibility: hidden;
+}
+
+.libro-cara .panel-verde {
+  width: 100%;
+  height: 100%;
 }
 
 .libro-cara-trasera {
@@ -1166,20 +1491,16 @@ body {
   }
 }
 
-
-/* APARICIÓN PROGRESIVA DEL DETALLE */
-
 #detalle.detalle-entrando .marco-izquierdo,
 #detalle.detalle-entrando .marco-texto {
   animation:
     aparecer-contenido
     var(--duracion-libro)
-    ease-in-out
-    both;
+    ease-in-out both;
 }
 
 @keyframes aparecer-contenido {
-  0%, 30% {
+  0%,30% {
     opacity: 0;
   }
 
@@ -1190,20 +1511,135 @@ body {
 
 
 /* ==========================================
-   ACCESIBILIDAD:
-   RESPETAR MOVIMIENTO REDUCIDO
+   NUEVO: CONTROL DE MÚSICA
+
+   Siempre visible en la esquina inferior
+   derecha, independiente del escenario.
+   ========================================== */
+
+.control-musica {
+  position: fixed;
+  right: 24px;
+  bottom: 22px;
+
+  display: flex;
+  align-items: center;
+  gap: 11px;
+
+  width: 205px;
+  min-height: 48px;
+  padding: 0 13px;
+
+  border: 2px solid #171717;
+  border-radius: 8px;
+
+  background: #171717;
+  color: var(--crema);
+
+  box-shadow: 0 4px 8px rgba(0,0,0,0.15);
+
+  z-index: 1000;
+}
+
+.boton-sonido {
+  width: 30px;
+  height: 34px;
+  flex-shrink: 0;
+
+  padding: 0;
+  border: none;
+
+  background: transparent;
+  color: var(--crema);
+
+  font-family: Georgia, "Times New Roman", serif;
+  font-size: 24px;
+  line-height: 1;
+
+  cursor: pointer;
+}
+
+.boton-sonido:hover {
+  color: var(--verde);
+}
+
+
+/* CONTROL DESLIZANTE */
+
+#volumen-musica {
+  flex: 1;
+  min-width: 0;
+
+  height: 5px;
+  margin: 0;
+
+  appearance: none;
+  -webkit-appearance: none;
+
+  border-radius: 5px;
+  background: var(--gris);
+
+  cursor: pointer;
+}
+
+#volumen-musica::-webkit-slider-thumb {
+  appearance: none;
+  -webkit-appearance: none;
+
+  width: 16px;
+  height: 16px;
+
+  border: 2px solid var(--crema);
+  border-radius: 50%;
+
+  background: var(--verde);
+  cursor: pointer;
+}
+
+#volumen-musica::-moz-range-thumb {
+  width: 12px;
+  height: 12px;
+
+  border: 2px solid var(--crema);
+  border-radius: 50%;
+
+  background: var(--verde);
+  cursor: pointer;
+}
+
+.porcentaje-volumen {
+  min-width: 32px;
+
+  font-family: Arial, Helvetica, sans-serif;
+  font-size: 11px;
+  text-align: right;
+  color: var(--crema);
+}
+
+.boton-sonido:focus-visible,
+#volumen-musica:focus-visible {
+  outline: 2px solid var(--verde);
+  outline-offset: 4px;
+}
+
+
+/* ==========================================
+   MOVIMIENTO REDUCIDO
    ========================================== */
 
 @media (prefers-reduced-motion: reduce) {
-
-  .boton-inicio {
+  .diapositiva,
+  .diapositiva.activa,
+  .diapositiva.saliendo,
+  .cassette,
+  .estuche-cara {
     transition: none;
   }
 
   .circulo-gris::before,
   .circulo-gris::after,
-  .marco-derecho .panel-verde::before {
+  .marco-derecho .panel-verde::before,
+  .disco-lateral-giro {
     animation: none;
   }
-
 }
